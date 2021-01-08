@@ -76,18 +76,54 @@ To build the sampling scenarios, the following datasets were retrieved and utili
 
 4. The package `spatialsampler` was used to perform grid-based sampling. The package is available via GitHub at https://github.com/spatialworks/spatialsampler
 
+5. The package `smartr` was used to perform population proportional sampling (PPS). The package is available via GitHub at https://github.com/nutriverse/smartr
+
 ## Sampling scenarios
 
 ### Cluster sample selected proportional to population size
 
-* This will be a more traditional approach to sampling.
+Using Tanzania census data for village enumeration areas within the study area, a selection of villages to sample proportional to their population sizes can be performed. Here we use the `smartr` package which has a function that can perform this selection given a list of villages with population sizes. Assuming that 30 clusters are needed for the study, the following operation can be performed:
 
-* Limitation will be that the resulting sample will be representative of human population but may not be of the livestock population given that areas with high population density will most likely have lesser livestock population
-
-```{r livestock, echo = TRUE, fig.cap = "Ruminant population in the study area", fig.align = "center"}
+```{r pps1, echo = TRUE, eval = TRUE}
 ## Subset village to study areas
 studyVillages <- village[village$REGNAME %in% c("Arusha", "Mara"), ]
+studyVillagesSP <- data.frame(coordinates(studyVillages), studyVillages@data)
+names(studyVillagesSP) <- c("x", "y", names(studyVillages@data))
 
+studySamplePPS <- smartr::get_pps(df = studyVillagesSP, pop = "TOTAL", m = 30)
+```
+
+The following list of villages are selected using this approach:
+
+```{r pps2, echo = FALSE, eval = TRUE}
+knitr::kable(x = studySamplePPS[ , c("cluster_id", "REGNAME", "DISTNAME", "WARD_NAME", "STREET", "TOTAL")], 
+             row.names = )
+```
+
+And a map of these selected villages:
+
+```{r pps3, echo = TRUE, fig.cap = "Selected sampling villages using population proportional sampling", fig.align = "center"}
+par(mar = c(0,0,0,0))
+
+## Plot base maps
+plot(studyArea, lty = 0)
+plot(studyVillages, border = "darkgreen", add = TRUE)
+plot(studyArea, lwd = 2, add = TRUE)
+
+points(studySamplePPS[ , c("x", "y")], cex = 1, pch = 19, col = "blue")
+
+legend("topright", inset = 0.01, box.lwd = 1,
+       title = "Legend", cex = 1, y.intersp = 1.2,
+       legend = c("Selected villages", "Village EAs"),
+       pch = c(19, 0), col = c("blue", "darkgreen"), bty = "o")
+```
+
+
+* This will be a more traditional approach to sampling.
+
+* Limitation will be that the resulting sample will be representative of human population but may not be of the livestock population given that areas with high population density will most likely have lesser livestock population.
+
+```{r livestock, echo = TRUE, fig.cap = "Ruminant population in the study area", fig.align = "center"}
 ## Plot study area
 par(mar = c(0,0,0,0))
 plot(studyArea, lty = 0)
@@ -96,14 +132,14 @@ plot(studyVillages, lwd = 1, border = "gray50", add = TRUE)
 plot(region, lwd = 1, add = TRUE)
 plot(studyArea, lwd = 3, add = TRUE)
 ```
+
+* This approach will also require that populations for each cluster are known to be able to select clusters proportionally.
+
 ### Spatial sampling
 
 An alternative would be a spatial sample based on centric systematic area sampling (CSAS). The basic principle would be to create a sample that is evenly spread throughout the study area by applying a square grid across the study area. The clusters to sample are then selected by proximity to the centroids of the square grid. The following map illustrates this sampling approach on the study area assuming that $n = 30$ clusters are needed for the study.
 
 ```{r basic_spatial, echo = TRUE, fig.cap = "Spatial sample of 30 clusters across study area", fig.align = "center"}
-## Subset village to study areas
-studyVillages <- village[village$REGNAME %in% c("Arusha", "Mara"), ]
-
 par(mar = c(0,0,0,0))
 
 ## Plot base maps
@@ -115,12 +151,9 @@ plot(studyArea, lwd = 2, add = TRUE)
 studySP <- create_sp_grid(x = studyArea, 
                           n = 30,
                           country = "Tanzania", 
-                          buffer = 2, type = "csas")
+                          buffer = 10, type = "csas")
 
 ## Get nearest point
-studyVillagesSP <- data.frame(coordinates(studyVillages), studyVillages@data)
-names(studyVillagesSP) <- c("x", "y", names(studyVillages@data))
-
 studySampleVillages <- get_nearest_point(data = studyVillagesSP,
                                          data.x = "x", data.y = "y",
                                          query = studySP, n = 1)
@@ -130,8 +163,8 @@ plot(studySP, cex = 0.5, add = TRUE)
 
 legend("topright", inset = 0.01, box.lwd = 1,
        title = "Legend", cex = 1, y.intersp = 1.2,
-       legend = c("Grid centroids", "Selected villages"),
-       pch = c(3, 19), col = c("black", "blue"), bty = "o")
+       legend = c("Grid centroids", "Selected villages", "Village EAs"),
+       pch = c(3, 19, 0), col = c("black", "blue", "darkgreen"), bty = "o")
 ```
 
 Following is a list of the selected villages from the map.
@@ -143,6 +176,11 @@ names(tab) <- c("SPID", "Region", "District", "Ward", "Street", "Population")
 knitr::kable(x = tab, row.names = FALSE)
 ```
 
+In this sample, we observe:
+
+* roughly equal spread of sampling points throughout the study area;
+
+* most sampling points seem to lie in areas where the village enumeration areas have larger area sizes whilst areas with smaller village enumeration areas (west near Serengeti, eastern and southern border of Arusha region) seem to have lesser sampling points.
 
 ```{r livelihood_zones, echo = FALSE, eval = FALSE, fig.align = "center"}
 ## Subset village to study areas
