@@ -64,21 +64,38 @@ Additional assumptions made:
 
 This document provides some ideas/insights as to how sampling for a study can be done in the given context and the stated parameters and assumptions.
 
-## Data used for sampling scenario building
+## Data and tools used for sampling scenario building
 
 To build the sampling scenarios, the following datasets were retrieved and utilised:
 
-1.
+1. Region, district, ward and village enumeration area boundaries datasets for Tanzania - the region, district and ward boundaries dataset were retrieved from the Tanzania Bureau of Statistics (www.nbs.go.tz). The village enumeration area boundaries dataset was retrieved from the Tanzania Bureau of Statistics years back but is not found in the bureau's current website. This dataset includes population of each village enumeration area (based on 2002 census). These datasets were accessed via an R package called `tanzania` from the following Github repository (https://github.com/spatialworks/tanzania).
 
-2. 
+2. Boundaries map of livelihood zones of Tanzania - available from the Famine Early Warning Sytems Network or FEWS Net - https://fews.net/east-africa/tanzania/livelihood-zone-map/november-2009; This dataset is accessed via an R package called `tanzania` from the following Github repository (https://github.com/spatialworks/tanzania).
 
+3. Raster map of ruminant livestock population - retrieved from the Gridded Livestock of the World (GLW) Database (https://dataverse.harvard.edu/dataverse/glw_3). This dataset is accessed via an R package called `tanzania` from the following Github repository (https://github.com/spatialworks/tanzania).
 
-
+4. The package `spatialsampler` was used to perform grid-based sampling. The package is available via GitHub at https://github.com/spatialworks/spatialsampler
 
 ## Sampling scenarios
 
 ### Cluster sample selected proportional to population size
 
+* This will be a more traditional approach to sampling.
+
+* Limitation will be that the resulting sample will be representative of human population but may not be of the livestock population given that areas with high population density will most likely have lesser livestock population
+
+```{r livestock, echo = FALSE, fig.cap = "Ruminant population in the study area", fig.align = "center"}
+## Subset village to study areas
+studyVillages <- village[village$REGNAME %in% c("Arusha", "Mara"), ]
+
+## Plot study area
+par(mar = c(0,0,0,0))
+plot(studyArea, lty = 0)
+plot(ruminant_population, add = TRUE)
+plot(studyVillages, lwd = 1, border = "gray50", add = TRUE)
+plot(region, lwd = 1, add = TRUE)
+plot(studyArea, lwd = 3, add = TRUE)
+```
 ### Spatial sampling
 
 ```{r basic_spatial, echo = TRUE, fig.align = "center"}
