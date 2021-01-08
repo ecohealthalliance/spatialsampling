@@ -6,19 +6,23 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  error = FALSE,
+  echo = TRUE
+)
 
 ## Load libraries
 if (!require(remotes)) install.packages("remotes")
 remotes::install_github("spatialworks/tanzania")
+remotes::install_github("spatialworks/spatialsampler")
+
 library(rgdal)
 library(rgeos)
 library(raster)
 library(tanzania)
-
-## Read tif of gridded livestock population
-livestockPop <- raster("2_GlobalRuminantLPS_GIS/glps_gleam_61113_10km.tif")
-lsPopStudyArea <- raster::intersect(livestockPop, studyArea)
+library(spatialsampler)
 ```
 
 ## Context
@@ -56,21 +60,72 @@ Additional assumptions made:
 
 1. Approach to study sampling is using cluster sampling (CS) rather than simple random sampling (SRS).
 
+2. Study will use the data perform general estimation of specific indicators but mostly to use the data and the indicators for modelling to address study questions.
+
+This document provides some ideas/insights as to how sampling for a study can be done in the given context and the stated parameters and assumptions.
+
+## Data used for sampling scenario building
+
+To build the sampling scenarios, the following datasets were retrieved and utilised:
+
+1.
+
 2. 
 
-Given these initial parameters, we consider the following sampling options.
 
-## 
 
-```{r}
+
+## Sampling scenarios
+
+### Cluster sample selected proportional to population size
+
+### Spatial sampling
+
+```{r basic_spatial, echo = TRUE, fig.align = "center"}
 ## Subset village to study areas
 studyVillages <- village[village$REGNAME %in% c("Arusha", "Mara"), ]
 
 par(mar = c(0,0,0,0))
+
+## Plot base maps
 plot(studyArea, lty = 0)
-plot(lsPopStudyArea, add = TRUE)
-plot(region, lwd = 1, add = TRUE)
 plot(studyVillages, border = "darkgreen", add = TRUE)
+plot(studyArea, lwd = 2, add = TRUE)
+
+## Create sampling grid (area size 100 sq kms)
+studySP <- create_sp_grid(x = studyArea, 
+                          n = 100,
+                          country = "Tanzania", 
+                          buffer = 2, type = "csas")
+
+## Get nearest point
+studyVillagesSP <- data.frame(coordinates(studyVillages), studyVillages@data)
+names(studyVillagesSP) <- c("x", "y", names(studyVillages@data))
+
+studySampleVillages <- get_nearest_point(data = studyVillagesSP,
+                                         data.x = "x", data.y = "y",
+                                         query = studySP, n = 1)
+
+plot(studySP, cex = 0.3, add = TRUE)
+points(studySampleVillages[ , c("x", "y")], cex = 0.5, pch = 0, col = "blue")
+```
+
+```{r sample-table, echo = FALSE}
+tab <- studySampleVillages[ , c("spid", "REGNAME", "DISTNAME", "WARD_NAME", "STREET", "TOTAL")]
+names(tab) <- c("SPID", "Region", "District", "Ward", "Street", "Population")
+
+knitr::kable(x = tab)
+```
+
+
+```{r livelihood_zones, echo = FALSE, eval = FALSE, fig.align = "center"}
+## Subset village to study areas
+studyVillages <- village[village$REGNAME %in% c("Arusha", "Mara"), ]
+
+plot(studyArea, lty = 0)
+plot(livelihood_zone, lwd = 2, border = "red", add = TRUE)
+plot(region, lwd = 2, border = "blue", add = TRUE)
+#plot(studyVillages, border = "darkgreen", add = TRUE)
 ```
 
 
