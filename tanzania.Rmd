@@ -1,0 +1,76 @@
+---
+title: "Spatial Sampling Scenarios for Tanzania"
+author: "Ernest Guevarra"
+date: "07/01/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+## Load libraries
+if (!require(remotes)) install.packages("remotes")
+remotes::install_github("spatialworks/tanzania")
+library(rgdal)
+library(rgeos)
+library(raster)
+library(tanzania)
+
+## Read tif of gridded livestock population
+livestockPop <- raster("2_GlobalRuminantLPS_GIS/glps_gleam_61113_10km.tif")
+lsPopStudyArea <- raster::intersect(livestockPop, studyArea)
+```
+
+## Context
+A study to be conducted in the northeastern border of Tanzania from Arusha up to west to Serengeti that will collect human population samples/information, livestock samples/information and also land use/land disturbance information. The question is what possible sampling approaches can be used that can unify these different sources of data for the study.
+
+```{r map1, echo = FALSE, fig.cap = "Northeastern border of Tanzania from Arusha to Serengeti", fig.align = "center"}
+## Subset region to study area
+studyArea <- region[region$Region_Nam %in% c("Arusha", "Mara"), ]
+
+## Plot study area
+par(mar = c(0,0,0,0))
+plot(studyArea, lty = 0)
+plot(region, lwd = 1, add = TRUE)
+plot(studyArea, lwd = 2, col = "gray70", add = TRUE)
+
+## Inset
+par(plt = c(0.79, 0.99, 0.79, 0.99), new = TRUE)
+plot(region, lwd = 0.5)
+plot(studyArea, col = "gray50", add = TRUE)
+polygon(x = c(bbox(studyArea)[1, 1] - 0.2, bbox(studyArea)[1, 1] - 0.2,
+              bbox(studyArea)[1, 2] + 0.2, bbox(studyArea)[1, 2] + 0.2),
+        y = c(bbox(studyArea)[2, 1] - 0.2, bbox(studyArea)[2, 2] + 0.2,
+              bbox(studyArea)[2, 2] + 0.2, bbox(studyArea)[2, 1] - 0.2),
+        border = "red", lwd = 1)
+box(which = "plot", lty = "solid", lwd = 2)
+```
+
+Other factors/conditions to consider are:
+
+1. Population density of humans decrease as population density of livestock increase and as population density of humans increase, population density of livestock decrease.
+
+2. In order to study land disturbance properly, samples/information need to also be collected in areas where humand and livestock do not reside/stay.
+
+Additional assumptions made:
+
+1. Approach to study sampling is using cluster sampling (CS) rather than simple random sampling (SRS).
+
+2. 
+
+Given these initial parameters, we consider the following sampling options.
+
+## 
+
+```{r}
+## Subset village to study areas
+studyVillages <- village[village$REGNAME %in% c("Arusha", "Mara"), ]
+
+par(mar = c(0,0,0,0))
+plot(studyArea, lty = 0)
+plot(lsPopStudyArea, add = TRUE)
+plot(region, lwd = 1, add = TRUE)
+plot(studyVillages, border = "darkgreen", add = TRUE)
+```
+
+
