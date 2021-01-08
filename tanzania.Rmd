@@ -134,11 +134,13 @@ legend("topright", inset = 0.01, box.lwd = 1,
        pch = c(3, 19), col = c("black", "blue"), bty = "o")
 ```
 
+Following is a list of the selected villages from the map.
+
 ```{r sample_table, echo = FALSE}
 tab <- studySampleVillages[ , c("spid", "REGNAME", "DISTNAME", "WARD_NAME", "STREET", "TOTAL")]
 names(tab) <- c("SPID", "Region", "District", "Ward", "Street", "Population")
 
-knitr::kable(x = tab)
+knitr::kable(x = tab, row.names = FALSE)
 ```
 
 
