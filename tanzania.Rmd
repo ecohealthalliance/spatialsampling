@@ -92,9 +92,9 @@ plot(studyArea, lty = 0)
 plot(studyVillages, border = "darkgreen", add = TRUE)
 plot(studyArea, lwd = 2, add = TRUE)
 
-## Create sampling grid (area size 100 sq kms)
+## Create sampling grid (n = 30 square grids)
 studySP <- create_sp_grid(x = studyArea, 
-                          n = 100,
+                          n = 30,
                           country = "Tanzania", 
                           buffer = 2, type = "csas")
 
