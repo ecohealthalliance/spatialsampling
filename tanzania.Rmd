@@ -84,7 +84,7 @@ To build the sampling scenarios, the following datasets were retrieved and utili
 
 * Limitation will be that the resulting sample will be representative of human population but may not be of the livestock population given that areas with high population density will most likely have lesser livestock population
 
-```{r livestock, echo = FALSE, fig.cap = "Ruminant population in the study area", fig.align = "center"}
+```{r livestock, echo = TRUE, fig.cap = "Ruminant population in the study area", fig.align = "center"}
 ## Subset village to study areas
 studyVillages <- village[village$REGNAME %in% c("Arusha", "Mara"), ]
 
@@ -98,7 +98,9 @@ plot(studyArea, lwd = 3, add = TRUE)
 ```
 ### Spatial sampling
 
-```{r basic_spatial, echo = TRUE, fig.align = "center"}
+An alternative would be a spatial sample based on centric systematic area sampling (CSAS). The basic principle would be to create a sample that is evenly spread throughout the study area by applying a square grid across the study area. The clusters to sample are then selected by proximity to the centroids of the square grid. The following map illustrates this sampling approach on the study area assuming that $n = 30$ clusters are needed for the study.
+
+```{r basic_spatial, echo = TRUE, fig.cap = "Spatial sample of 30 clusters across study area", fig.align = "center"}
 ## Subset village to study areas
 studyVillages <- village[village$REGNAME %in% c("Arusha", "Mara"), ]
 
@@ -123,11 +125,16 @@ studySampleVillages <- get_nearest_point(data = studyVillagesSP,
                                          data.x = "x", data.y = "y",
                                          query = studySP, n = 1)
 
-plot(studySP, cex = 0.3, add = TRUE)
-points(studySampleVillages[ , c("x", "y")], cex = 0.5, pch = 0, col = "blue")
+points(studySampleVillages[ , c("x", "y")], cex = 1, pch = 19, col = "blue")
+plot(studySP, cex = 0.5, add = TRUE)
+
+legend("topright", inset = 0.01, box.lwd = 1,
+       title = "Legend", cex = 1, y.intersp = 1.2,
+       legend = c("Grid centroids", "Selected villages"),
+       pch = c(3, 19), col = c("black", "blue"), bty = "o")
 ```
 
-```{r sample-table, echo = FALSE}
+```{r sample_table, echo = FALSE}
 tab <- studySampleVillages[ , c("spid", "REGNAME", "DISTNAME", "WARD_NAME", "STREET", "TOTAL")]
 names(tab) <- c("SPID", "Region", "District", "Ward", "Street", "Population")
 
