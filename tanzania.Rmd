@@ -17,12 +17,14 @@ knitr::opts_chunk$set(
 if (!require(remotes)) install.packages("remotes")
 remotes::install_github("spatialworks/tanzania")
 remotes::install_github("spatialworks/spatialsampler")
+remotes::install_github("nutriverse/smartr")
 
 library(rgdal)
 library(rgeos)
 library(raster)
 library(tanzania)
 library(spatialsampler)
+library(smartr)
 ```
 
 ## Context
@@ -96,8 +98,8 @@ studySamplePPS <- smartr::get_pps(df = studyVillagesSP, pop = "TOTAL", m = 30)
 The following list of villages are selected using this approach:
 
 ```{r pps2, echo = FALSE, eval = TRUE}
-knitr::kable(x = studySamplePPS[ , c("cluster_id", "REGNAME", "DISTNAME", "WARD_NAME", "STREET", "TOTAL")], 
-             row.names = )
+knitr::kable(x = studySamplePPS[[2]][ , c("cluster_id", "REGNAME", "DISTNAME", "WARD_NAME", "STREET", "TOTAL")], 
+             row.names = FALSE)
 ```
 
 And a map of these selected villages:
@@ -110,7 +112,7 @@ plot(studyArea, lty = 0)
 plot(studyVillages, border = "darkgreen", add = TRUE)
 plot(studyArea, lwd = 2, add = TRUE)
 
-points(studySamplePPS[ , c("x", "y")], cex = 1, pch = 19, col = "blue")
+points(studySamplePPS[[2]][ , c("x", "y")], cex = 1, pch = 19, col = "blue")
 
 legend("topright", inset = 0.01, box.lwd = 1,
        title = "Legend", cex = 1, y.intersp = 1.2,
