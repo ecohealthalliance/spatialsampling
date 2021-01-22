@@ -13,6 +13,7 @@ library(spatialsampler)
 ## Shiny packages
 library(shiny)
 library(shinydashboard)
+library(shinyFiles)
 
 ## Utilities and data wrangling
 library(magrittr)
