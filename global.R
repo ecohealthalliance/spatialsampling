@@ -20,8 +20,7 @@ library(magrittr)
 library(dplyr)
 
 ## Authenticate with Mapbox ----------------------------------------------------
-mapboxapi::mb_access_token(token = Sys.getenv("MAPBOX_PUBLIC_TOKEN"),
-                           install = TRUE)
+mapboxapi::mb_access_token(token = Sys.getenv("MAPBOX_PUBLIC_TOKEN"))
 
 ## Mapbox styles
 leShine   <- "ckk7gbtu20d9817qu6i8hbxet"
