@@ -153,7 +153,7 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
                 ## Select colour for study area boundaries
                 colourpicker::colourInput(inputId = "survey_area_colour",
                   label = "Colour of survey area boundaries",
-                  value = "yellow",
+                  value = "green",
                   palette = "limited",
                   allowTransparent = TRUE,
                   returnName = TRUE
@@ -169,12 +169,12 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
                 ##
                 checkboxInput(inputId = "show_boundaries",
                   label = "Show country boundaries",
-                  value = TRUE
+                  value = FALSE
                 ),
                 ## Select colour for country area boundaries
                 colourpicker::colourInput(inputId = "country_boundaries_colour",
                   label = "Colour of country boundaries",
-                  value = "green",
+                  value = "yellow",
                   palette = "limited",
                   allowTransparent = TRUE,
                   returnName = TRUE
@@ -182,7 +182,7 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
                 ## Select weight of country area boundaries
                 numericInput(inputId = "country_boundaries_weight",
                   label = "Weight of country area boundaries",
-                  value = 5,
+                  value = 2,
                   min = 5, max = 20,
                   step = 1
                 ),
@@ -259,7 +259,7 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
                 ## Select colour for sample grid
                 colourpicker::colourInput(inputId = "grid_colour",
                   label = "Colour of sampling grid lines",
-                  value = "yellow",
+                  value = "blue",
                   palette = "limited",
                   allowTransparent = TRUE,
                   returnName = TRUE

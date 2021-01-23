@@ -197,76 +197,88 @@ function(input, output, session) {
   ## Get boundary files from GADM for chosen country
   admin_boundaries <- reactive({
     country_code <- countrycode(input$country,
-                                origin = "country.name",
-                                destination = "iso3c")
+      origin = "country.name",
+      destination = "iso3c")
 
-    raster::getData(country = country_code, level = 3)
+    raster::getData(country = country_code, level = 3, path = tempdir())
   })
 
   ## Base map
   output$map <- renderLeaflet({
     leaflet() %>%
       addMapboxTiles(style_id = get(input$base_layer),
-                     username = "ernestguevarra") %>%
-      setView(lng = country_coordinates()[1],
-              lat = country_coordinates()[2],
-              zoom = 6)
-  })
-
-  ## Show country boundaries
-  observeEvent(input$show_boundaries, {
-    leafletProxy("map") %>%
+        username = "ernestguevarra") %>%
       addPolygons(data = admin_boundaries(),
-                  color = input$country_boundaries_colour,
-                  fill = FALSE,
-                  weight = input$country_boundaries_weight,
-                  group = "admin_area")
+        color = input$country_boundaries_colour,
+        fill = FALSE,
+        weight = input$country_boundaries_weight,
+        group = "Administrative boundaries") %>%
+      addLayersControl(
+        baseGroups = c("Administrative boundaries"),
+        position = "bottomleft",
+        options = layersControlOptions(collapsed = FALSE, autoZIndex = TRUE)
+      ) %>%
+      setView(lng = country_coordinates()[1],
+        lat = country_coordinates()[2],
+        zoom = 6)
   })
 
   ## Add survey area
   observeEvent(input$survey_area, {
     leafletProxy("map") %>%
-      clearShapes() %>%
-      clearControls() %>%
+      #clearControls() %>%
       clearMarkers() %>%
       setView(lng = coordinates(survey_area())[1],
-              lat = coordinates(survey_area())[2],
-              zoom = 9) %>%
+        lat = coordinates(survey_area())[2],
+        zoom = 9) %>%
       addPolygons(data = survey_area(),
-                  color = input$survey_area_colour,
-                  fill = FALSE,
-                  weight = input$survey_area_weight,
-                  group = "survey_area")
+        color = input$survey_area_colour,
+        fill = FALSE,
+        weight = input$survey_area_weight,
+        group = "Study area") %>%
+      addLayersControl(
+        baseGroups = c("Administrative boundaries"),
+        overlayGroups = c("Study area"),
+        position = "bottomleft",
+        options = layersControlOptions(collapsed = FALSE, autoZIndex = TRUE)
+      )
   })
 
   ## Add sampling grid
   observeEvent(input$get_sample, {
     leafletProxy("map") %>%
-      clearControls() %>%
-      clearGroup(group = "sample_points") %>%
-      clearGroup(group = "sample_grid") %>%
-      addCircleMarkers(lng = sampling_points()@coords[ , 1],
-                       lat = sampling_points()@coords[ , 2],
-                       color = input$centroid_colour,
-                       radius = input$centroid_size,
-                       weight = input$centroid_weight,
-                       group = "sample_points") %>%
+      clearGroup(group = "Sampling points") %>%
+      clearGroup(group = "Sampling grid") %>%
+      addCircleMarkers(
+        lng = sampling_points()@coords[ , 1],
+        lat = sampling_points()@coords[ , 2],
+        color = input$centroid_colour,
+        radius = input$centroid_size,
+        weight = input$centroid_weight,
+        group = "Sampling points") %>%
       addPolygons(data = sampling_grid(),
-                  color = input$grid_colour,
-                  fill = FALSE,
-                  weight = input$grid_weight,
-                  group = "sample_grid")
+        color = input$grid_colour,
+        fill = FALSE,
+        weight = input$grid_weight,
+        group = "Sampling grid") %>%
+      addLayersControl(
+        overlayGroups = c("Sampling points", "Sampling grid", "Study area"),
+        baseGroups = c("Administrative Boundaries"),
+        position = "bottomleft",
+        options = layersControlOptions(collapsed = FALSE, autoZIndex = TRUE)
+      )
   })
 
   ## Check if mapping settings are changed
   observeEvent(input$save_centroid_settings, {
     leafletProxy("map") %>%
       clearMarkers() %>%
-      addCircleMarkers(lng = sampling_points()@coords[ , 1],
-                       lat = sampling_points()@coords[ , 2],
-                       color = input$centroid_colour,
-                       radius = input$centroid_size,
-                       weight = input$centroid_weight,
-                       group = "sample_points")
+      addCircleMarkers(
+        lng = sampling_points()@coords[ , 1],
+        lat = sampling_points()@coords[ , 2],
+        color = input$centroid_colour,
+        radius = input$centroid_size,
+        weight = input$centroid_weight,
+        group = "Sampling points")
   })
 }
