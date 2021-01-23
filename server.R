@@ -6,7 +6,13 @@
 
 ##
 function(input, output, session) {
-  ## Condition-based UIs -------------------------------------------------------
+  ##############################################################################
+  #
+  # Condition-based UIs
+  #
+  ##############################################################################
+
+  ## UI for main page
   output$survey_area_input <- renderUI({
     if (input$input_type == "gpkg") {
       fileInput(inputId = "survey_area",
@@ -27,7 +33,42 @@ function(input, output, session) {
     roots = c("wd" = ".", "home" = "/home")
   )
 
-  ## Process input layer -------------------------------------------------------
+  ## UI for dataset input
+  output$dataset_input <- renderUI({
+    if (input$input_type_alt == "gpkg") {
+      if (input$dataset_type == "humans") {
+        fileInput(inputId = "dataset_human_alt",
+          label = "Upload gpkg file of human population dataset",
+          accept = "gpkg"
+        )
+      } else {
+        fileInput(inputId = "dataset_cattle_alt",
+          label = "Upload gpkg file of cattle population dataset",
+          accept = "gpkg"
+        )
+      }
+    } else {
+      if (input$dataset_type == "humans") {
+        shinyDirButton(id = "dataset_human_alt",
+          label = "Upload shapefile folder",
+          title = "Select shp folder of human population dataset"
+        )
+      } else {
+        shinyDirButton(id = "dataset_cattle_alt",
+          label = "Upload shapefile folder",
+          title = "Select shp folder of cattle population dataset"
+        )
+      }
+    }
+  })
+
+  ##############################################################################
+  #
+  # Process inputs
+  #
+  ##############################################################################
+
+  ## Process input layer
   survey_area <- reactive({
     if (input$input_type == "gpkg") {
       file <- input$survey_area
@@ -36,7 +77,7 @@ function(input, output, session) {
     }
   })
 
-  ## Create sample -------------------------------------------------------------
+  ## Create spatial sample - points
   sampling_points <- eventReactive(input$get_sample, {
     req(input$nSamplingUnits)
 
@@ -45,6 +86,7 @@ function(input, output, session) {
                    type = "csas")
   })
 
+  ## Create spatial sample - grid
   sampling_grid <- reactive({
     req(sampling_points())
 
@@ -53,6 +95,12 @@ function(input, output, session) {
       as("SpatialPolygons")
   })
 
+  ## Process appropriate population dataset from WorldPop
+  #pop_data <- getCatalogue() %>%
+  #  filter(country = countrycode("Tanzania", "country.name", "iso3c"),
+  #         category = "Population")
+
+  ## Population dataset from GLW3 ----------------------------------------------
 
   ## Mapping -------------------------------------------------------------------
 
@@ -60,7 +108,7 @@ function(input, output, session) {
   output$map <- renderLeaflet({
     leaflet() %>%
       addMapboxTiles(style_id = satellite, username = "ernestguevarra") %>%
-      setView(lng = 20, lat = 20, zoom = 3)
+      setView(lng = 20, lat = 20, zoom = 4)
   })
 
   ## Add survey area
