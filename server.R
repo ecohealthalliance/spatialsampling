@@ -96,9 +96,7 @@ function(input, output, session) {
   })
 
   ## Process appropriate population dataset from WorldPop
-  #pop_data <- getCatalogue() %>%
-  #  filter(country = countrycode("Tanzania", "country.name", "iso3c"),
-  #         category = "Population")
+
 
   ## Population dataset from GLW3 ----------------------------------------------
 
