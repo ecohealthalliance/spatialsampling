@@ -29,7 +29,7 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
         ##
         selectInput(inputId = "country",
           label = "Study country",
-          choices = c("Tanzania", "Rwanda"),
+          choices = c("Tanzania"),
           selected = "Tanzania"
         ),
         ## Input type
@@ -56,10 +56,81 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
         ## Sampling button
         actionButton(inputId = "get_sample",
           label = "Sample",
-          icon = icon(name = "fa-table", lib = "font-awesome")
+          icon = icon(name = "table", lib = "font-awesome")
         )
       )
     )
+  ),
+  ## Settings page
+  tabPanel(title = "Settings",
+    value = 2,
+    icon = icon(name = "cog", lib = "font-awesome"),
+    tabsetPanel(
+      tabPanel(title = "Datasets",
+        fluidPage(
+          fluidRow(
+            ## add empty row for spacing
+            column(width = 12, br())
+          ),
+          fluidRow(
+            column(width = 3,
+              wellPanel(
+                h4("Datasets"),
+                hr(),
+                tags$p("This application uses pre-loaded population datasets
+                       for humans and cattles retrieved from the following
+                       sources:"),
+                radioButtons(inputId = "pop_data",
+                  label = "",
+                  choices = c("WorldPop" = "worldpop",
+                              "GLW3" = "glw3"),
+                  inline = TRUE
+                ),
+                hr(),
+                h5("Upload alternative population datasets"),
+                ## Select alternative input
+                selectInput(inputId = "dataset_type",
+                  label = "Alternative population dataset for",
+                  choices = c("humans", "cattles"),
+                  selected = "humans"
+                ),
+                selectInput(inputId = "input_type_alt",
+                  label = "Select alternative dataset file type",
+                  choices = c("shapefile" = "shp",
+                              "geopackage" = "gpkg"),
+                  selected = c("shp")
+                ),
+                uiOutput("dataset_input")
+              )
+            ),
+            column(width = 9,
+
+            )
+          )
+        )
+      ),
+      tabPanel(title = "Maps",
+        fluidPage(
+          fluidRow(
+            ## add empty row for spacing
+            column(width = 12, br())
+          ),
+          fluidRow(
+            column(width = 3,
+              wellPanel(
+                h4("Maps"),
+                hr()
+              )
+            )
+          )
+        )
+      )
+    )
+  ),
+  ## About page
+  tabPanel(title = "About",
+    value = 3,
+    icon = icon(name = "user", lib = "font-awesome")
   )
 )
 

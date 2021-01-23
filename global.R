@@ -8,6 +8,7 @@ library(sf)
 library(mapboxapi)
 library(mapdeck)
 library(leaflet)
+library(wopr)
 library(spatialsampler)
 
 ## Shiny packages
@@ -18,6 +19,7 @@ library(shinyFiles)
 ## Utilities and data wrangling
 library(magrittr)
 library(dplyr)
+library(countrycode)
 
 ## Authenticate with Mapbox ----------------------------------------------------
 mapboxapi::mb_access_token(token = Sys.getenv("MAPBOX_PUBLIC_TOKEN"))
