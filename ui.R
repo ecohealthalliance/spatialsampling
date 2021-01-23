@@ -41,22 +41,17 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
           multiple = FALSE),
         ## Input base maplayer
         uiOutput("survey_area_input"),
+        ## Horizontal line break
         hr(),
-        ## Sampling units
-        numericInput(inputId = "nSamplingUnits",
-          label = "Number of sampling units",
-          min = 20, max = 600,
-          value = 30, step = 1
+        ## Input sampling parameters
+        uiOutput("sample_parameters1"),
+        uiOutput("sample_parameters2"),
+        div(style="display:inline-block",
+          uiOutput("sample_parameters3")
         ),
-        numericInput(inputId = "samplingBuffer",
-          label = "Set an area sampling buffer",
-          min = 0, max = 10,
-          value = 0, step = 1
-        ),
-        ## Sampling button
-        actionButton(inputId = "get_sample",
-          label = "Sample",
-          icon = icon(name = "table", lib = "font-awesome")
+        ##
+        div(style="display:inline-block",
+          uiOutput("report_output")
         )
       )
     )
@@ -66,7 +61,7 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
     value = 2,
     icon = icon(name = "cog", lib = "font-awesome"),
     tabsetPanel(
-      tabPanel(title = "Datasets",
+      tabPanel(title = "Population",
         fluidPage(
           fluidRow(
             ## add empty row for spacing
@@ -75,8 +70,6 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
           fluidRow(
             column(width = 3,
               wellPanel(
-                h4("Datasets"),
-                hr(),
                 tags$p("This application uses pre-loaded population datasets
                        for humans and cattles retrieved from the following
                        sources:"),
@@ -88,6 +81,9 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
                 ),
                 hr(),
                 h5("Upload alternative population datasets"),
+                tags$p("Alternative sources of population datasets for humans
+                       and/or cattle can be specified by uploading these
+                       sources here."),
                 ## Select alternative input
                 selectInput(inputId = "dataset_type",
                   label = "Alternative population dataset for",
@@ -111,15 +107,66 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
       ),
       tabPanel(title = "Maps",
         fluidPage(
+          useShinyjs(),
           fluidRow(
-            ## add empty row for spacing
+            ## add empty row for horizontal spacing
             column(width = 12, br())
           ),
           fluidRow(
             column(width = 3,
               wellPanel(
-                h4("Maps"),
-                hr()
+                h4("Settings for map layers"),
+                ## Select base layer
+                selectInput(inputId = "base_layer",
+                  label = "Select base layer",
+                  choices = c("Satellite Street" = "satellite",
+                              "Le Shine" = "leShine",
+                              "Decimal" = "decimal",
+                              "Standard" = "standard",
+                              "Northstar" = "northstar"),
+                  selected = "satellite"
+                )
+              )
+            ),
+            column(width = 3,
+              wellPanel(
+                id = "sample_points_settings_panel",
+                h4("Settings for sampling points"),
+                ## Select colour for sampling points
+                colourpicker::colourInput(inputId = "centroid_colours",
+                  label = "Colour of sampling points",
+                  value = "red",
+                  palette = "limited",
+                  allowTransparent = TRUE,
+                  returnName = TRUE
+                ),
+                ## Select size for sampling points
+                numericInput(inputId = "centroid_size",
+                  label = "Size of sampling points",
+                  value = 2,
+                  min = 1, max = 10, step = 1
+                ),
+                ## Select weight for sampling points
+                numericInput(inputId = "centroid_weight",
+                  label = "Weight of sampling points",
+                  value = 5,
+                  min = 5, max = 10, step = 1
+                ),
+                ## Reset selection
+                div(style="display:inline-block; vertical-align:middle;",
+                  actionButton(inputId = "reset_centroid_settings",
+                    label = "Reset",
+                    class = "btn-primary",
+                    icon = icon(name = "refresh", lib = "font-awesome")
+                  )
+                ),
+                ##
+                div(style="display:inline-block; vertical-align:middle;",
+                  actionButton(inputId = "save_centroid_colours",
+                    label = "Save",
+                    class = "btn-success",
+                    icon = icon(name = "check", lib = "font-awesome"))
+                ),
               )
             )
           )
