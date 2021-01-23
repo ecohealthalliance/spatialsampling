@@ -9,7 +9,7 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
   ## Create tab panel
   tabPanel(title = "",
     value = 1,
-    icon = icon(name = "home", class = "fa-lg"),
+    icon = icon(name = "home", class = "fa-lg", lib = "font-awesome"),
     ## Header HTML
     div(class = "outer",
       ## Header HTML
@@ -59,9 +59,9 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
   ## Settings page
   tabPanel(title = "Settings",
     value = 2,
-    icon = icon(name = "cog", lib = "font-awesome"),
+    icon = icon(name = "cog", class = "fa-lg", lib = "font-awesome"),
     tabsetPanel(
-      tabPanel(title = "Population",
+      tabPanel(title = "Datasets",
         fluidPage(
           fluidRow(
             ## add empty row for spacing
@@ -69,7 +69,8 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
           ),
           fluidRow(
             column(width = 3,
-              wellPanel(
+              wellPanel(id = "population_dataset_settings",
+                h4("Population"),
                 tags$p("This application uses pre-loaded population datasets
                        for humans and cattles retrieved from the following
                        sources:"),
@@ -99,8 +100,23 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
                 uiOutput("dataset_input")
               )
             ),
-            column(width = 9,
-
+            column(width = 3,
+              wellPanel(id = "boundary_dataset_settings",
+                h4("Country boundaries"),
+                HTML("<p>This application uses boundary files available from
+                     <a href='https://gadm.org'>https://gadm.org</a>.</p>"),
+                br(),
+                hr(),
+                h5("Upload alternative map boundaries dataset"),
+                selectInput(inputId = "input_type_boundaries",
+                  label = "Select alternative boundaries file type",
+                  choices = c("shapefile" = "shp",
+                              "geopackage" = "gpkg"),
+                  selected = c("shp")
+                ),
+                uiOutput("boundaries_input"),
+                br(), br(), br()
+              )
             )
           )
         )
@@ -114,8 +130,8 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
           ),
           fluidRow(
             column(width = 3,
-              wellPanel(
-                h4("Settings for map layers"),
+              wellPanel(id = "map_layers_settings_panel",
+                h4("Base map layers"),
                 ## Select base layer
                 selectInput(inputId = "base_layer",
                   label = "Select base layer",
@@ -125,15 +141,77 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
                               "Standard" = "standard",
                               "Northstar" = "northstar"),
                   selected = "satellite"
+                ),
+                hr(),
+                ## Show sample of selected base layer
+                leafletOutput("sample_base_map", height = 200)
+              )
+            ),
+            column(width = 3,
+              wellPanel(id = "boundaries_settings_panel",
+                h4("Area boundaries"),
+                ## Select colour for study area boundaries
+                colourpicker::colourInput(inputId = "survey_area_colour",
+                  label = "Colour of survey area boundaries",
+                  value = "yellow",
+                  palette = "limited",
+                  allowTransparent = TRUE,
+                  returnName = TRUE
+                ),
+                ## Select weight of study area boundaries
+                numericInput(inputId = "survey_area_weight",
+                  label = "Weigth of survey area boundaries",
+                  value = 5,
+                  min = 5, max = 20,
+                  step = 1
+                ),
+                hr(),
+                ##
+                checkboxInput(inputId = "show_boundaries",
+                  label = "Show country boundaries",
+                  value = TRUE
+                ),
+                ## Select colour for country area boundaries
+                colourpicker::colourInput(inputId = "country_boundaries_colour",
+                  label = "Colour of country boundaries",
+                  value = "green",
+                  palette = "limited",
+                  allowTransparent = TRUE,
+                  returnName = TRUE
+                ),
+                ## Select weight of country area boundaries
+                numericInput(inputId = "country_boundaries_weight",
+                  label = "Weight of country area boundaries",
+                  value = 5,
+                  min = 5, max = 20,
+                  step = 1
+                ),
+                hr(),
+                ## Reset selection
+                div(style="display:inline-block; vertical-align:middle;",
+                  actionButton(inputId = "reset_boundary_settings",
+                    label = "Reset",
+                    class = "btn-primary",
+                    icon = icon(name = "refresh",
+                                class = "fa-med",
+                                lib = "font-awesome"))
+                ),
+                ## Save centroid settings
+                div(style="display:inline-block; vertical-align:middle;",
+                  actionButton(inputId = "save_boundary_settings",
+                    label = "Save",
+                    class = "btn-success",
+                    icon = icon(name = "check",
+                                class = "fa-med",
+                                lib = "font-awesome"))
                 )
               )
             ),
             column(width = 3,
-              wellPanel(
-                id = "sample_points_settings_panel",
-                h4("Settings for sampling points"),
+              wellPanel(id = "sample_points_settings_panel",
+                h4("Sampling points"),
                 ## Select colour for sampling points
-                colourpicker::colourInput(inputId = "centroid_colours",
+                colourpicker::colourInput(inputId = "centroid_colour",
                   label = "Colour of sampling points",
                   value = "red",
                   palette = "limited",
@@ -152,21 +230,67 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
                   value = 5,
                   min = 5, max = 10, step = 1
                 ),
+                br(), br(), br(),
+                hr(),
                 ## Reset selection
                 div(style="display:inline-block; vertical-align:middle;",
                   actionButton(inputId = "reset_centroid_settings",
                     label = "Reset",
                     class = "btn-primary",
-                    icon = icon(name = "refresh", lib = "font-awesome")
+                    icon = icon(name = "refresh",
+                                class = "fa-med",
+                                lib = "font-awesome")
                   )
                 ),
-                ##
+                ## Save centroid settings
                 div(style="display:inline-block; vertical-align:middle;",
-                  actionButton(inputId = "save_centroid_colours",
+                  actionButton(inputId = "save_centroid_settings",
                     label = "Save",
                     class = "btn-success",
-                    icon = icon(name = "check", lib = "font-awesome"))
+                    icon = icon(name = "check",
+                                class = "fa-med",
+                                lib = "font-awesome"))
+                )
+              )
+            ),
+            column(width = 3,
+              wellPanel(id = "sample_grid_settings_panel",
+                h4("Sampling grid"),
+                ## Select colour for sample grid
+                colourpicker::colourInput(inputId = "grid_colour",
+                  label = "Colour of sampling grid lines",
+                  value = "yellow",
+                  palette = "limited",
+                  allowTransparent = TRUE,
+                  returnName = TRUE
                 ),
+                ## Select weight for sampling grid
+                numericInput(inputId = "grid_weight",
+                  label = "Weight of sampling grid lines",
+                  value = 5,
+                  min = 5, max = 10, step = 1
+                ),
+                br(), br(), br(), br(), br(), br(), br(),
+                hr(),
+                ## Reset selection
+                div(style="display:inline-block; vertical-align:middle;",
+                  actionButton(inputId = "reset_grid_settings",
+                    label = "Reset",
+                    class = "btn-primary",
+                    icon = icon(name = "refresh",
+                                class = "fa-med",
+                                lib = "font-awesome")
+                  )
+                ),
+                ## Save centroid settings
+                div(style="display:inline-block; vertical-align:middle;",
+                  actionButton(inputId = "save_grid_settings",
+                    label = "Save",
+                    class = "btn-success",
+                    icon = icon(name = "check",
+                                class = "fa-med",
+                                lib = "font-awesome"))
+                )
               )
             )
           )
@@ -177,7 +301,7 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
   ## About page
   tabPanel(title = "About",
     value = 3,
-    icon = icon(name = "user", lib = "font-awesome")
+    icon = icon(name = "user", class = "fa-lg", lib = "font-awesome")
   )
 )
 

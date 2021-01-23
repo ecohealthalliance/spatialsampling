@@ -102,6 +102,21 @@ function(input, output, session) {
     }
   })
 
+  ## UI for boundaries input
+  output$boundaries_input <- renderUI({
+    if (input$input_type_boundaries == "gpkg") {
+      fileInput(inputId = "boundary_map",
+                label = "Upload geopackage file of area map",
+                accept = "gpkg"
+      )
+    } else {
+      shinyDirButton(id = "boundary_map",
+                     label = "Upload shapefile folder of area map",
+                     title = "Select shapefile folder to upload"
+      )
+    }
+  })
+
   ##############################################################################
   #
   # Process inputs
@@ -148,10 +163,17 @@ function(input, output, session) {
   ##############################################################################
 
   ## Reset maps settings
+  observeEvent(input$reset_boundary_settings, {
+    shinyjs::reset(id = "boundaries_settings_panel")
+  })
+
   observeEvent(input$reset_centroid_settings, {
     shinyjs::reset(id = "sample_points_settings_panel")
   })
 
+  observeEvent(input$reset_grid_settings, {
+    shinyjs::reset(id = "sample_grid_settings_panel")
+  })
 
   ##############################################################################
   #
@@ -159,9 +181,26 @@ function(input, output, session) {
   #
   ##############################################################################
 
+  ## Create sample map for settings
+  output$sample_base_map <- renderLeaflet({
+    leaflet() %>%
+      addMapboxTiles(style_id = get(input$base_layer),
+                     username = "ernestguevarra") %>%
+      setView(lng = 20, lat = 20, zoom = 2)
+  })
+
   ## Get coordinates for selected country
   country_coordinates <- reactive({
     mb_geocode(search_text = input$country)
+  })
+
+  ## Get boundary files from GADM for chosen country
+  admin_boundaries <- reactive({
+    country_code <- countrycode(input$country,
+                                origin = "country.name",
+                                destination = "iso3c")
+
+    raster::getData(country = country_code, level = 3)
   })
 
   ## Base map
@@ -174,6 +213,16 @@ function(input, output, session) {
               zoom = 6)
   })
 
+  ## Show country boundaries
+  observeEvent(input$show_boundaries, {
+    leafletProxy("map") %>%
+      addPolygons(data = admin_boundaries(),
+                  color = input$country_boundaries_colour,
+                  fill = FALSE,
+                  weight = input$country_boundaries_weight,
+                  group = "admin_area")
+  })
+
   ## Add survey area
   observeEvent(input$survey_area, {
     leafletProxy("map") %>%
@@ -184,9 +233,9 @@ function(input, output, session) {
               lat = coordinates(survey_area())[2],
               zoom = 9) %>%
       addPolygons(data = survey_area(),
-                  color = "yellow",
+                  color = input$survey_area_colour,
                   fill = FALSE,
-                  weight = 3,
+                  weight = input$survey_area_weight,
                   group = "survey_area")
   })
 
@@ -198,14 +247,26 @@ function(input, output, session) {
       clearGroup(group = "sample_grid") %>%
       addCircleMarkers(lng = sampling_points()@coords[ , 1],
                        lat = sampling_points()@coords[ , 2],
-                       color = "red",
+                       color = input$centroid_colour,
                        radius = input$centroid_size,
                        weight = input$centroid_weight,
                        group = "sample_points") %>%
       addPolygons(data = sampling_grid(),
-                  color = "blue",
+                  color = input$grid_colour,
                   fill = FALSE,
-                  weight = 1,
+                  weight = input$grid_weight,
                   group = "sample_grid")
+  })
+
+  ## Check if mapping settings are changed
+  observeEvent(input$save_centroid_settings, {
+    leafletProxy("map") %>%
+      clearMarkers() %>%
+      addCircleMarkers(lng = sampling_points()@coords[ , 1],
+                       lat = sampling_points()@coords[ , 2],
+                       color = input$centroid_colour,
+                       radius = input$centroid_size,
+                       weight = input$centroid_weight,
+                       group = "sample_points")
   })
 }
