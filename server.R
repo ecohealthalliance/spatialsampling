@@ -12,9 +12,6 @@ function(input, output, session) {
   #
   ##############################################################################
 
-  ## Get volumnes
-  volumes <- getVolumes()
-
   ## UI for main page
   output$survey_area_input <- renderUI({
     if (input$input_type == "gpkg") {
@@ -71,9 +68,9 @@ function(input, output, session) {
     req(input$get_sample)
 
     ## Report button
-    actionButton(inputId = "create_report",
-                 label = "Report",
-                 icon = icon(name = "clipboard", lib = "font-awesome"))
+    downloadButton(outputId = "create_report",
+      label = "Report",
+      icon = icon(name = "clipboard", lib = "font-awesome"))
   })
 
   ## UI for dataset input
@@ -167,6 +164,47 @@ function(input, output, session) {
     }
   })
 
+  ## Process administrative boundaries
+
+  ## Get coordinates for selected country
+  country_coordinates <- reactive({
+    mb_geocode(search_text = input$country)
+  })
+
+  ## Process file paths
+  boundary_map_file_path <- reactive({
+    req(input$boundary_map)
+    parseDirPath(roots = c("wd" = ".", "home" = "/home"),
+                 selection = input$boundary_map)
+  })
+
+  ## Get boundary files from GADM for chosen country
+  admin_boundaries <- reactive({
+    if (!is.null(input$boundary_map)) {
+      if (input$input_type_boundaries == "gpkg") {
+        req(input$boundary_map)
+        file <- input$boundary_map
+        readOGR(dsn = file$datapath)
+      } else {
+        req(boundary_map_file_path())
+        files <- list.files(boundary_map_file_path())
+        layer <- files %>%
+          stringr::str_split(pattern = "\\.", simplify = TRUE)
+        readOGR(dsn = boundary_maxp_file_path(),
+                layer = layer[1])
+      }
+    } else {
+      ## Read data from GADM
+      country_code <- countrycode(input$country,
+                                  origin = "country.name",
+                                  destination = "iso3c")
+
+      raster::getData(country = country_code,
+                      level = 3,
+                      path = "maps")
+    }
+  })
+
   ## Create spatial sample - points
   sampling_points <- eventReactive(input$get_sample, {
     req(input$nSamplingUnits)
@@ -174,6 +212,13 @@ function(input, output, session) {
     create_sp_grid(x = survey_area(), country = input$country,
                    n = input$nSamplingUnits, buffer = input$samplingBuffer,
                    type = "csas")
+  })
+
+  ## Get sampling points information
+  sampling_points_info <- reactive({
+    req(sampling_points())
+    z <- raster::intersect(sampling_points(), admin_boundaries())
+    cbind(z@data, z@coords)
   })
 
   ## Create spatial sample - grid
@@ -229,44 +274,7 @@ function(input, output, session) {
     }
   })
 
-  ## Process administrative boundaries
 
-  ## Get coordinates for selected country
-  country_coordinates <- reactive({
-    mb_geocode(search_text = input$country)
-  })
-
-  ## Process file paths
-  boundary_map_file_path <- reactive({
-    req(input$boundary_map)
-    parseDirPath(roots = c("wd" = ".", "home" = "/home"),
-                 selection = input$boundary_map)
-  })
-
-  ## Get boundary files from GADM for chosen country
-  admin_boundaries <- reactive({
-    ## Read data from GADM
-    country_code <- countrycode(input$country,
-                                origin = "country.name",
-                                destination = "iso3c")
-
-    raster::getData(country = country_code,
-                    level = 3,
-                    path = "maps")
-
-    if (input$input_type_boundaries == "gpkg") {
-      req(input$boundary_map)
-      file <- input$boundary_map
-      readOGR(dsn = file$datapath)
-    } else {
-      req(boundary_map_file_path())
-      files <- list.files(boundary_map_file_path())
-      layer <- files %>%
-        stringr::str_split(pattern = "\\.", simplify = TRUE)
-      readOGR(dsn = boundary_map_file_path(),
-              layer = layer[1])
-    }
-  })
 
   ##############################################################################
   #
@@ -337,7 +345,8 @@ function(input, output, session) {
     req(survey_area())
     leafletProxy("map") %>%
       clearMarkers() %>%
-      setView(lng = coordinates(survey_area())[1],
+      setView(
+        lng = coordinates(survey_area())[1],
         lat = coordinates(survey_area())[2],
         zoom = 9) %>%
       addPolygons(data = survey_area(),
@@ -417,5 +426,25 @@ function(input, output, session) {
   #
   ##############################################################################
 
+  output$create_report <- downloadHandler(
+    filename <- paste(tolower(input$country), ".html", sep = ""),
+    content <- function(file) {
+      tempReport <- file.path(tempdir(), "report.Rmd")
+      file.copy("report.Rmd", tempReport, overwrite = TRUE)
 
+      params <- list(country = input$country,
+                     nSamplingUnits = input$nSamplingUnits,
+                     buffer = input$samplingBuffer,
+                     samplingFrame = sampling_points_info(),
+                     adminArea = admin_boundaries(),
+                     studyArea = survey_area(),
+                     samplingGrid = sampling_grid(),
+                     samplingPoints = sampling_points(),
+                     baseLayer = get(input$base_layer))
+
+      rmarkdown::render(tempReport, output_file = file,
+                        params = params,
+                        envir = new.env(parent = globalenv()))
+    }
+  )
 }
