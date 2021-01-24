@@ -1,8 +1,9 @@
 ---
 title: '`r paste("Spatial Sampling Plan for ", params$country, " Study", sep = "")`'
-date: '`r format(Sys.Date(), "%d %B %Y")`'
+date: '`r params$ts`'
 output: html_document
 params:
+  ts: NA
   country: NA
   nSamplingUnits: NA
   buffer: NA
@@ -47,6 +48,8 @@ knitr::kable(x = x) %>%
   kableExtra::kable_styling(full_width = TRUE)
 ```
 
+The list of sampling points can be downloaded [here](`r paste("reports/", params$country, "_", params$ts, ".xlsx", sep = ""`).
+
 ```{r map, fig.align = "center", fig.width = 10, fig.height = 10}
 plot(params$studyArea, lty = 0)
 plot(params$adminArea, lwd = 1, add = TRUE)
@@ -55,7 +58,7 @@ plot(params$samplingGrid, lwd = 2, border = "blue", add = TRUE)
 points(params$samplingPoints@coords, pch = 20, col = "red", cex = 3)
 ```
 
-```{r leafletMap, out.width = "100%", out.height = "400px"}
+```{r leafletMap, out.width = "100%", out.height = "600px"}
 leaflet() %>%
   addMapboxTiles(style_id = params$baseLayer,
                  username = "ernestguevarra") %>%

@@ -491,9 +491,13 @@ function(input, output, session) {
       value = 0.7
     )
 
+    ts <- Sys.time() %>%
+      str_replace(pattern = " ", replacement = "_")
+
     filename <- paste(tolower(input$country), ".html", sep = "")
 
-    params <- list(country = input$country,
+    params <- list(ts = ts,
+                   country = input$country,
                    nSamplingUnits = input$nSamplingUnits,
                    buffer = input$samplingBuffer,
                    samplingFrame = sampling_points_info(),
@@ -514,7 +518,8 @@ function(input, output, session) {
     openxlsx::write.xlsx(
       x = data.frame(coordinates(sampling_points()),
                      sampling_points_info()),
-      file = paste("reports/", input$country, ".xlsx", sep = "")
+      file = paste("reports/", tolower(input$country),
+                   "_", ts, ".xlsx", sep = "")
     )
   })
 }
