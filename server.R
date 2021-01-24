@@ -180,6 +180,14 @@ function(input, output, session) {
 
   ## Get boundary files from GADM for chosen country
   admin_boundaries <- reactive({
+    ## Progress bar
+    progress <- Progress$new()
+    on.exit(progress$close())
+    progress$set(
+      message = paste("Retrieving administrative boundaries map of ",
+                       input$country, sep = ""),
+      value = 0.7)
+
     if (!is.null(input$boundary_map)) {
       if (input$input_type_boundaries == "gpkg") {
         req(input$boundary_map)
@@ -321,6 +329,14 @@ function(input, output, session) {
 
   ## Generate administrative borders
   observe({
+    ## Show progress bar
+    progress <- Progress$new()
+    on.exit(progress$close())
+    progress$set(
+      message = paste("Loading administrative boundaries map of ",
+                      input$country, sep = ""),
+      value = 0.7)
+
     leafletProxy("map") %>%
       addPolygons(data = admin_boundaries(),
         color = input$country_boundaries_colour,
@@ -332,6 +348,14 @@ function(input, output, session) {
   ## Should administrative borders be shown?
   observe({
     if (input$show_boundaries) {
+      ## Show progress bar
+      progress <- Progress$new()
+      on.exit(progress$close())
+      progress$set(
+        message = paste("Loading administrative boundaries map of ",
+                        input$country, sep = ""),
+        value = 0.7)
+
       leafletProxy("map") %>%
         showGroup("Administrative boundaries")
     } else {

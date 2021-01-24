@@ -22,7 +22,6 @@ library(shinydashboard)
 library(shinyFiles)      ## ui for selecting and uploading directories in Shiny
 library(colourpicker)
 library(shinyjs)
-library(waiter)
 
 ## Utilities and data wrangling
 library(magrittr)
