@@ -524,7 +524,8 @@ function(input, output, session) {
                       params = params,
                       envir = new.env(parent = globalenv()))
 
-    browseURL(url = paste("www/reports/", input$country, ".html", sep = ""))
+    browseURL(url = paste("www/reports/",
+                          tolower(input$country), ".html", sep = ""))
 
     openxlsx::write.xlsx(
       x = data.frame(coordinates(sampling_points()),
