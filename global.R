@@ -14,7 +14,6 @@ library(mapboxapi)       ## for mapbox baselayers and functions
 library(mapdeck)         ## for webgl mapping functions
 library(leaflet)         ## for leaflet mapping
 library(wopr)            ## interface to WorldPop database
-library(gadmr)           ## interface to GADM database
 library(spatialsampler)  ## spatial sampling functions
 
 ## Shiny packages

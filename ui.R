@@ -32,6 +32,11 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
           choices = c("Tanzania"),
           selected = "Tanzania"
         ),
+        ## Show admin area map?
+        checkboxInput(inputId = "show_boundaries",
+          label = "Show country boundaries",
+          value = FALSE
+        ),
         ## Input type
         selectInput(inputId = "input_type",
           label = "Select input file type",
@@ -81,7 +86,7 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
                   inline = TRUE
                 ),
                 hr(),
-                h5("Upload alternative population datasets"),
+                h5("Upload population datasets"),
                 tags$p("Alternative sources of population datasets for humans
                        and/or cattle can be specified by uploading these
                        sources here."),
@@ -105,9 +110,11 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
                 h4("Country boundaries"),
                 HTML("<p>This application uses boundary files available from
                      <a href='https://gadm.org'>https://gadm.org</a>.</p>"),
-                br(),
+                br(), br(), br(),
                 hr(),
-                h5("Upload alternative map boundaries dataset"),
+                h5("Upload map boundaries dataset"),
+                tags$p("Alternative sources of boundaries datasets can be
+                        specified by uploading here."),
                 selectInput(inputId = "input_type_boundaries",
                   label = "Select alternative boundaries file type",
                   choices = c("shapefile" = "shp",
@@ -115,7 +122,7 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
                   selected = c("shp")
                 ),
                 uiOutput("boundaries_input"),
-                br(), br(), br()
+                br(), br(), br(), br(), br()
               )
             )
           )
@@ -144,7 +151,7 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
                 ),
                 hr(),
                 ## Show sample of selected base layer
-                leafletOutput("sample_base_map", height = 200)
+                leafletOutput("sample_base_map", height = 300)
               )
             ),
             column(width = 3,
@@ -166,11 +173,6 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
                   step = 1
                 ),
                 hr(),
-                ##
-                checkboxInput(inputId = "show_boundaries",
-                  label = "Show country boundaries",
-                  value = FALSE
-                ),
                 ## Select colour for country area boundaries
                 colourpicker::colourInput(inputId = "country_boundaries_colour",
                   label = "Colour of country boundaries",
@@ -230,7 +232,7 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
                   value = 5,
                   min = 5, max = 10, step = 1
                 ),
-                br(), br(), br(),
+                br(), br(), br(), br(), br(),
                 hr(),
                 ## Reset selection
                 div(style="display:inline-block; vertical-align:middle;",
@@ -270,7 +272,7 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
                   value = 5,
                   min = 5, max = 10, step = 1
                 ),
-                br(), br(), br(), br(), br(), br(), br(),
+                br(), br(), br(), br(), br(), br(), br(), br(), br(),
                 hr(),
                 ## Reset selection
                 div(style="display:inline-block; vertical-align:middle;",
