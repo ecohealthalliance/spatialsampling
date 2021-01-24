@@ -524,7 +524,7 @@ function(input, output, session) {
                       params = params,
                       envir = new.env(parent = globalenv()))
 
-    browseURL(url = paste("www/reports/",
+    browseURL(url = paste("https://aegypti.ecohealthalliance.org/shiny/guevarra/spatialsampling/reports/",
                           tolower(input$country), ".html", sep = ""))
 
     openxlsx::write.xlsx(
