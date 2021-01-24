@@ -67,10 +67,16 @@ function(input, output, session) {
   output$report_output <- renderUI({
     req(input$get_sample)
 
-    ## Report button
-    downloadButton(outputId = "create_report",
+    ## Report button - action
+    actionButton(inputId = "make_report",
       label = "Report",
-      icon = icon(name = "clipboard", lib = "font-awesome"))
+      icon = icon(name = "clipboard", lib = "font-awesome")
+    )
+
+    ## Report button - download
+    #downloadButton(outputId = "create_report",
+    #  label = "Report",
+    #  icon = icon(name = "clipboard", lib = "font-awesome"))
   })
 
   ## UI for dataset input
@@ -186,7 +192,8 @@ function(input, output, session) {
     progress$set(
       message = paste("Retrieving administrative boundaries map of ",
                        input$country, sep = ""),
-      value = 0.7)
+      value = 0.7
+    )
 
     if (!is.null(input$boundary_map)) {
       if (input$input_type_boundaries == "gpkg") {
@@ -354,7 +361,8 @@ function(input, output, session) {
       progress$set(
         message = paste("Loading administrative boundaries map of ",
                         input$country, sep = ""),
-        value = 0.7)
+        value = 0.7
+      )
 
       leafletProxy("map") %>%
         showGroup("Administrative boundaries")
@@ -453,8 +461,8 @@ function(input, output, session) {
   output$create_report <- downloadHandler(
     filename <- paste(tolower(input$country), ".html", sep = ""),
     content <- function(file) {
-      tempReport <- file.path(tempdir(), "report.Rmd")
-      file.copy("report.Rmd", tempReport, overwrite = TRUE)
+      #tempReport <- file.path(tempdir(), "report.Rmd")
+      #file.copy("report.Rmd", tempReport, overwrite = TRUE)
 
       params <- list(country = input$country,
                      nSamplingUnits = input$nSamplingUnits,
@@ -466,9 +474,47 @@ function(input, output, session) {
                      samplingPoints = sampling_points(),
                      baseLayer = get(input$base_layer))
 
-      rmarkdown::render(tempReport, output_file = file,
+      rmarkdown::render(input = "www/report.Rmd",
+                        output_file = file,
                         params = params,
                         envir = new.env(parent = globalenv()))
     }
   )
+
+  observeEvent(input$make_report, {
+    ## Show progress bar
+    progress <- Progress$new()
+    on.exit(progress$close())
+    progress$set(
+      message = paste("Rendering sampling frame report for ",
+                      input$country, sep = ""),
+      value = 0.7
+    )
+
+    filename <- paste(tolower(input$country), ".html", sep = "")
+
+    params <- list(country = input$country,
+                   nSamplingUnits = input$nSamplingUnits,
+                   buffer = input$samplingBuffer,
+                   samplingFrame = sampling_points_info(),
+                   adminArea = admin_boundaries(),
+                   studyArea = survey_area(),
+                   samplingGrid = sampling_grid(),
+                   samplingPoints = sampling_points(),
+                   baseLayer = get(input$base_layer))
+
+    rmarkdown::render(input = "www/report.Rmd",
+                      output_file = filename,
+                      output_dir = "reports",
+                      params = params,
+                      envir = new.env(parent = globalenv()))
+
+    browseURL(url = paste("reports/", input$country, ".html", sep = ""))
+
+    openxlsx::write.xlsx(
+      x = data.frame(coordinates(sampling_points()),
+                     sampling_points_info()),
+      file = paste("reports/", input$country, ".xlsx", sep = "")
+    )
+  })
 }

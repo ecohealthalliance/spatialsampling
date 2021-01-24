@@ -1,0 +1,88 @@
+---
+title: '`r paste("Spatial Sampling Plan for ", params$country, " Study", sep = "")`'
+date: '`r format(Sys.Date(), "%d %B %Y")`'
+output: html_document
+params:
+  country: NA
+  nSamplingUnits: NA
+  buffer: NA
+  samplingFrame: NA
+  studyArea: NA
+  samplingPoints: NA
+  samplingGrid: NA
+  adminArea: NA
+  baseLayer: NA
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  error = FALSE,
+  echo = FALSE
+)
+```
+
+## Spatial sampling parameters
+
+```{r parameters}
+parameters <- c("Study country",
+                "Number of sampling units",
+                "Spatial sampling buffer")
+
+parameterValues <- c(params$country, params$nSamplingUnits, params$buffer)
+
+parameters <- data.frame(parameters, parameterValues)
+
+knitr::kable(x = parameters) %>%
+  kableExtra::kable_styling(full_width = FALSE)
+```
+
+## Sampling frame
+
+```{r frame}
+x <- params$samplingFrame
+
+knitr::kable(x = x) %>%
+  kableExtra::kable_styling(full_width = TRUE)
+```
+
+```{r map, fig.align = "center", fig.width = 10, fig.height = 10}
+plot(params$studyArea, lty = 0)
+plot(params$adminArea, lwd = 1, add = TRUE)
+plot(params$studyArea, lwd = 3, border = "darkgreen", add = TRUE)
+plot(params$samplingGrid, lwd = 2, border = "blue", add = TRUE)
+points(params$samplingPoints@coords, pch = 20, col = "red", cex = 3)
+```
+
+```{r leafletMap, out.width = "100%", out.height = "400px"}
+leaflet() %>%
+  addMapboxTiles(style_id = params$baseLayer,
+                 username = "ernestguevarra") %>%
+  setView(lng = coordinates(params$studyArea)[1], 
+          lat = coordinates(params$studyArea)[2], 
+          zoom = 9) %>%
+  addPolygons(data = params$adminArea,
+    color = "yellow",
+    fill = FALSE,
+    weight = 5,
+    group = "Administrative boundaries") %>%
+  addPolygons(data = params$studyArea,
+    color = "green",
+    fill = FALSE,
+    weight = 10,
+    group = "Study area") %>%
+  addPolygons(data = params$samplingGrid,
+    color = "blue",
+    fill = FALSE,
+    weight = 5,
+    group = "Sampling grid") %>%
+  addCircleMarkers(
+    lng = params$samplingPoints@coords[ , 1],
+    lat = params$samplingPoints@coords[ , 2],
+    color = "red",
+    radius = 5,
+    weight = 2,
+    group = "Sampling points")
+```
+
