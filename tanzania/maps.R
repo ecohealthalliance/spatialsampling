@@ -26,6 +26,10 @@ survey_area_tza <- Polygon(survey_area_tza) %>%
 writeOGR(obj = survey_area_tza, dsn = "tanzania",
          layer = "survey_area_tza", driver = "GPKG")
 
+## Save as shapefile
+writeOGR(obj = survey_area_tza, dsn = "tanzania/survey_area",
+         layer = "survey_area", driver = "ESRI Shapefile")
+
 
 
 coords_window = matrix(c(34.000000,-3.87000,
