@@ -10,6 +10,9 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
   tabPanel(title = "",
     value = 1,
     icon = icon(name = "home", class = "fa-lg", lib = "font-awesome"),
+    ## Use waiter
+    #use_waiter(),
+    #waiter_on_busy(html = spin_2(), color = "gray90"),
     ## Header HTML
     div(class = "outer",
       ## Header HTML
