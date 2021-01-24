@@ -1,0 +1,17 @@
+bookdown::pdf_document2:
+  includes:
+    in_header: preamble.tex
+    before_body: before_body.tex
+  toc: true
+  toc_depth: 3
+  number_sections: true
+  highlight: tango
+  keep_tex: yes
+  fig_caption: yes
+  latex_engine: xelatex
+  citation_package: natbib
+#bookdown::html_document2:
+#  toc_depth: 2
+#  toc: true
+#  number_sections: true
+#  fig_caption: true
