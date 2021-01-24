@@ -233,7 +233,7 @@ function(input, output, session) {
   sampling_points_info <- reactive({
     req(sampling_points())
     z <- raster::intersect(sampling_points(), admin_boundaries())
-    cbind(z@data, z@coords)
+    cbind(z@coords, z@data)
   })
 
   ## Create spatial sample - grid
