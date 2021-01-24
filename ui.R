@@ -57,9 +57,13 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
         div(style="display:inline-block",
           uiOutput("sample_parameters3")
         ),
-        ##
+        ## Report output
         div(style="display:inline-block",
           uiOutput("report_output")
+        ),
+        ## List output
+        div(style="display:inline-block",
+          uiOutput("list_output")
         )
       )
     )
@@ -149,7 +153,9 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
                               "Le Shine" = "leShine",
                               "Decimal" = "decimal",
                               "Standard" = "standard",
-                              "Northstar" = "northstar"),
+                              "Northstar" = "northstar",
+                              "Terminal" = "teminal",
+                              "Moonlight" = "moonlight"),
                   selected = "satellite"
                 ),
                 hr(),

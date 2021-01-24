@@ -24,7 +24,11 @@ knitr::opts_chunk$set(
 )
 ```
 
+This document is a summary report of the spatial sampling plan for the study in `r params$country`.
+
 ## Spatial sampling parameters
+
+The spatial sampling plan was based on the following sampling parameters:
 
 ```{r parameters}
 parameters <- c("Study country",
@@ -41,6 +45,8 @@ knitr::kable(x = parameters) %>%
 
 ## Sampling frame
 
+Based on the abovementioned parameters, the following sampling frame was arrived at:
+
 ```{r frame}
 x <- params$samplingFrame
 
@@ -48,14 +54,19 @@ knitr::kable(x = x) %>%
   kableExtra::kable_styling(full_width = TRUE)
 ```
 
-The list of sampling points can be downloaded [here](`r paste("reports/", params$country, "_", params$ts, ".xlsx", sep = ""`).
-
 ```{r map, fig.align = "center", fig.width = 10, fig.height = 10}
 plot(params$studyArea, lty = 0)
 plot(params$adminArea, lwd = 1, add = TRUE)
-plot(params$studyArea, lwd = 3, border = "darkgreen", add = TRUE)
+plot(params$studyArea, lwd = 3, 
+     border = "darkgreen", 
+     col = rgb(red = col2rgb("gray70", alpha = 0.7)[1],
+               green = col2rgb("gray70", alpha = 0.7)[2],
+               blue = col2rgb("gray70", alpha = 0.7)[3],
+               alpha = 100,
+               maxColorValue = 255),
+     add = TRUE)
 plot(params$samplingGrid, lwd = 2, border = "blue", add = TRUE)
-points(params$samplingPoints@coords, pch = 20, col = "red", cex = 3)
+points(params$samplingPoints@coords, pch = 20, col = "red", cex = 1)
 ```
 
 ```{r leafletMap, out.width = "100%", out.height = "600px"}

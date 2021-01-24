@@ -79,6 +79,15 @@ function(input, output, session) {
     #  icon = icon(name = "clipboard", lib = "font-awesome"))
   })
 
+  ## UI for sample list button
+  output$list_output <- renderUI({
+    req(input$get_sample)
+
+    ## list button - download
+    downloadButton(outputId = "sample_list",
+      label = "List")
+  })
+
   ## UI for dataset input
   output$dataset_input <- renderUI({
     if (input$input_type_alt == "gpkg") {
@@ -233,7 +242,7 @@ function(input, output, session) {
   sampling_points_info <- reactive({
     req(sampling_points())
     z <- raster::intersect(sampling_points(), admin_boundaries())
-    cbind(z@data, z@coords)
+    cbind(z@coords, z@data)
   })
 
   ## Create spatial sample - grid
@@ -458,6 +467,11 @@ function(input, output, session) {
   #
   ##############################################################################
 
+  ts <- reactive({
+    Sys.time() %>%
+      str_replace(pattern = " ", replacement = "_")
+  })
+
   output$create_report <- downloadHandler(
     filename <- paste(tolower(input$country), ".html", sep = ""),
     content <- function(file) {
@@ -491,12 +505,9 @@ function(input, output, session) {
       value = 0.7
     )
 
-    ts <- Sys.time() %>%
-      str_replace(pattern = " ", replacement = "_")
-
     filename <- paste(tolower(input$country), ".html", sep = "")
 
-    params <- list(ts = ts,
+    params <- list(ts = ts(),
                    country = input$country,
                    nSamplingUnits = input$nSamplingUnits,
                    buffer = input$samplingBuffer,
@@ -519,7 +530,20 @@ function(input, output, session) {
       x = data.frame(coordinates(sampling_points()),
                      sampling_points_info()),
       file = paste("reports/", tolower(input$country),
-                   "_", ts, ".xlsx", sep = "")
+                   "_", ts(), ".xlsx", sep = "")
     )
   })
+
+  output$sample_list <- downloadHandler(
+    filename = function() {
+      paste(tolower(input$country), "_",
+            ts(), ".xlsx", sep = "")
+    },
+    content = function(file) {
+      openxlsx::write.xlsx(
+        x = data.frame(coordinates(sampling_points()),
+                     sampling_points_info()),
+        file = file)
+    }
+  )
 }
