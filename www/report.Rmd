@@ -24,7 +24,13 @@ knitr::opts_chunk$set(
 )
 ```
 
+<br/>   
+<br/>    
+
 This document is a summary report of the spatial sampling plan for the study in `r params$country`.
+    
+<br/>   
+<br/>
 
 ## Spatial sampling parameters
 
@@ -42,7 +48,10 @@ parameters <- data.frame(parameters, parameterValues)
 knitr::kable(x = parameters) %>%
   kableExtra::kable_styling(full_width = FALSE)
 ```
-
+    
+<br/>   
+<br/>
+    
 ## Sampling frame
 
 Based on the abovementioned parameters, the following sampling frame was arrived at:
@@ -53,7 +62,13 @@ x <- params$samplingFrame
 knitr::kable(x = x) %>%
   kableExtra::kable_styling(full_width = TRUE)
 ```
-
+    
+<br/>
+    
+The sampling frame can be downloaded as an `XLSX` file [here](`r paste("https://aegypti.ecohealthalliance.org/shiny/guevarra/spatialsampling/reports/", tolower(params$country), "_", params$ts, ".xlsx", sep = "")`).
+    
+<br/>
+    
 ```{r map, fig.align = "center", fig.width = 10, fig.height = 10}
 plot(params$studyArea, lty = 0)
 plot(params$adminArea, lwd = 1, add = TRUE)
@@ -68,7 +83,9 @@ plot(params$studyArea, lwd = 3,
 plot(params$samplingGrid, lwd = 2, border = "blue", add = TRUE)
 points(params$samplingPoints@coords, pch = 20, col = "red", cex = 1)
 ```
-
+    
+<br/>
+    
 ```{r leafletMap, out.width = "100%", out.height = "600px"}
 leaflet() %>%
   addMapboxTiles(style_id = params$baseLayer,

@@ -225,7 +225,7 @@ function(input, output, session) {
 
       raster::getData(country = country_code,
                       level = 3,
-                      path = "maps")
+                      path = "www/maps")
     }
   })
 
@@ -520,16 +520,16 @@ function(input, output, session) {
 
     rmarkdown::render(input = "www/report.Rmd",
                       output_file = filename,
-                      output_dir = "reports",
+                      output_dir = "www/reports",
                       params = params,
                       envir = new.env(parent = globalenv()))
 
-    browseURL(url = paste("reports/", input$country, ".html", sep = ""))
+    browseURL(url = paste("www/reports/", input$country, ".html", sep = ""))
 
     openxlsx::write.xlsx(
       x = data.frame(coordinates(sampling_points()),
                      sampling_points_info()),
-      file = paste("reports/", tolower(input$country),
+      file = paste("www/reports/", tolower(input$country),
                    "_", ts(), ".xlsx", sep = "")
     )
   })
