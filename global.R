@@ -27,9 +27,11 @@ library(shinyjs)
 library(magrittr)
 library(dplyr)
 library(countrycode)     ## conversion of country names <--> other formats
+library(stringr)
 
 ## Reporting
 library(kableExtra)
+library(openxlsx)
 
 ## Authenticate with Mapbox ----------------------------------------------------
 mapboxapi::mb_access_token(token = Sys.getenv("MAPBOX_PUBLIC_TOKEN"))
