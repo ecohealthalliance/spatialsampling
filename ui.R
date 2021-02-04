@@ -32,8 +32,8 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
         ##
         selectInput(inputId = "country",
           label = "Study country",
-          choices = c("Tanzania"),
-          selected = "Tanzania"
+          choices = c("Select study country" = " ", "Tanzania"),
+          selected = " "
         ),
         ## Show admin area map?
         checkboxInput(inputId = "show_boundaries",

@@ -183,6 +183,7 @@ function(input, output, session) {
 
   ## Get coordinates for selected country
   country_coordinates <- reactive({
+    req(input$country != " ")
     mb_geocode(search_text = input$country)
   })
 
@@ -238,13 +239,6 @@ function(input, output, session) {
                    type = "csas")
   })
 
-  ## Get sampling points information
-  sampling_points_info <- reactive({
-    req(sampling_points())
-    z <- raster::intersect(sampling_points(), admin_boundaries())
-    cbind(z@coords, z@data)
-  })
-
   ## Create spatial sample - grid
   sampling_grid <- reactive({
     req(sampling_points())
@@ -254,16 +248,57 @@ function(input, output, session) {
       as("SpatialPolygons")
   })
 
+  ## Get grid populations
+  sampling_pops <- reactive({
+    req(sampling_grid(), dataset_worldpop(), dataset_glw())
+
+    ## Show progress bar
+    progress <- Progress$new(min = 1, max = length(sampling_grid()))
+    on.exit(progress$close())
+    progress$set(
+      message = paste("Getting population data for each sampling grid"))
+
+    ## Get human and cattle pop
+    pops <- data.frame(matrix(nrow = length(sampling_grid()), ncol = 2))
+    names(pops) <- c("human_pop", "cattle_pop")
+
+    for (i in seq_len(length(sampling_grid()))) {
+      progress$set(value = i)
+      subGridHuman <- raster::intersect(dataset_worldpop(), sampling_grid()[i])
+      subGridCattle <- raster::intersect(dataset_glw(), sampling_grid()[i])
+      pops[i, ] <- c(sum(values(subGridHuman)), sum(values(subGridCattle)))
+    }
+
+    pops
+  })
+
+  ## Get sampling points information
+  sampling_points_info <- reactive({
+    req(sampling_pops())
+    z <- raster::intersect(sampling_points(), admin_boundaries())
+    #z <- cbind(z@coords, z@data)
+    z <- data.frame(z, sampling_pops())
+  })
+
   ## Process appropriate human population dataset from WorldPop
   dataset_worldpop <- reactive({
     req(survey_area())
 
     if (input$country == "Tanzania") {
-      x <- readOGR("maps/TZA_popmap10adj_v2b.tif")
-      x <- raster::intersect(x, survey_area())
+      pop <- raster("www/maps/TZA_popmap10adj_v2b.tif")
+      pop <- raster::intersect(pop, survey_area())
     }
 
-    x
+    pop
+  })
+
+  ## Process appropriate cattle population dataset from GLW
+  dataset_glw <- reactive({
+    req(survey_area())
+
+    cattle_global <- raster("www/maps/6_Ct_2010_Aw.tif")
+    cattle <- raster::intersect(cattle_global, survey_area())
+    cattle
   })
 
   ## Process uploaded human population dataset other than WorldPop
@@ -350,13 +385,15 @@ function(input, output, session) {
     leaflet() %>%
       addMapboxTiles(style_id = get(input$base_layer),
         username = "ernestguevarra") %>%
-      setView(lng = country_coordinates()[1],
-        lat = country_coordinates()[2],
-        zoom = 6)
+      setView(lng = 20,
+        lat = 20,
+        zoom = 3)
   })
 
   ## Generate administrative borders
   observe({
+    req(input$country != " ")
+
     ## Show progress bar
     progress <- Progress$new()
     on.exit(progress$close())
@@ -366,6 +403,9 @@ function(input, output, session) {
       value = 0.7)
 
     leafletProxy("map") %>%
+      setView(lng = country_coordinates()[1],
+              lat = country_coordinates()[2],
+              zoom = 6) %>%
       addPolygons(data = admin_boundaries(),
         color = input$country_boundaries_colour,
         fill = FALSE,
@@ -414,6 +454,81 @@ function(input, output, session) {
       )
   })
 
+  ## Generate population rasters
+  observe({
+    req(survey_area(), dataset_worldpop())
+
+    ## Show progress bar
+    progress <- Progress$new()
+    on.exit(progress$close())
+    progress$set(message = "Loading population raster for study area",
+                 value = 0.7)
+
+    leafletProxy("map") %>%
+      addRasterImage(
+        x = dataset_worldpop(),
+        colors = colorNumeric(
+          palette = RColorBrewer::brewer.pal(n = 9, name = "YlOrRd"),
+          domain = values(dataset_worldpop()),
+          na.color = "transparent"),
+        opacity = 0.8,
+        group = "Human population") %>%
+      addLegend(
+        title = "Human\npopulation",
+        position = "topleft",
+        pal = colorNumeric(
+          palette = RColorBrewer::brewer.pal(n = 9, name = "YlOrRd"),
+          domain = values(dataset_worldpop()),
+          na.color = "transparent"),
+        values = values(dataset_worldpop()),
+        group = "Human population"
+      ) %>%
+    addLayersControl(
+      baseGroups = c("Study area"),
+      overlayGroups = c("Human population"),
+      position = "bottomleft",
+      options = layersControlOptions(collapsed = FALSE, autoZIndex = TRUE)
+    )
+  })
+
+  ## Generate cattle population rasters
+  observe({
+    req(survey_area(), dataset_glw())
+
+    ## Show progress bar
+    progress <- Progress$new()
+    on.exit(progress$close())
+    progress$set(message = "Loading cattle population raster for study area",
+                 value = 0.7)
+
+    leafletProxy("map") %>%
+      addRasterImage(
+        x = dataset_glw(),
+        colors = colorNumeric(
+          palette = RColorBrewer::brewer.pal(n = 9, name = "YlGnBu"),
+          domain = values(dataset_glw()),
+          na.color = "transparent"),
+        opacity = 0.8,
+        group = "Cattle population") %>%
+      addLegend(
+        title = "Cattle\npopulation",
+        position = "topleft",
+        pal = colorNumeric(
+          palette = RColorBrewer::brewer.pal(n = 9, name = "YlGnBu"),
+          domain = values(dataset_glw()),
+          na.color = "transparent"),
+        values = values(dataset_glw()),
+        group = "Cattle population"
+      ) %>%
+      addLayersControl(
+        baseGroups = c("Study area"),
+        overlayGroups = c("Human population", "Cattle population"),
+        position = "bottomleft",
+        options = layersControlOptions(collapsed = FALSE, autoZIndex = TRUE)
+      ) %>%
+      hideGroup(c("Cattle population"))
+  })
+
   ## Add sampling grid
   observeEvent(input$get_sample, {
     leafletProxy("map") %>%
@@ -432,7 +547,9 @@ function(input, output, session) {
         weight = input$grid_weight,
         group = "Sampling grid") %>%
       addLayersControl(
-        overlayGroups = c("Sampling points", "Sampling grid", "Study area"),
+        baseGroups = c("Study area"),
+        overlayGroups = c("Human population", "Cattle population",
+                          "Sampling points", "Sampling grid", "Study area"),
         position = "bottomleft",
         options = layersControlOptions(collapsed = FALSE, autoZIndex = TRUE)
       )
