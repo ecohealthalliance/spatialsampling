@@ -1,3 +1,7 @@
+library(rgeos)
+library(rgdal)
+library(raster)
+
 coords <- matrix(
   c(36.72108, -3.482266,
     37.27464, -2.561640,
@@ -22,8 +26,17 @@ survey_area_tza <- Polygon(survey_area_tza) %>%
   ) %>%
   SpatialPolygonsDataFrame(data = data.frame(1))
 
+## Read water bodies map
+water <- readOGR(dsn = "tanzania/tza_water_areas_dcw", layer = "tza_water_areas_dcw")
+
+##
+survey_area_tza <- rgeos::gDifference(survey_area_tza, water)
+
+survey_area_tza <- survey_area_tza %>%
+  SpatialPolygonsDataFrame(data = data.frame(1))
+
 ## Save as geopackage
-writeOGR(obj = survey_area_tza, dsn = "tanzania",
+writeOGR(obj = survey_area_tza, dsn = "tanzania/survey_area_tza.gpkg",
          layer = "survey_area_tza", driver = "GPKG")
 
 ## Save as shapefile

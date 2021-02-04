@@ -27,6 +27,7 @@ library(magrittr)
 library(dplyr)
 library(countrycode)     ## conversion of country names <--> other formats
 library(stringr)
+library(RColorBrewer)
 
 ## Reporting
 library(kableExtra)
