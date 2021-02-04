@@ -266,7 +266,8 @@ function(input, output, session) {
       progress$set(value = i)
       subGridHuman <- raster::intersect(dataset_worldpop(), sampling_grid()[i])
       subGridCattle <- raster::intersect(dataset_glw(), sampling_grid()[i])
-      pops[i, ] <- c(sum(values(subGridHuman)), sum(values(subGridCattle)))
+      pops[i, ] <- c(sum(values(subGridHuman), na.rm = TRUE),
+                     sum(values(subGridCattle), na.rm = TRUE))
     }
 
     pops

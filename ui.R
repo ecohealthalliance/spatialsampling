@@ -58,9 +58,9 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
           uiOutput("sample_parameters3")
         ),
         ## Report output
-        div(style="display:inline-block",
-          uiOutput("report_output")
-        ),
+        #div(style="display:inline-block",
+        #  uiOutput("report_output")
+        #),
         ## List output
         div(style="display:inline-block",
           uiOutput("list_output")
