@@ -14,11 +14,10 @@ Area sampling approaches such as **centric systematic area sampling** or
 **CSAS** have potential applications in studies that sample from mixed
 human and animal subjects, and from the environment. Standard sampling
 approaches that select subjects proportional to population size (PPS)
-are impractical for used in these studies because sampling units
-selected for one subject will not necessarily be representative of the
-other subjects. This is particularly true in contexts where animal
-population size distribution is inversely related to human population
-size.
+are impractical for use in these studies because sampling units selected
+for one subject will not necessarily be representative of the other
+subjects. This is particularly true in contexts where animal population
+size distribution is inversely related to human population size.
 
 With **CSAS**, sampling of any subject is performed systematically over
 geographic area and resulting sample is said to be spatially
@@ -29,6 +28,31 @@ Additional advantages of a **CSAS** approach is that the resulting
 sample is implicitly spatially stratified which contributes to increased
 sampling variance<sup>\[2\]\[3\]</sup>.
 
+## Steps in CSAS
+
+### Step 1: Find a map
+
+The first step is to find a map of the study area. Try to find a map
+with as much detail and features (e.g., towns, villages, landmarks, etc)
+as possible.
+
+Below is a map of a study area somewhere in Tanzania.
+
+<img src="README_files/figure-gfm/step1-1.png" style="display: block; margin: auto;" />
+
+### Step 2: Draw a grid
+
+The size of each square should be small enough for it to be reasonable
+to assume homogeneity within the square. The size of the grid will also
+be dictated by a target number of sampling units that you are aiming
+for.
+
+### Step 3: Select the squares to sample
+
+### Step 4: Select the areas to sample
+
+## Data analysis considerations
+
 Data collected from this type of sampling frame can the be made
 population representative by applying a population weighted analysis
 during indicator/outcome estimation. This can be done parametrically
@@ -37,6 +61,8 @@ in [R](https://cran.r-project.org) using Thomas Lumley’s [survey
 package](https://cran.r-project.org/web/packages/survey/survey.pdf) or
 using a non-parametric weighted bootstrap approach such as described
 [here](https://github.com/rapidsurvys/bbw).
+
+## About the `spatialsampling` Shiny app
 
 This [Shiny](https://cran.r-project.org/web/packages/survey/survey.pdf)
 application assists users in the process of applying **CSAS** to a
@@ -49,10 +75,10 @@ To use the
 [Shiny](https://cran.r-project.org/web/packages/survey/survey.pdf)
 application, go to
 <https://aegypti.echohealthalliance.org/shiny/guevarra/spatialsampling>.
-When prompted for a username and password, please use your EcoHealth
-Alliance Google account credentials.
+When prompted for a username and password, please use your [EcoHealth
+Alliance](https://www.ecohealthalliance.org) Google account credentials.
 
-<br/>
+## References
 
 1.  Milne, A. (1959). The Centric Systematic Area-Sample Treated as a
     Random Sample. Biometrics, 15(2), 270-297. <doi:10.2307/2527674>
