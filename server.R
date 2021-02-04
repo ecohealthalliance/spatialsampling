@@ -378,9 +378,7 @@ function(input, output, session) {
     leaflet() %>%
       addMapboxTiles(style_id = get(input$base_layer),
                      username = "ernestguevarra") %>%
-      setView(lng = 20, lat = 20, zoom = 2) %>%
-      addScaleBar(position = "bottomright") %>%
-      addMeasure()
+      setView(lng = 20, lat = 20, zoom = 2)
   })
 
   ## Base map

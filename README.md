@@ -47,9 +47,18 @@ to assume homogeneity within the square. The size of the grid will also
 be dictated by a target number of sampling units that you are aiming
 for.
 
-### Step 3: Select the squares to sample
+Below is an example of a grid overlaid onto the previous map to create
+200 square grids
 
-### Step 4: Select the areas to sample
+<img src="README_files/figure-gfm/step2-1.png" style="display: block; margin: auto;" />
+
+### Step 3: Select the areas to sample
+
+The sampling points which are the centroids of the sampling grid points
+us where to sample. For human and animal populations, this can be the
+village or settlement at or near the centroid location. For
+environmental sampling, this would be specimens drawn at or near the
+centroid locations.
 
 ## Data analysis considerations
 
