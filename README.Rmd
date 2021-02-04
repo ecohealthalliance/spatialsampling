@@ -13,9 +13,11 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
+library(magrittr)
 library(rgeos)
 library(rgdal)
 library(raster)
+library(spatialsampler)
 ```
 
 # Shiny App for Spatial Sampling
@@ -61,16 +63,32 @@ legend("topright", inset = 0.01, box.lwd = 1,
 
 The size of each square should be small enough for it to be reasonable to assume homogeneity within the square. The size of the grid will also be dictated by a target number of sampling units that you are aiming for.
 
-### Step 3: Select the squares to sample
+Below is an example of a grid overlaid onto the previous map to create 200 square grids
 
+```{r step2, echo = FALSE, fig.align = "center", fig.width = 10, fig.height = 10}
+sp_points <- create_sp_grid(x = x, 
+                            country = "Tanzania", 
+                            n = 200, 
+                            type = "csas")
 
-### Step 4: Select the areas to sample
+sp_grid <- sp_points %>%
+  SpatialPixels() %>%
+  as("SpatialPolygons")
 
+plot(x, lty = 0)
+plot(tza, lwd = 1, add = TRUE)
+plot(x, lwd = 5, border = "darkgreen", add = TRUE)
+plot(sp_points, pch = 20, cex = 1, col = "red", add = TRUE)
+plot(sp_grid, border = "blue", add = TRUE)
+```
+
+### Step 3: Select the areas to sample
+
+The sampling points which are the centroids of the sampling grid points us where to sample. For human and animal populations, this can be the village or settlement at or near the centroid location. For environmental sampling, this would be specimens drawn at or near the centroid locations.
 
 ## Data analysis considerations
 
 Data collected from this type of sampling frame can the be made population representative by applying a population weighted analysis during indicator/outcome estimation. This can be done parametrically using Taylor linearised deviation techniques (which can be implemented in [R](https://cran.r-project.org) using Thomas Lumley's [survey package](https://cran.r-project.org/web/packages/survey/survey.pdf) or using a non-parametric weighted bootstrap approach such as described [here](https://github.com/rapidsurvys/bbw).
-
 
 ## About the `spatialsampling` Shiny app
 
