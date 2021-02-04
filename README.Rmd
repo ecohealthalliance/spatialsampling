@@ -90,7 +90,6 @@ The sampling points which are the centroids of the sampling grid points us where
 
 Data collected from this type of sampling frame can the be made population representative by applying a population weighted analysis during indicator/outcome estimation. This can be done parametrically using Taylor linearised deviation techniques (which can be implemented in [R](https://cran.r-project.org) using Thomas Lumley's [survey package](https://cran.r-project.org/web/packages/survey/survey.pdf) or using a non-parametric weighted bootstrap approach such as described [here](https://github.com/rapidsurvys/bbw).
 
-
 ## About the `spatialsampling` Shiny app
 
 This [Shiny](https://cran.r-project.org/web/packages/survey/survey.pdf) application assists users in the process of applying **CSAS** to a specified study area. This application utilises the [R](https://cran.r-project.org) package [`spatialsampler`](https://github.com/spatialworks/spatialsampler) which provides functions for performing **CSAS**.
