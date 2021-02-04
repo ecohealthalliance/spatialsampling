@@ -255,6 +255,18 @@ function(input, output, session) {
   })
 
   ## Process appropriate human population dataset from WorldPop
+  dataset_worldpop <- reactive({
+    req(survey_area())
+
+    if (input$country == "Tanzania") {
+      x <- readOGR("maps/TZA_popmap10adj_v2b.tif")
+      x <- raster::intersect(x, survey_area())
+    }
+
+    x
+  })
+
+  ## Process uploaded human population dataset other than WorldPop
   dataset_human_alt_file_path <- reactive({
     req(input$dataset_input)
     parseDirPath(roots = c("wd" = ".", "home" = "/home"),
