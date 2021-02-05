@@ -44,9 +44,9 @@ writeOGR(obj = survey_area_tza, dsn = "tanzania/survey_area",
          layer = "survey_area", driver = "ESRI Shapefile")
 
 
+## Villages map
+villages_tza <- readOGR(dsn = "tanzania/Tanzania_Village_EA_2002_region",
+                        layer = "Tanzania_Village_EA_2002_region")
 
-coords_window = matrix(c(34.000000,-3.87000,
-                         37.87000, -3.87000,
-                         37.87000, -1.15000,
-                         34.000000, -1.15000),
-                       ncol = 2, byrow = TRUE)
+writeOGR(obj = villages_tza, dsn = "tanzania/villages_tza.gpkg",
+         layer = "villages_tza", driver = "GPKG")
