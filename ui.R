@@ -44,20 +44,13 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
           choices = c("Select study country" = " ", "Tanzania"),
           selected = " "
         ),
-        ## Show admin area map?
-        checkboxInput(inputId = "show_boundaries",
-          label = "Show country boundaries",
-          value = TRUE
+        ## Upload study area map
+        fileInput(inputId = "survey_map",
+          label = "Upload file of study area map",
+          accept = c(".gpkg", ".zip")
         ),
-        ## Input type
-        selectInput(inputId = "input_type",
-          label = "Select input file type",
-          choices = c("shapefile" = "shp",
-                      "geopackage" = "gpkg"),
-          selected = "shp",
-          multiple = FALSE),
-        ## Input base maplayer
-        uiOutput("survey_area_input"),
+        ## Show admin area map?
+        #uiOutput("show_boundaries_check"),
         ## Horizontal line break
         hr(),
         ## Input sampling parameters

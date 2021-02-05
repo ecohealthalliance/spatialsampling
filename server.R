@@ -12,30 +12,9 @@ function(input, output, session) {
   #
   ##############################################################################
 
-  ## UI for main page
-  output$survey_area_input <- renderUI({
-    if (input$input_type == "gpkg") {
-      fileInput(inputId = "survey_area",
-                label = "Upload geopackage file of area map",
-                accept = "gpkg"
-      )
-    } else {
-      shinyDirButton(id = "survey_area",
-        label = "Upload shapefile folder of area map",
-        title = "Select shapefile folder to upload"
-      )
-    }
-  })
-
-  ## Choose a directory for SHP folder for survey area map upload
-  shinyDirChoose(input = input, session = session,
-    id = "survey_area",
-    roots = c("wd" = ".", "home" = "/home")
-  )
-
   ## UI for sampling parameters
   output$sample_parameters1 <- renderUI({
-    req(input$survey_area)
+    req(input$survey_map)
 
     ## Sampling units
     numericInput(inputId = "nSamplingUnits",
@@ -45,7 +24,7 @@ function(input, output, session) {
   })
 
   output$sample_parameters2 <- renderUI({
-    req(input$survey_area)
+    req(input$survey_map)
 
     ## Spatial buffer
     numericInput(inputId = "samplingBuffer",
@@ -55,7 +34,7 @@ function(input, output, session) {
   })
 
   output$sample_parameters3 <- renderUI({
-    req(input$survey_area)
+    req(input$survey_map)
 
     ## Sampling button
     actionButton(inputId = "get_sample",
@@ -156,27 +135,24 @@ function(input, output, session) {
   #
   ##############################################################################
 
-  ## Process file paths
-  survey_area_file_path <- reactive({
-    req(input$survey_area)
-    parseDirPath(roots = c("wd" = ".", "home" = "/home"),
-                 selection = input$survey_area)
-  })
-
   ## Process input layers
   survey_area <- reactive({
-    if (input$input_type == "gpkg") {
-      req(input$survey_area)
-      file <- input$survey_area
-      readOGR(dsn = file$datapath)
-    } else {
-      req(survey_area_file_path())
-      files <- list.files(survey_area_file_path())
-      layer <- files %>%
-        stringr::str_split(pattern = "\\.", simplify = TRUE)
-      readOGR(dsn = survey_area_file_path(),
-              layer = layer[1])
+    req(input$survey_map)
+
+    fn <- input$survey_map
+
+    x <- try(readOGR(dsn = fn$datapath))
+
+    if (class(x) == "try-error") {
+      unzip(zipfile = fn$datapath, exdir = tempdir())
+      files <- unzip(zipfile = fn$datapath, list = TRUE)
+      layer <- files$Name %>%
+        stringr::str_split(pattern = "\\.|\\/", simplify = TRUE)
+      x <- readOGR(dsn = paste0(tempdir(), "/", layer[1, 1]),
+              layer = layer[2, 2])
     }
+
+    x
   })
 
   ## Process administrative boundaries
@@ -205,18 +181,20 @@ function(input, output, session) {
       value = 0.7
     )
 
+    req(survey_area())
+
     if (!is.null(input$boundary_map)) {
       if (input$input_type_boundaries == "gpkg") {
         req(input$boundary_map)
         file <- input$boundary_map
-        readOGR(dsn = file$datapath)
+        z <- readOGR(dsn = file$datapath)
       } else {
         req(boundary_map_file_path())
         files <- list.files(boundary_map_file_path())
         layer <- files %>%
           stringr::str_split(pattern = "\\.", simplify = TRUE)
-        readOGR(dsn = boundary_maxp_file_path(),
-                layer = layer[1])
+        z <- readOGR(dsn = boundary_maxp_file_path(),
+                     layer = layer[1])
       }
     } else {
       ## Read data from GADM
@@ -224,10 +202,13 @@ function(input, output, session) {
                                   origin = "country.name",
                                   destination = "iso3c")
 
-      raster::getData(country = country_code,
-                      level = 3,
-                      path = "www/maps")
+      z <- raster::getData(country = country_code,
+                           level = 3,
+                           path = "www/maps")
     }
+
+    ## Subset country boundaries to study area
+    z[survey_area(), ]
   })
 
   ## Create spatial sample - points
@@ -395,43 +376,10 @@ function(input, output, session) {
   observe({
     req(input$country != " ")
 
-    ## Show progress bar
-    progress <- Progress$new()
-    on.exit(progress$close())
-    progress$set(
-      message = paste("Loading administrative boundaries map of ",
-                      input$country, sep = ""),
-      value = 0.7)
-
     leafletProxy("map") %>%
       setView(lng = country_coordinates()[1],
               lat = country_coordinates()[2],
-              zoom = 6) %>%
-      addPolygons(data = admin_boundaries(),
-        color = input$country_boundaries_colour,
-        fill = FALSE,
-        weight = input$country_boundaries_weight,
-        group = "Administrative boundaries")
-  })
-
-  ## Should administrative borders be shown?
-  observe({
-    if (input$show_boundaries) {
-      ## Show progress bar
-      progress <- Progress$new()
-      on.exit(progress$close())
-      progress$set(
-        message = paste("Loading administrative boundaries map of ",
-                        input$country, sep = ""),
-        value = 0.7
-      )
-
-      leafletProxy("map") %>%
-        showGroup("Administrative boundaries")
-    } else {
-      leafletProxy("map") %>%
-        hideGroup("Administrative boundaries")
-    }
+              zoom = 6)
   })
 
   ## Add survey area
@@ -443,12 +391,18 @@ function(input, output, session) {
         lng = coordinates(survey_area())[1],
         lat = coordinates(survey_area())[2],
         zoom = 9) %>%
+      addPolygons(data = admin_boundaries(),
+        color = input$country_boundaries_colour,
+        fill = FALSE,
+        weight = input$country_boundaries_weight,
+        group = "Administrative boundaries") %>%
       addPolygons(data = survey_area(),
         color = input$survey_area_colour,
         fill = FALSE,
         weight = input$survey_area_weight,
         group = "Study area") %>%
       addLayersControl(
+        baseGroups = c("Administrative boundaries"),
         overlayGroups = c("Study area"),
         position = "bottomleft",
         options = layersControlOptions(collapsed = FALSE, autoZIndex = TRUE)
@@ -485,8 +439,8 @@ function(input, output, session) {
         group = "Human population"
       ) %>%
     addLayersControl(
-      baseGroups = c("Study area"),
-      overlayGroups = c("Human population"),
+      baseGroups = c("Administrative boundaries"),
+      overlayGroups = c("Study area", "Human population"),
       position = "bottomleft",
       options = layersControlOptions(collapsed = FALSE, autoZIndex = TRUE)
     )
@@ -522,8 +476,9 @@ function(input, output, session) {
         group = "Cattle population"
       ) %>%
       addLayersControl(
-        baseGroups = c("Study area"),
-        overlayGroups = c("Human population", "Cattle population"),
+        baseGroups = c("Administrative boundaries"),
+        overlayGroups = c("Study area", "Human population",
+                          "Cattle population"),
         position = "bottomleft",
         options = layersControlOptions(collapsed = FALSE, autoZIndex = TRUE)
       ) %>%
@@ -548,9 +503,9 @@ function(input, output, session) {
         weight = input$grid_weight,
         group = "Sampling grid") %>%
       addLayersControl(
-        baseGroups = c("Study area"),
-        overlayGroups = c("Human population", "Cattle population",
-                          "Sampling points", "Sampling grid", "Study area"),
+        baseGroups = c("Administrative boundaries"),
+        overlayGroups = c("Study area", "Human population", "Cattle population",
+                          "Sampling points", "Sampling grid"),
         position = "bottomleft",
         options = layersControlOptions(collapsed = FALSE, autoZIndex = TRUE)
       )
@@ -693,41 +648,21 @@ function(input, output, session) {
           <p>Select country where study is to be done.</p>
           <p>Please note that once you have selected a country, the application
           will download and read in the map boundary files for the specified
-          country. This process can take a bit of time and may make the
-          application seem to be unresponsive. Please wait up to a couple of
-          minutes for this process to complete before making any other
-          inputs or selections. The boundaries of the selected country would
-          then be shown on the map once this process is completed.</p>
+          country.</p>
           <br>
-          <h4>Show country boundaries</h4>
-          <p>By default, country boundaries are shown on the map once they have
-          been downloaded and processed. The country boundaries can be turned
-          off by toggling this option.</p>
-          <br>
-          <h4>Select input file type</h4>
-          <p>Select the file type of the input map layer for the study area.
-          There are currently only two possible input file types -
-          1) shapefiles (SHP); and, 2) geopackage (GPKG).</p>
-          <br>
-          <h4>Upload shapefile folder of area map</h4>
-          <p>If shapefiles is selected as the input file type, click on the
-          <strong><em>Upload shapefile folder of area map</em></strong>
-          button and a dialog box will appear to select a folder containing
-          the various files of a shapefile of the study area.</p>
-          <br>
-          <h4>Upload geopackage file of area map</h4>
-          <p>If geopackage is selected as the input file type, click on the
-          <strong><em>Upload geopackage file of area map</em></strong> button
-          and a dialog box will appear to select a geopackage file of the
-          study area.</p>
+          <h4>Upload study area map</h4>
+          <p>Upload study area map in either shapefiles (SHP) or geopackage
+          (GPKG) format. If uploading shapefiles, select a zip file of a folder
+          containing the multiple files required.</p>
           <br>
           <p>Once a map file has been uploaded, this will be read and processed.
-          Part of this processing includes the extraction of human and cattle
+          Part of this processing includes the downloading of the country
+          administrative boundaries, and the extraction of human and cattle
           population rasters appropriate for the study area. When this process
-          has completed, the study area along with the human population raster
-          will be shown on the map while the cattle population raster is hidden
-          but can be activated via the layers menu on the bottom left side of
-          the map.</p>
+          has completed, the study area and administrative boundaries along with
+          the human population raster will be shown on the map while the cattle
+          population raster is hidden but can be activated via the layers menu
+          on the bottom left side of the map.</p>
           <br>
           <h4>Number of sampling units</h4>
           <p>Input the number of sampling units required or desired. For a
