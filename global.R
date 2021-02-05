@@ -1,7 +1,8 @@
 ## Options ---------------------------------------------------------------------
 
 ## Quiet proj4 warnings
-options("rgdal_show_exportToProj4_warnings"="none")
+options("rgdal_show_exportToProj4_warnings"="none",
+        shiny.maxRequestSize = 150 * 1024 ^ 2)
 
 ## Libraries -------------------------------------------------------------------
 

@@ -375,7 +375,7 @@ function(input, output, session) {
 
   ## Create sample map for settings
   output$sample_base_map <- renderLeaflet({
-    leaflet() %>%
+    leaflet(options = leafletOptions(zoomControl = FALSE)) %>%
       addMapboxTiles(style_id = get(input$base_layer),
                      username = "ernestguevarra") %>%
       setView(lng = 20, lat = 20, zoom = 2)
