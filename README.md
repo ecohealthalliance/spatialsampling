@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Shiny App for Spatial Sampling
+# Shiny Application for Spatial Sampling
 
 <!-- badges: start -->
 
@@ -68,8 +68,8 @@ during indicator/outcome estimation. This can be done parametrically
 using Taylor linearised deviation techniques (which can be implemented
 in [R](https://cran.r-project.org) using Thomas Lumley’s [survey
 package](https://cran.r-project.org/web/packages/survey/survey.pdf) or
-using a non-parametric weighted bootstrap approach such as described
-[here](https://github.com/rapidsurvys/bbw).
+using a non-parametric weighted bootstrap approach such as the one
+described [here](https://github.com/rapidsurvys/bbw).
 
 ## About the `spatialsampling` Shiny app
 
@@ -92,14 +92,12 @@ Alliance](https://www.ecohealthalliance.org) Google account credentials.
 1.  Milne, A. (1959). The Centric Systematic Area-Sample Treated as a
     Random Sample. Biometrics, 15(2), 270-297. <doi:10.2307/2527674>
 
-2.  Aaron, G. et al. (2014) ‘Coverage of a market-based approach to
-    deliver a complementary food supplement to infants and children in
-    three districts in Eastern Ghana: use of the simple spatial survey
-    method (S3M) (255.5)’, FASEB J, 28(1\_Supplement), pp. 255.5-.
-    Available at:
-    <http://www.fasebj.org/cgi/content/long/28/1_Supplement/255.5>
-    (Accessed: 10 April 2015).
+2.  Aaron GJ, Strutt N, Boateng NA, Guevarra E, Siling K, et al. (2016)
+    Assessing Program Coverage of Two Approaches to Distributing a
+    Complementary Feeding Supplement to Infants and Young Children in
+    Ghana. PLOS ONE 11(10): e0162462.
+    <https://doi.org/10.1371/journal.pone.0162462>
 
 3.  Aaron, G. J. et al. (2016) ‘Household coverage of fortified staple
-    food commodities in Rajasthan, India’, PLoS ONE, 11(10). doi:
-    10.1371/journal.pone.0163176.
+    food commodities in Rajasthan, India’, PLoS ONE, 11(10).
+    <https://doi.org/10.1371/journal.pone.0163176>
