@@ -388,7 +388,7 @@ function(input, output, session) {
         username = "ernestguevarra") %>%
       setView(lng = 20, lat = 20, zoom = 3) %>%
       addScaleBar(position = "bottomright") %>%
-      addMeasure()
+      addMeasure(position = "topleft")
   })
 
   ## Generate administrative borders
@@ -677,4 +677,86 @@ function(input, output, session) {
         file = file)
     }
   )
+
+  ##############################################################################
+  #
+  # Modal
+  #
+  ##############################################################################
+
+  ## Landing page modal
+  observeEvent(input$inputs_info, {
+    showModal(
+      modalDialog(
+        HTML(
+          "<h4>Select study country</h4>
+          <p>Select country where study is to be done.</p>
+          <p>Please note that once you have selected a country, the application
+          will download and read in the map boundary files for the specified
+          country. This process can take a bit of time and may make the
+          application seem to be unresponsive. Please wait up to a couple of
+          minutes for this process to complete before making any other
+          inputs or selections. The boundaries of the selected country would
+          then be shown on the map once this process is completed.</p>
+          <br>
+          <h4>Show country boundaries</h4>
+          <p>By default, country boundaries are shown on the map once they have
+          been downloaded and processed. The country boundaries can be turned
+          off by toggling this option.</p>
+          <br>
+          <h4>Select input file type</h4>
+          <p>Select the file type of the input map layer for the study area.
+          There are currently only two possible input file types -
+          1) shapefiles (SHP); and, 2) geopackage (GPKG).</p>
+          <br>
+          <h4>Upload shapefile folder of area map</h4>
+          <p>If shapefiles is selected as the input file type, click on the
+          <strong><em>Upload shapefile folder of area map</em></strong>
+          button and a dialog box will appear to select a folder containing
+          the various files of a shapefile of the study area.</p>
+          <br>
+          <h4>Upload geopackage file of area map</h4>
+          <p>If geopackage is selected as the input file type, click on the
+          <strong><em>Upload geopackage file of area map</em></strong> button
+          and a dialog box will appear to select a geopackage file of the
+          study area.</p>
+          <br>
+          <p>Once a map file has been uploaded, this will be read and processed.
+          Part of this processing includes the extraction of human and cattle
+          population rasters appropriate for the study area. When this process
+          has completed, the study area along with the human population raster
+          will be shown on the map while the cattle population raster is hidden
+          but can be activated via the layers menu on the bottom left side of
+          the map.</p>
+          <br>
+          <h4>Number of sampling units</h4>
+          <p>Input the number of sampling units required or desired. For a
+          human population study, the recommended minimum number of sampling
+          units is at least 30 (default).</p>
+          <br>
+          <h4>Set a sampling area buffer</h4>
+          <p>Sometimes, it is necessary to add a buffer around the study area
+          to be able to spread the spatial sample evenly up to the edges. This
+          buffer can be specified here. By default, this is set to 0 for no
+          buffer. The buffer should be specified in kilometres (kms).</p>
+          <br>
+          <h4>Sample</h4>
+          <p>Once the required number of sampling units has been specified,
+          a spatial sample can now be taken. Click this button and a sampling
+          grid and sampling points based on the specifications will be added to
+          the map.</p>
+          <br>
+          <h4>List</h4>
+          <p>Once the sampling grid and the sampling points have been generated
+          on the map, a list of the sampling points and their identifying
+          features, geocoordinates, and human and cattle population weights is
+          generated and can be saved and downloaded by clicking this button.</p>
+          "
+        ),
+        title = "Spatial inputs and parameters",
+        footer = modalButton("Close")
+      )
+    )
+  })
+
 }
