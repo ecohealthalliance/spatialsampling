@@ -67,9 +67,9 @@ population representative by applying a population weighted analysis
 during indicator/outcome estimation. This can be done parametrically
 using Taylor linearised deviation techniques (which can be implemented
 in [R](https://cran.r-project.org) using Thomas Lumley’s [survey
-package](https://cran.r-project.org/web/packages/survey/survey.pdf) or
-using a non-parametric weighted bootstrap approach such as the one
-described [here](https://github.com/rapidsurvys/bbw).
+package](https://cran.r-project.org/web/packages/survey/survey.pdf)<sup>\[4\]</sup>
+or using a non-parametric weighted bootstrap approach such as the one
+described [here](https://github.com/rapidsurvys/bbw)<sup>\[5\]</sup>.
 
 ## About the `spatialsampling` Shiny app
 
@@ -77,8 +77,8 @@ This [Shiny](https://cran.r-project.org/web/packages/survey/survey.pdf)
 application assists users in the process of applying **CSAS** to a
 specified study area. This application utilises the
 [R](https://cran.r-project.org) package
-[`spatialsampler`](https://github.com/spatialworks/spatialsampler) which
-provides functions for performing **CSAS**.
+[`spatialsampler`](https://github.com/spatialworks/spatialsampler)<sup>\[6\]</sup>
+which provides functions for performing **CSAS**.
 
 To use the
 [Shiny](https://cran.r-project.org/web/packages/survey/survey.pdf)
@@ -101,3 +101,16 @@ Alliance](https://www.ecohealthalliance.org) Google account credentials.
 3.  Aaron, G. J. et al. (2016) ‘Household coverage of fortified staple
     food commodities in Rajasthan, India’, PLoS ONE, 11(10).
     <https://doi.org/10.1371/journal.pone.0163176>
+
+4.  Lumley T. Analysis of complex survey samples. Journal of Statistical
+    Software. 2004;9: 1–19. Available:
+    <http://www.jstatsoft.org/v09/a08/paper>
+
+5.  Mark Myatt (2018). bbw: Blocked Weighted Bootstrap. R package
+    version 0.1.3. <https://CRAN.R-project.org/package=bbw>
+
+6.  Mark Myatt, Farah Ibrahim and Ernest Guevarra (2021).
+    spatialsampler: An Implementation of the Centric Systematic Area
+    Sampling (CSAS) and Simple Spatial Sampling Method (S3M) sampling
+    approaches in R. R package version 0.1.0.
+    <https://github.com/spatialworks/spatialsampler>
