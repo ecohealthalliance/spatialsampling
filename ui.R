@@ -370,9 +370,10 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
       using Taylor linearised deviation techniques (which can be implemented in
       <a href='https://cran.r-project.org' target='_blank'>R</a> using Thomas
       Lumley's <a href='https://cran.r-project.org/web/packages/survey/survey.pdf'
-      target='_blank'>survey package</a> or using a non-parametric weighted
-      bootstrap approach such as the one described
-      <a href='https://github.com/rapidsurvys/bbw' target='_blank'>here</a>.</p>
+      target='_blank'>survey package</a><sup>4</sup> or using a non-parametric
+      weighted bootstrap approach such as the one described
+      <a href='https://github.com/rapidsurvys/bbw' target='_blank'>here</a>
+      <sup>5</sup>.</p>
       <br>
       <h3>About the spatialsampling Shiny application</h3>
       <p>This <a href='http://shiny.rstudio.com' target='_blank'>Shiny</a>
@@ -380,21 +381,36 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
       to a specified study area. This application utilises the
       <a href='https://cran.r-project.org' target='_blank'>R</a> package
       <a href='https://github.com/spatialworks/spatialsampler'
-      target='_blank'>spatialsampler</a> which provides functions for performing
-      <strong>CSAS</strong>.</p>
+      target='_blank'>spatialsampler</a><sup>6</sup> which provides functions
+      for performing <strong>CSAS</strong>.</p>
       <br>
       <h3>References</h3>
       <p><sup>1</sup> Milne, A. (1959). The Centric Systematic Area-Sample
       Treated as a Random Sample. Biometrics, 15(2), 270-297.
-      doi:10.2307/2527674</p>
+      <a href='https://doi.org/10.2307/2527674'
+      target='_blank'>https://doi.org/10.2307/2527674</a></p>
       <p><sup>2</sup> Aaron GJ, Strutt N, Boateng NA, Guevarra E, Siling K,
       et al. (2016) Assessing Program Coverage of Two Approaches to
       Distributing a Complementary Feeding Supplement to Infants and Young
       Children in Ghana. PLOS ONE 11(10): e0162462.
-      https://doi.org/10.1371/journal.pone.0162462</p>
+      <a href='https://doi.org/10.1371/journal.pone.0162462' target='_blank'>
+      https://doi.org/10.1371/journal.pone.0162462</a></p>
       <p><sup>3</sup> Aaron, G. J. et al. (2016) ‘Household coverage of fortified
       staple food commodities in Rajasthan, India’, PLoS ONE, 11(10).
-      https://doi.org/10.1371/journal.pone.0163176</p>
+      <a href='https://doi.org/10.1371/journal.pone.0163176' target='_blank'>
+      https://doi.org/10.1371/journal.pone.0163176</a></p>
+      <p><sup>4</sup> Lumley T. Analysis of complex survey samples. Journal of
+      Statistical Software. 2004;9: 1–19. Available:
+      <a href='http://www.jstatsoft.org/v09/a08/paper' target='_blank'>
+      http://www.jstatsoft.org/v09/a08/paper</a></p>
+      <p><sup>5</sup> Mark Myatt (2018). bbw: Blocked Weighted Bootstrap. R
+      package version 0.1.3. <a href='https://CRAN.R-project.org/package=bbw'
+      target='_blank'>https://CRAN.R-project.org/package=bbw</a></p>
+      <p><sup>6</sup> Mark Myatt, Farah Ibrahim and Ernest Guevarra (2021).
+      spatialsampler: An Implementation of the Centric Systematic Area Sampling
+      (CSAS) and Simple Spatial Sampling Method (S3M) sampling approaches in R.
+      R package version 0.1.0. <a href='https://github.com/spatialworks/spatialsampler'
+      target='_blank'>https://github.com/spatialworks/spatialsampler</a></p>
       "
     )
   )
