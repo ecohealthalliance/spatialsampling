@@ -12,6 +12,15 @@ function(input, output, session) {
   #
   ##############################################################################
 
+  ## UI for map file input
+  output$input_map_file <- renderUI({
+    #input$reset_sample_input
+    fileInput(inputId = "survey_map",
+      label = "Upload file of study area map",
+      accept = c(".gpkg", ".zip")
+    )
+  })
+
   ## UI for sampling parameters
   output$sample_parameters1 <- renderUI({
     req(input$survey_map)
@@ -65,6 +74,17 @@ function(input, output, session) {
     ## list button - download
     downloadButton(outputId = "sample_list",
       label = "List")
+  })
+
+  ## UI for reset sample button
+  output$reset_sample <- renderUI({
+    req(input$survey_map)
+
+    ## reset button
+    actionButton(inputId = "reset_sample_input",
+      label = "Reset",
+      icon = icon(name = "refresh", lib = "font-awesome")
+    )
   })
 
   ## UI for dataset input
@@ -240,17 +260,28 @@ function(input, output, session) {
       message = paste("Getting population data for each sampling grid"))
 
     ## Get human and cattle pop
-    pops <- data.frame(matrix(nrow = length(sampling_grid()), ncol = 2))
-    names(pops) <- c("human_pop", "cattle_pop")
+    pops1 <- data.frame(matrix(nrow = length(sampling_grid()), ncol = 2))
+    names(pops1) <- c("human_pop1", "cattle_pop1")
 
     for (i in seq_len(length(sampling_grid()))) {
       progress$set(value = i)
+
       subGridHuman <- raster::intersect(dataset_worldpop(), sampling_grid()[i])
       subGridCattle <- raster::intersect(dataset_glw(), sampling_grid()[i])
-      pops[i, ] <- c(sum(values(subGridHuman), na.rm = TRUE),
-                     sum(values(subGridCattle), na.rm = TRUE))
+      pops1[i, ] <- c(sum(values(subGridHuman), na.rm = TRUE),
+                      sum(values(subGridCattle), na.rm = TRUE))
     }
 
+    ## population by points
+    pops2 <- data.frame(
+      dataset_worldpop()[sampling_points(), ],
+      dataset_glw()[sampling_points(), ]
+    )
+
+    names(pops2) <- c("human_pop2", "cattle_pop2")
+
+    ## Concatenate
+    pops <- data.frame(pops1, pops2)
     pops
   })
 
@@ -264,7 +295,7 @@ function(input, output, session) {
 
   ## Process appropriate human population dataset from WorldPop
   dataset_worldpop <- reactive({
-    req(survey_area())
+    req(survey_area(), input$country != " ")
 
     if (input$country == "Tanzania") {
       pop <- raster("www/maps/TZA_popmap10adj_v2b.tif")
@@ -278,9 +309,17 @@ function(input, output, session) {
   dataset_glw <- reactive({
     req(survey_area())
 
+    ## Read GLW3 global raster
     cattle_global <- raster("www/maps/6_Ct_2010_Aw.tif")
-    cattle <- raster::intersect(cattle_global, survey_area())
-    cattle
+
+    ## Get study are raster
+    cattle_local <- raster::intersect(cattle_global, survey_area())
+
+    ## Increase resolution of cattle_local
+    cattle_local <- raster::disaggregate(cattle_local, fact = 100)
+    values(cattle_local) <- values(cattle_local) / 100
+
+    cattle_local
   })
 
   ## Process uploaded human population dataset other than WorldPop
@@ -327,8 +366,6 @@ function(input, output, session) {
     }
   })
 
-
-
   ##############################################################################
   #
   # Process reset calls
@@ -346,6 +383,10 @@ function(input, output, session) {
 
   observeEvent(input$reset_grid_settings, {
     shinyjs::reset(id = "sample_grid_settings_panel")
+  })
+
+  observeEvent(input$reset_sample_input, {
+    shinyjs::refresh()
   })
 
   ##############################################################################
@@ -384,7 +425,7 @@ function(input, output, session) {
 
   ## Add survey area
   observe({
-    req(survey_area())
+    req(survey_area(), input$country != " ")
     leafletProxy("map") %>%
       clearMarkers() %>%
       setView(
@@ -420,6 +461,7 @@ function(input, output, session) {
                  value = 0.7)
 
     leafletProxy("map") %>%
+      clearGroup(group = "Human population") %>%
       addRasterImage(
         x = dataset_worldpop(),
         colors = colorNumeric(
@@ -457,6 +499,7 @@ function(input, output, session) {
                  value = 0.7)
 
     leafletProxy("map") %>%
+      clearGroup(group = "Cattle population") %>%
       addRasterImage(
         x = dataset_glw(),
         colors = colorNumeric(
@@ -509,6 +552,17 @@ function(input, output, session) {
         position = "bottomleft",
         options = layersControlOptions(collapsed = FALSE, autoZIndex = TRUE)
       )
+  })
+
+  ## Check if sampling inputs are reset
+  observeEvent(input$reset_sample_input, {
+    leafletProxy("map") %>%
+      clearImages() %>%
+      clearShapes() %>%
+      clearMarkers() %>%
+      clearControls() %>%
+      removeLayersControl() %>%
+      setView(lng = 20, lat = 20, zoom = 3)
   })
 
   ## Check if survey area settings are changed

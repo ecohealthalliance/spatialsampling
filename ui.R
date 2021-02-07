@@ -10,9 +10,6 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
   tabPanel(title = "",
     value = 1,
     icon = icon(name = "home", class = "fa-lg", lib = "font-awesome"),
-    ## Use waiter
-    #use_waiter(),
-    #waiter_on_busy(html = spin_2(), color = "gray90"),
     ## Header HTML
     div(class = "outer",
       ## Header HTML
@@ -27,6 +24,8 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
         fixed = TRUE, draggable = FALSE,
         top = 65, left = "auto", right = 10, bottom = "auto",
         width = 330, height = "auto",
+        ## shinyjs
+        useShinyjs(),
         ## UI header
         div(style="display: inline-block;vertical-align: middle;",
           h4("Sampling inputs and parameters")
@@ -49,8 +48,7 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
           label = "Upload file of study area map",
           accept = c(".gpkg", ".zip")
         ),
-        ## Show admin area map?
-        #uiOutput("show_boundaries_check"),
+        #uiOutput("input_map_file"),
         ## Horizontal line break
         hr(),
         ## Input sampling parameters
@@ -66,6 +64,10 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
         ## List output
         div(style="display:inline-block",
           uiOutput("list_output")
+        ),
+        ## Reset button
+        div(style="display:inline-block",
+          uiOutput("reset_sample")
         )
       )
     )
@@ -77,6 +79,7 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
     tabsetPanel(
       tabPanel(title = "Datasets",
         fluidPage(
+          useShinyjs(),
           fluidRow(
             ## add empty row for spacing
             column(width = 12, br())
