@@ -309,9 +309,17 @@ function(input, output, session) {
   dataset_glw <- reactive({
     req(survey_area())
 
+    ## Read GLW3 global raster
     cattle_global <- raster("www/maps/6_Ct_2010_Aw.tif")
-    cattle <- raster::intersect(cattle_global, survey_area())
-    cattle
+
+    ## Get study are raster
+    cattle_local <- raster::intersect(cattle_global, survey_area())
+
+    ## Increase resolution of cattle_local
+    cattle_local <- raster::disaggregate(cattle_local, fact = 100)
+    values(cattle_local) <- values(cattle_local) / 100
+
+    cattle_local
   })
 
   ## Process uploaded human population dataset other than WorldPop
