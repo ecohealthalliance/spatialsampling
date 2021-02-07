@@ -318,96 +318,117 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
   tabPanel(title = "About",
     value = 3,
     icon = icon(name = "info-circle", class = "fa-lg", lib = "font-awesome"),
-    HTML(
-      "<h2>Spatial sampling</h2>
-      <p>Area sampling approaches such as <strong>centric systematic area
-      sampling</strong> or <strong>CSAS</strong> have potential applications in
-      studies that sample from mixed human and animal subjects, and from the
-      environment. Standard sampling approaches that select subjects
-      <em>proportional to population size (PPS)</em> are impractical for use in
-      these studies because sampling units selected for one subject will not
-      necessarily be representative of the other subjects. This is particularly
-      true in contexts where animal population size distribution is inversely
-      related to human population size.</p>
-      <br>
-      <p>With <strong>CSAS</strong>, sampling of any subject is performed
-      systematically over geographic area and resulting sample is said to be
-      spatially representative. This type of sample is approximates a
-      <strong>simple random sample (SRS)</strong><sup>1</sup>. Thus, a mixed
-      human and animal subject study can use the same spatial sampling frame
-      for all subjects. Additional advantages of a <strong>CSAS</strong>
-      approach is that the resulting sample is implicitly spatially stratified
-      which contributes to increased sampling variance<sup>2,3</sup>.</p>
-      <br>
-      <h3>Steps in CSAS</h3>
-      <br>
-      <h4>Step 1: Find a map</h4>
-      <p>The first step is to find a map of the study area. Try to find a map
-      with as much detail and features (e.g., towns, villages, landmarks, etc)
-      as possible.</p>
-      <br>
-      <h4>Step 2: Draw a grid</h4>
-      <p>The size of each square should be small enough for it to be reasonable
-      to assume homogeneity within the square. The size of the grid will also
-      be dictated by a target number of sampling units that you are aiming
-      for.</p>
-      <br>
-      <h4>Step 3: Select the areas to sample</h4>
-      <p>The sampling points which are the centroids of the sampling grid points
-      us where to sample. For human and animal populations, this can be the
-      village or settlement at or near the centroid location. For environmental
-      sampling, this would be specimens drawn at or near the centroid
-      locations.</p>
-      <br>
-      <h3>Data analysis considerations</h3>
-      <p>Data collected from this type of sampling frame can the be made
-      population representative by applying a population weighted analysis
-      during indicator/outcome estimation. This can be done parametrically
-      using Taylor linearised deviation techniques (which can be implemented in
-      <a href='https://cran.r-project.org' target='_blank'>R</a> using Thomas
-      Lumley's <a href='https://cran.r-project.org/web/packages/survey/survey.pdf'
-      target='_blank'>survey package</a><sup>4</sup> or using a non-parametric
-      weighted bootstrap approach such as the one described
-      <a href='https://github.com/rapidsurvys/bbw' target='_blank'>here</a>
-      <sup>5</sup>.</p>
-      <br>
-      <h3>About the spatialsampling Shiny application</h3>
-      <p>This <a href='http://shiny.rstudio.com' target='_blank'>Shiny</a>
-      application assists users in the process of applying <strong>CSAS</strong>
-      to a specified study area. This application utilises the
-      <a href='https://cran.r-project.org' target='_blank'>R</a> package
-      <a href='https://github.com/spatialworks/spatialsampler'
-      target='_blank'>spatialsampler</a><sup>6</sup> which provides functions
-      for performing <strong>CSAS</strong>.</p>
-      <br>
-      <h3>References</h3>
-      <p><sup>1</sup> Milne, A. (1959). The Centric Systematic Area-Sample
-      Treated as a Random Sample. Biometrics, 15(2), 270-297.
-      <a href='https://doi.org/10.2307/2527674'
-      target='_blank'>https://doi.org/10.2307/2527674</a></p>
-      <p><sup>2</sup> Aaron GJ, Strutt N, Boateng NA, Guevarra E, Siling K,
-      et al. (2016) Assessing Program Coverage of Two Approaches to
-      Distributing a Complementary Feeding Supplement to Infants and Young
-      Children in Ghana. PLOS ONE 11(10): e0162462.
-      <a href='https://doi.org/10.1371/journal.pone.0162462' target='_blank'>
-      https://doi.org/10.1371/journal.pone.0162462</a></p>
-      <p><sup>3</sup> Aaron, G. J. et al. (2016) ‘Household coverage of fortified
-      staple food commodities in Rajasthan, India’, PLoS ONE, 11(10).
-      <a href='https://doi.org/10.1371/journal.pone.0163176' target='_blank'>
-      https://doi.org/10.1371/journal.pone.0163176</a></p>
-      <p><sup>4</sup> Lumley T. Analysis of complex survey samples. Journal of
-      Statistical Software. 2004;9: 1–19. Available:
-      <a href='http://www.jstatsoft.org/v09/a08/paper' target='_blank'>
-      http://www.jstatsoft.org/v09/a08/paper</a></p>
-      <p><sup>5</sup> Mark Myatt (2018). bbw: Blocked Weighted Bootstrap. R
-      package version 0.1.3. <a href='https://CRAN.R-project.org/package=bbw'
-      target='_blank'>https://CRAN.R-project.org/package=bbw</a></p>
-      <p><sup>6</sup> Mark Myatt, Farah Ibrahim and Ernest Guevarra (2021).
-      spatialsampler: An Implementation of the Centric Systematic Area Sampling
-      (CSAS) and Simple Spatial Sampling Method (S3M) sampling approaches in R.
-      R package version 0.1.0. <a href='https://github.com/spatialworks/spatialsampler'
-      target='_blank'>https://github.com/spatialworks/spatialsampler</a></p>
-      "
+    sidebarPanel(
+      width = 4,
+      HTML(
+        "
+        <h4>The <code>spatialsampling</code> Shiny application has been developed
+        specifically for EcoHealth Alliance's Crimean-Congo Haemorrhagic Fever
+        (CCHF) project in Tanzania.</h4>
+        <br>
+        <h4>However, this application has potential uses for any other project
+        as an alternative to traditional population proportional sampling (PPS)
+        sampling frames.</h4>
+        <br>
+        <h4>To learn more about spatial sampling and for using it in your study
+        or project, please contact <a href='mailto:guevarra@ecohealthalliance.org'>
+        Ernest Guevarra</a>.</h4>
+        "
+      )
+    ),
+    mainPanel(width = 8,
+      HTML(
+        "
+        <h2>Spatial sampling</h2>
+        <p>Area sampling approaches such as <strong>centric systematic area
+        sampling</strong> or <strong>CSAS</strong> have potential applications in
+        studies that sample from mixed human and animal subjects, and from the
+        environment. Standard sampling approaches that select subjects
+        <em>proportional to population size (PPS)</em> are impractical for use in
+        these studies because sampling units selected for one subject will not
+        necessarily be representative of the other subjects. This is particularly
+        true in contexts where animal population size distribution is inversely
+        related to human population size.</p>
+        <br>
+        <p>With <strong>CSAS</strong>, sampling of any subject is performed
+        systematically over geographic area and resulting sample is said to be
+        spatially representative. This type of sample is approximates a
+        <strong>simple random sample (SRS)</strong><sup>1</sup>. Thus, a mixed
+        human and animal subject study can use the same spatial sampling frame
+        for all subjects. Additional advantages of a <strong>CSAS</strong>
+        approach is that the resulting sample is implicitly spatially stratified
+        which contributes to increased sampling variance<sup>2,3</sup>.</p>
+        <br>
+        <h3>Steps in CSAS</h3>
+        <br>
+        <h4>Step 1: Find a map</h4>
+        <p>The first step is to find a map of the study area. Try to find a map
+        with as much detail and features (e.g., towns, villages, landmarks, etc)
+        as possible.</p>
+        <br>
+        <h4>Step 2: Draw a grid</h4>
+        <p>The size of each square should be small enough for it to be reasonable
+        to assume homogeneity within the square. The size of the grid will also
+        be dictated by a target number of sampling units that you are aiming
+        for.</p>
+        <br>
+        <h4>Step 3: Select the areas to sample</h4>
+        <p>The sampling points which are the centroids of the sampling grid points
+        us where to sample. For human and animal populations, this can be the
+        village or settlement at or near the centroid location. For environmental
+        sampling, this would be specimens drawn at or near the centroid
+        locations.</p>
+        <br>
+        <h3>Data analysis considerations</h3>
+        <p>Data collected from this type of sampling frame can the be made
+        population representative by applying a population weighted analysis
+        during indicator/outcome estimation. This can be done parametrically
+        using Taylor linearised deviation techniques (which can be implemented in
+        <a href='https://cran.r-project.org' target='_blank'>R</a> using Thomas
+        Lumley's <a href='https://cran.r-project.org/web/packages/survey/survey.pdf'
+        target='_blank'>survey package</a><sup>4</sup> or using a non-parametric
+        weighted bootstrap approach such as the one described
+        <a href='https://github.com/rapidsurvys/bbw' target='_blank'>here</a>
+        <sup>5</sup>.</p>
+        <br>
+        <h3>The Shiny application</h3>
+        <p>This <a href='http://shiny.rstudio.com' target='_blank'>Shiny</a>
+        application assists users in the process of applying <strong>CSAS</strong>
+        to a specified study area. This application utilises the
+        <a href='https://cran.r-project.org' target='_blank'>R</a> package
+        <a href='https://github.com/spatialworks/spatialsampler'
+        target='_blank'>spatialsampler</a><sup>6</sup> which provides functions
+        for performing <strong>CSAS</strong>.</p>
+        <br>
+        <h3>References</h3>
+        <p><sup>1</sup> Milne, A. (1959). The Centric Systematic Area-Sample
+        Treated as a Random Sample. Biometrics, 15(2), 270-297.
+        <a href='https://doi.org/10.2307/2527674'
+        target='_blank'>https://doi.org/10.2307/2527674</a></p>
+        <p><sup>2</sup> Aaron GJ, Strutt N, Boateng NA, Guevarra E, Siling K,
+        et al. (2016) Assessing Program Coverage of Two Approaches to
+        Distributing a Complementary Feeding Supplement to Infants and Young
+        Children in Ghana. PLOS ONE 11(10): e0162462.
+        <a href='https://doi.org/10.1371/journal.pone.0162462' target='_blank'>
+        https://doi.org/10.1371/journal.pone.0162462</a></p>
+        <p><sup>3</sup> Aaron, G. J. et al. (2016) ‘Household coverage of fortified
+        staple food commodities in Rajasthan, India’, PLoS ONE, 11(10).
+        <a href='https://doi.org/10.1371/journal.pone.0163176' target='_blank'>
+        https://doi.org/10.1371/journal.pone.0163176</a></p>
+        <p><sup>4</sup> Lumley T. Analysis of complex survey samples. Journal of
+        Statistical Software. 2004;9: 1–19. Available:
+        <a href='http://www.jstatsoft.org/v09/a08/paper' target='_blank'>
+        http://www.jstatsoft.org/v09/a08/paper</a></p>
+        <p><sup>5</sup> Mark Myatt (2018). bbw: Blocked Weighted Bootstrap. R
+        package version 0.1.3. <a href='https://CRAN.R-project.org/package=bbw'
+        target='_blank'>https://CRAN.R-project.org/package=bbw</a></p>
+        <p><sup>6</sup> Mark Myatt, Farah Ibrahim and Ernest Guevarra (2021).
+        spatialsampler: An Implementation of the Centric Systematic Area Sampling
+        (CSAS) and Simple Spatial Sampling Method (S3M) sampling approaches in R.
+        R package version 0.1.0. <a href='https://github.com/spatialworks/spatialsampler'
+        target='_blank'>https://github.com/spatialworks/spatialsampler</a></p>
+        "
+      )
     )
   )
 )
