@@ -46,3 +46,27 @@ standard  <- "ckk7geic50d9417juktz7ajet"
 northstar <- "ckk7iv17e0fnn17lt6cvi9ppz"
 terminal  <- "cj6g0tzbd30kc2sph2wyh666m"
 
+## Functions
+
+list_wp_pop_files <- function(ftp = "ftp://ftp.worldpop.org.uk/GIS/Population/Individual_countries/",
+                              country) {
+  ## Create the full URL
+  ftp_folder <- paste(
+    ftp,
+    countrycode::countrycode(sourcevar = country,
+                             origin = "country.name",
+                             destination = "iso3c"),
+    "/",
+    countrycode::countrycode(sourcevar = country,
+                             origin = "country.name",
+                             destination = "un.name.en") %>%
+      stringr::str_replace_all(pattern = " ", replacement = "_"),
+    "_100m_Population/", sep = "")
+
+  RCurl::getURL(ftp_folder, ftp.use.epsv = FALSE, dirlistonly = TRUE) %>%
+    stringr::str_split(pattern = "\n")
+}
+
+get_wp_pop_data <- function(ftp = "https://ftp.worldpop.org.uk/GIS/Population/Individual_countries",
+                            country, )
+
