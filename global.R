@@ -12,14 +12,11 @@ library(rgeos)
 library(raster)
 library(sf)
 library(mapboxapi)       ## for mapbox baselayers and functions
-library(mapdeck)         ## for webgl mapping functions
 library(leaflet)         ## for leaflet mapping
-library(wopr)            ## interface to WorldPop database
 library(spatialsampler)  ## spatial sampling functions
 
 ## Shiny packages
 library(shiny)
-library(shinyFiles)      ## ui for selecting and uploading directories in Shiny
 library(colourpicker)
 library(shinyjs)
 
@@ -30,6 +27,8 @@ library(countrycode)     ## conversion of country names <--> other formats
 library(stringr)
 library(RColorBrewer)
 library(RCurl)
+library(curl)
+library(jsonlite)
 
 ## Reporting
 library(kableExtra)
