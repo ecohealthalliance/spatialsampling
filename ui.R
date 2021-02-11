@@ -40,7 +40,9 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
         ##
         selectInput(inputId = "country",
           label = "Study country",
-          choices = c("Select study country" = " ", "Tanzania"),
+          choices = c("Select study country" = " ",
+                      "Bangladesh", "Liberia", "Philippines",
+                      "South Africa", "Tanzania", "South Africa"),
           selected = " "
         ),
         ## Upload study area map
