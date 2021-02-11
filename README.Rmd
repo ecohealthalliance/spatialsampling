@@ -94,17 +94,121 @@ legend("topright", inset = 0.01, box.lwd = 1,
 
 ### Step 3: Select the areas to sample
 
-The sampling points which are the centroids of the sampling grid points us where to sample. For human and animal populations, this can be the village or settlement at or near the centroid location. For environmental sampling, this would be specimens drawn at or near the centroid locations.
+The sampling points, which are the centroids of the sampling grid, indicates where to sample. For human and animal populations, this can be the village or settlement or farm at or near the centroid location. For environmental sampling, this would be specimens drawn at or near the centroid locations.
 
 ## Data analysis considerations
 
 Data collected from this type of sampling frame can the be made population representative by applying a population weighted analysis during indicator/outcome estimation. This can be done parametrically using Taylor linearised deviation techniques (which can be implemented in [R](https://cran.r-project.org) using Thomas Lumley's [survey package](https://cran.r-project.org/web/packages/survey/survey.pdf)<sup>[^4]</sup> or using a non-parametric weighted bootstrap approach such as the one described [here](https://github.com/rapidsurvys/bbw)<sup>[^5]</sup>.
 
-## About the `spatialsampling` Shiny app
+## About the `spatialsampling` Shiny application
 
-This [Shiny](https://cran.r-project.org/web/packages/survey/survey.pdf) application assists users in the process of applying **CSAS** to a specified study area. This application utilises the [R](https://cran.r-project.org) package [`spatialsampler`](https://github.com/spatialworks/spatialsampler)<sup>[^6]</sup> which provides functions for performing **CSAS**.
+This [Shiny](https://shiny.rstudio.com) application assists users in the process of applying **CSAS** to a specified study area. This application utilises the [R](https://cran.r-project.org) package [`spatialsampler`](https://github.com/spatialworks/spatialsampler)<sup>[^6]</sup> which provides functions for performing **CSAS**.
 
-To use the [Shiny](https://cran.r-project.org/web/packages/survey/survey.pdf) application, go to https://aegypti.echohealthalliance.org/shiny/guevarra/spatialsampling. When prompted for a username and password, please use your [EcoHealth Alliance](https://www.ecohealthalliance.org) Google account credentials.
+The application can be accessed either via [EcoHealth Alliance](https://www.ecohealthalliance.org)'s [Shiny](https://shiny.rstudio.com) server, or locally by cloning this [GitHub repository](https://github.com/ecohealthalliance/spatialsampling). 
+### Accessing the Shiny application via EHA's server
+
+To use the [Shiny](https://shiny.rstudio.com) application via [EcoHealth Alliance](https://www.ecohealthalliance.org)'s [Shiny](https://shiny.rstudio.com) server, go to https://aegypti.echohealthalliance.org/shiny/guevarra/spatialsampling. When prompted for a *username* and *password*, please use your [EcoHealth Alliance](https://www.ecohealthalliance.org) [Google](https://www.google.com) account credentials.
+
+### Accessing the Shiny application locally
+
+To use the [Shiny](https://shiny.rstudio.com) application locally, you will need to clone or download this [GitHub repository](https://github.com/ecohealthalliance/spatialsampling) into your local computer.
+
+The figure below shows how to download this [GitHub repository](https://github.com/ecohealthalliance/spatialsampling):
+
+<br/>
+
+```{r download_github, echo = FALSE, fig.align = "center"}
+knitr::include_graphics("README_files/downloadGitHubRepo.png")
+```
+
+<br/>
+
+The repository will then be downloaded as a `.zip` file into your default downloads folder. Unzip the contents of the `.zip` file into your preferred local directory.
+
+To clone this [GitHub repository](https://github.com/ecohealthalliance/spatialsampling) via `https`, type the following command in your terminal:
+
+```Shell
+git clone https://github.com/ecohealthalliance/spatialsampling.git
+```
+
+or via `ssh`:
+
+```Shell
+git clone git@github.com:ecohealthalliance/spatialsampling.git
+```
+
+Once you have downloaded or cloned the repository locally, open the folder and then double-click the `spatialsampling.Rproj` file to open the project in [RStudio](https://rstudio.com). Once on [RStudio](https://rstudio.com), run the application using the following command in the [R](https://cran.r-project.org) console:
+
+```{r run_app, echo = TRUE, eval = FALSE}
+if (!require(shiny)) install.packages("shiny")
+
+shiny::runApp(launch.browser = TRUE)
+```
+
+### Using the Shiny application
+
+You will see the following on your web browser when you access the [Shiny](https://shiny.rstudio.com) application either remotely on [EHA](https://www.ecohealthalliance.org)'s [Shiny](https://shiny.rstudio.com) server or locally through your copy of the application.
+
+```{r shiny_app, echo = FALSE, fig.align = "center"}
+knitr::include_graphics("README_files/spatialSampling.png")
+```
+
+The basic interface of the [Shiny](https://shiny.rstudio.com) application is a that of a map with an overlay menu on the upper right hand corner where the user inputs a few required parameters to be used for spatial sampling. When the menu is not in use, it turns transparent. Hover your cursor over the menu and it will turn opaque allowing for the menu buttons to be readable.
+
+The following points describe the different input parameters for the [Shiny](https://shiny.rstudio.com) application. These can also be found as a quick start-up guide modal on the [Shiny](https://shiny.rstudio.com) application itself which can be accessed by clicking on the information link on the overlay menu.
+
+#### Select study country
+
+Select country where study is to be done.
+
+Please note that once you have selected a country, the application will download and read in the map boundary files for the specified country.
+
+#### Upload study area map
+
+Upload study area map in either shapefiles (SHP) or geopackage (GPKG) format. If uploading shapefiles, select a zip file of a folder containing the multiple files required.
+
+Once a map file has been uploaded, this will be read and processed. Part of this processing includes the subsetting of the country administrative boundaries to those that are local to the study area map provided, and the extraction of human and cattle population rasters appropriate for the study area. When this process has completed, the study area and administrative boundaries along with the human population raster will be shown on the map while the cattle population raster is hidden but can be activated via the layers menu on the bottom left side of the map.
+
+#### Number of sampling units
+
+Input the number of sampling units required or desired. For a human population study, the recommended minimum number of sampling units is at least 30 (default). This is the minimum number of sampling clusters recommended to achieve sampling variance that will provide proportion/prevalence estimates with ±3-5% precision. This should be adjusted accordingly based  on study's target sample size and target cluster size.
+
+#### Set a sampling area buffer
+
+Sometimes, it is necessary to add a buffer around the study area to be able to spread the spatial sample evenly up to the edges. This buffer can be specified here. By default, this is set to 0 for no buffer. The buffer should be specified in kilometres (kms). This parameter is optional but as a rule-of-thumb, it is recommended to add a buffer as the study area increases and/or if your number of sampling units is closer to 30.
+
+#### Sample
+
+Once the required number of sampling units has been specified, a spatial sample can now be taken. 
+
+Click the sampling button and a sampling grid and sampling points based on the specifications will be added to the map.
+
+#### List
+
+Once the sampling grid and the sampling points have been generated on the map, a list of the sampling points and their identifying features, geocoordinates, and human and cattle population weights is generated and can be saved and downloaded by clicking this button.
+
+#### Refresh
+
+If you want to redo the spatial sampling for some reason or if you want to do a spatial sample for a different country or a different study area within the same country, click on the refresh button and then repeat the steps above.
+
+## Contributors
+
+This [Shiny](https://shiny.rstudio.com) application was made possible by contributions from:
+
+* [Ernest Guevarra](mailto:guevarra@ecohealthalliance.org)
+
+* [Melinda Rostal](mailto:rostal@ecohealthalliance.org)
+
+* [Rebecca Bodenham](mailto:bodenham@ecohealthalliance.org)
+
+
+## License
+
+This [Shiny](https://shiny.rstudio.com) is made available under a [MIT license](https://github.com/ecohealthalliance/spatialsampling/blob/master/LICENSE).
+
+## Issues and feedback
+
+Feedback, bug reports and feature requests are welcome; file issues or seek support [here](https://github.com/ecohealthalliance/spatialsampling/issues).
 
 ## References
 
