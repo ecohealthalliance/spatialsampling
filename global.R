@@ -17,6 +17,7 @@ library(spatialsampler)  ## spatial sampling functions
 
 ## Shiny packages
 library(shiny)
+library(shinyFiles)
 library(colourpicker)
 library(shinyjs)
 
