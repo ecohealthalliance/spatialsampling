@@ -183,17 +183,17 @@ Upload study area map in either shapefiles (SHP) or geopackage (GPKG) format. If
 
 To trial the application, the following sample study area maps for specific countries can be downloaded and used for this step:
 
-* Bangladesh - [survey_area_bgd.gpkg](https://raw.githubusercontent.com/ecohealthalliance/spatialsampling/main/maps/survey_area_bgd.gpkg)
+* Bangladesh - [survey_area_bgd.gpkg](https://github.com/ecohealthalliance/spatialsampling/blob/main/maps/survey_area_bgd.gpkg?raw=true)
 
-* Jordan - [survey_area_jor.gpkg](https://raw.githubusercontent.com/ecohealthalliance/spatialsampling/main/maps/survey_area_jor.gpkg)
+* Jordan - [survey_area_jor.gpkg](https://github.com/ecohealthalliance/spatialsampling/blob/main/maps/survey_area_jor.gpkg?raw=true)
 
-* Liberia - [survey_area_lbr.gpkg](https://raw.githubusercontent.com/ecohealthalliance/spatialsampling/main/maps/survey_area_lbr.gpkg) 
+* Liberia - [survey_area_lbr.gpkg](https://github.com/ecohealthalliance/spatialsampling/blob/main/maps/survey_area_lbr.gpkg?raw=true) 
 
-* Philippines - [survey_area_phl.gpkg](https://raw.githubusercontent.com/ecohealthalliance/spatialsampling/main/maps/survey_area_phl.gpkg)
+* Philippines - [survey_area_phl.gpkg](https://github.com/ecohealthalliance/spatialsampling/blob/main/maps/survey_area_phl.gpkg?raw=true)
 
-* South Africa - [survey_area_zaf.gpkg](https://raw.githubusercontent.com/ecohealthalliance/spatialsampling/main/maps/survey_area_zaf.gpkg)
+* South Africa - [survey_area_zaf.gpkg](https://github.com/ecohealthalliance/spatialsampling/blob/main/maps/survey_area_zaf.gpkg?raw=true)
 
-* Tanzania - [survey_area_tza.gpkg](https://raw.githubusercontent.com/ecohealthalliance/spatialsampling/main/maps/survey_area_tza.gpkg)
+* Tanzania - [survey_area_tza.gpkg](https://github.com/ecohealthalliance/spatialsampling/blob/main/maps/survey_area_tza.gpkg?raw=true)
 
 Once a map file has been uploaded, this will be read and processed. Part of this processing includes the subsetting of the country administrative boundaries to those that are local to the study area map provided, and the extraction of human and cattle population rasters appropriate for the study area. When this process has completed, the study area and administrative boundaries along with the human population raster will be shown on the map while the cattle population raster is hidden but can be activated via the layers menu on the bottom left side of the map.
 

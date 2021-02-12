@@ -210,22 +210,22 @@ To trial the application, the following sample study area maps for
 specific countries can be downloaded and used for this step:
 
   - Bangladesh -
-    [survey\_area\_bgd.gpkg](https://raw.githubusercontent.com/ecohealthalliance/spatialsampling/main/maps/survey_area_bgd.gpkg)
+    [survey\_area\_bgd.gpkg](https://github.com/ecohealthalliance/spatialsampling/blob/main/maps/survey_area_bgd.gpkg?raw=true)
 
   - Jordan -
-    [survey\_area\_jor.gpkg](https://raw.githubusercontent.com/ecohealthalliance/spatialsampling/main/maps/survey_area_jor.gpkg)
+    [survey\_area\_jor.gpkg](https://github.com/ecohealthalliance/spatialsampling/blob/main/maps/survey_area_jor.gpkg?raw=true)
 
   - Liberia -
-    [survey\_area\_lbr.gpkg](https://raw.githubusercontent.com/ecohealthalliance/spatialsampling/main/maps/survey_area_lbr.gpkg)
+    [survey\_area\_lbr.gpkg](https://github.com/ecohealthalliance/spatialsampling/blob/main/maps/survey_area_lbr.gpkg?raw=true)
 
   - Philippines -
-    [survey\_area\_phl.gpkg](https://raw.githubusercontent.com/ecohealthalliance/spatialsampling/main/maps/survey_area_phl.gpkg)
+    [survey\_area\_phl.gpkg](https://github.com/ecohealthalliance/spatialsampling/blob/main/maps/survey_area_phl.gpkg?raw=true)
 
   - South Africa -
-    [survey\_area\_zaf.gpkg](https://raw.githubusercontent.com/ecohealthalliance/spatialsampling/main/maps/survey_area_zaf.gpkg)
+    [survey\_area\_zaf.gpkg](https://github.com/ecohealthalliance/spatialsampling/blob/main/maps/survey_area_zaf.gpkg?raw=true)
 
   - Tanzania -
-    [survey\_area\_tza.gpkg](https://raw.githubusercontent.com/ecohealthalliance/spatialsampling/main/maps/survey_area_tza.gpkg)
+    [survey\_area\_tza.gpkg](https://github.com/ecohealthalliance/spatialsampling/blob/main/maps/survey_area_tza.gpkg?raw=true)
 
 Once a map file has been uploaded, this will be read and processed. Part
 of this processing includes the subsetting of the country administrative
