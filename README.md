@@ -206,6 +206,27 @@ Upload study area map in either shapefiles (SHP) or geopackage (GPKG)
 format. If uploading shapefiles, select a zip file of a folder
 containing the multiple files required.
 
+To trial the application, the following sample study area maps for
+specific countries can be downloaded and used for this step:
+
+  - Bangladesh -
+    [survey\_area\_bgd.gpkg](https://raw.githubusercontent.com/ecohealthalliance/spatialsampling/main/maps/survey_area_bgd.gpkg)
+
+  - Jordan -
+    [survey\_area\_jor.gpkg](https://raw.githubusercontent.com/ecohealthalliance/spatialsampling/main/maps/survey_area_jor.gpkg)
+
+  - Liberia -
+    [survey\_area\_lbr.gpkg](https://raw.githubusercontent.com/ecohealthalliance/spatialsampling/main/maps/survey_area_lbr.gpkg)
+
+  - Philippines -
+    [survey\_area\_phl.gpkg](https://raw.githubusercontent.com/ecohealthalliance/spatialsampling/main/maps/survey_area_phl.gpkg)
+
+  - South Africa -
+    [survey\_area\_zaf.gpkg](https://raw.githubusercontent.com/ecohealthalliance/spatialsampling/main/maps/survey_area_zaf.gpkg)
+
+  - Tanzania -
+    [survey\_area\_tza.gpkg](https://raw.githubusercontent.com/ecohealthalliance/spatialsampling/main/maps/survey_area_tza.gpkg)
+
 Once a map file has been uploaded, this will be read and processed. Part
 of this processing includes the subsetting of the country administrative
 boundaries to those that are local to the study area map provided, and

@@ -222,9 +222,21 @@ function(input, output, session) {
                                   origin = "country.name",
                                   destination = "iso3c")
 
-      z <- raster::getData(country = country_code,
-                           level = 3,
-                           path = "www/maps")
+      z <- try(
+        raster::getData(
+          country = country_code,
+          level = 3,
+          path = "www/maps"
+        )
+      )
+
+      if (class(z) == "try-error") {
+        z <- raster::getData(
+          country = country_code,
+          level = 2,
+          path = "www/maps"
+        )
+      }
     }
 
     ## Subset country boundaries to study area
@@ -467,10 +479,16 @@ function(input, output, session) {
     req(survey_area(), input$country != " ")
     leafletProxy("map") %>%
       clearMarkers() %>%
-      setView(
-        lng = coordinates(survey_area())[1],
-        lat = coordinates(survey_area())[2],
-        zoom = 9) %>%
+      #setView(
+      #  lng = coordinates(survey_area())[1],
+      #  lat = coordinates(survey_area())[2],
+      #  zoom = 9) %>%
+      fitBounds(
+        lng1 = bbox(survey_area())[1, 1],
+        lat1 = bbox(survey_area())[2, 1],
+        lng2 = bbox(survey_area())[1, 2],
+        lat2 = bbox(survey_area())[2, 2]
+      ) %>%
       addPolygons(data = admin_boundaries(),
         color = input$country_boundaries_colour,
         fill = FALSE,

@@ -4,7 +4,10 @@
 .Ruserdata
 .DS_Store
 www/maps
-maps
+maps/maps.R
+maps/survey_area
+maps/survey_area.zip
+maps/tza_water_areas_dcw
 www/reports
 tanzania/Tanzania_Village_EA_2002_region
 tanzania/villages_tza.gpkg
