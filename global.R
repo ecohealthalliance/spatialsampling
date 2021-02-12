@@ -13,7 +13,10 @@ library(raster)
 library(sf)
 library(mapboxapi)       ## for mapbox baselayers and functions
 library(leaflet)         ## for leaflet mapping
-library(spatialsampler)  ## spatial sampling functions
+
+## spatial sampling functions
+if (!require(remotes)) install.packages("remotes")
+if (!require(spatialsampler)) remotes::install_github("spatialworks/spatialsampler")
 
 ## Shiny packages
 library(shiny)
@@ -30,6 +33,7 @@ library(RColorBrewer)
 library(RCurl)
 library(curl)
 library(jsonlite)
+library(dataverse)
 
 ## Reporting
 library(kableExtra)

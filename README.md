@@ -86,7 +86,8 @@ Alliance](https://www.ecohealthalliance.org)’s
 [Shiny](https://shiny.rstudio.com) server, or locally by cloning this
 [GitHub
 repository](https://github.com/ecohealthalliance/spatialsampling).
-\#\#\# Accessing the Shiny application via EHA’s server
+
+### Accessing the Shiny application via the EHA server
 
 To use the [Shiny](https://shiny.rstudio.com) application via [EcoHealth
 Alliance](https://www.ecohealthalliance.org)’s
@@ -95,6 +96,9 @@ Alliance](https://www.ecohealthalliance.org)’s
 When prompted for a *username* and *password*, please use your
 [EcoHealth Alliance](https://www.ecohealthalliance.org)
 [Google](https://www.google.com) account credentials.
+
+This is the most straightforward and easiest way of accessing the
+[Shiny](https://shiny.rstudio.com) application.
 
 ### Accessing the Shiny application locally
 
@@ -142,6 +146,26 @@ if (!require(shiny)) install.packages("shiny")
 shiny::runApp(launch.browser = TRUE)
 ```
 
+Please note that there are [R](https://cran.r-project.org) packages
+required for running the [Shiny](https://shiny.rstudio.com) that you may
+have to install if they are not already installed on your local machine.
+This will most likley be the main issue that will arise when running
+this application locally. Please install missing packages as indicated
+in the resulting error messages (if any). Note also that installation of
+[R](https://cran.r-project.org) spatial packages can be tricky and a bit
+complicated.
+
+This approach of accessing the [Shiny](https://shiny.rstudio.com)
+application is more suitable for those who are more familiar with
+running [Shiny](https://shiny.rstudio.com) applications locally, those
+who would like to see the source code of the application and possibly
+contribute to it via
+[GitHub](https://github.com/ecohealthalliance/spatialsampling), and/or
+those who are familiar and comfortable with installing
+[R](https://cran.r-project.org) spatial packages. We recommend using
+this second approach if you fall within the categories described above
+or if you are up for a challenge\!
+
 ### Using the Shiny application
 
 You will see the following on your web browser when you access the
@@ -150,7 +174,11 @@ You will see the following on your web browser when you access the
 [Shiny](https://shiny.rstudio.com) server or locally through your copy
 of the application.
 
+<br>
+
 <img src="figures/spatialSampling.png" width="1000" style="display: block; margin: auto;" />
+
+<br>
 
 The basic interface of the [Shiny](https://shiny.rstudio.com)
 application is a that of a map with an overlay menu on the upper right
@@ -177,6 +205,27 @@ download and read in the map boundary files for the specified country.
 Upload study area map in either shapefiles (SHP) or geopackage (GPKG)
 format. If uploading shapefiles, select a zip file of a folder
 containing the multiple files required.
+
+To trial the application, the following sample study area maps for
+specific countries can be downloaded and used for this step:
+
+  - Bangladesh -
+    [survey\_area\_bgd.gpkg](https://raw.githubusercontent.com/ecohealthalliance/spatialsampling/main/maps/survey_area_bgd.gpkg)
+
+  - Jordan -
+    [survey\_area\_jor.gpkg](https://raw.githubusercontent.com/ecohealthalliance/spatialsampling/main/maps/survey_area_jor.gpkg)
+
+  - Liberia -
+    [survey\_area\_lbr.gpkg](https://raw.githubusercontent.com/ecohealthalliance/spatialsampling/main/maps/survey_area_lbr.gpkg)
+
+  - Philippines -
+    [survey\_area\_phl.gpkg](https://raw.githubusercontent.com/ecohealthalliance/spatialsampling/main/maps/survey_area_phl.gpkg)
+
+  - South Africa -
+    [survey\_area\_zaf.gpkg](https://raw.githubusercontent.com/ecohealthalliance/spatialsampling/main/maps/survey_area_zaf.gpkg)
+
+  - Tanzania -
+    [survey\_area\_tza.gpkg](https://raw.githubusercontent.com/ecohealthalliance/spatialsampling/main/maps/survey_area_tza.gpkg)
 
 Once a map file has been uploaded, this will be read and processed. Part
 of this processing includes the subsetting of the country administrative
