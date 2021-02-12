@@ -297,12 +297,27 @@ function(input, output, session) {
   dataset_worldpop <- reactive({
     req(survey_area(), input$country != " ")
 
+    ## Progress bar
+    progress <- Progress$new()
+    on.exit(progress$close())
+    progress$set(
+      message = paste("Retrieving human population raster for ",
+                       input$country, sep = ""),
+      value = 0.7
+    )
+
     if (input$country == "Tanzania") {
       pop <- raster("www/maps/TZA_popmap10adj_v2b.tif")
-      pop <- raster::intersect(pop, survey_area())
+    } else {
+      ccode <- countrycode::countrycode(
+        sourcevar = input$country,
+        origin = "country.name",
+        destination = "iso3c"
+      )
+      pop <- get_wpgp_pop_data(ccode = ccode, year = 2020)
     }
 
-    pop
+    raster::intersect(pop, survey_area())
   })
 
   ## Process appropriate cattle population dataset from GLW
