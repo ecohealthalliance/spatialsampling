@@ -755,6 +755,12 @@ function(input, output, session) {
           on the map, a list of the sampling points and their identifying
           features, geocoordinates, and human and cattle population weights is
           generated and can be saved and downloaded by clicking this button.</p>
+          <br>
+          <h4>Refresh</h4>
+          <p>If you want to redo the spatial sampling for some reason or if you
+          want to do a spatial sample for a different country or a different
+          study area within the same country, click on the refresh button and
+          then repeat the steps above.</p>
           "
         ),
         title = "Spatial inputs and parameters",

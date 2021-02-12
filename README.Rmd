@@ -10,7 +10,8 @@ knitr::opts_chunk$set(
   warning = FALSE,
   error = FALSE,
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.path = "figures/"
 )
 
 library(magrittr)
@@ -24,6 +25,8 @@ library(spatialsampler)
 
 <!-- badges: start -->
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+![version](https://img.shields.io/badge/version-v0.1.0-blue)
+[![license](https://img.shields.io/badge/license-MIT-blue)](https://github.com/ecohealthalliance/spatialsampling/blob/master/LICENSE)
 <!-- badges: end -->
 
 Area sampling approaches such as **centric systematic area sampling** or **CSAS** have potential applications in studies that sample from mixed human and animal subjects, and from the environment. Standard sampling approaches that select subjects proportional to population size (PPS) are impractical for use in these studies because sampling units selected for one subject will not necessarily be representative of the other subjects. This is particularly true in contexts where animal population size distribution is inversely related to human population size.
@@ -98,7 +101,7 @@ The sampling points, which are the centroids of the sampling grid, indicates whe
 
 ## Data analysis considerations
 
-Data collected from this type of sampling frame can the be made population representative by applying a population weighted analysis during indicator/outcome estimation. This can be done parametrically using Taylor linearised deviation techniques (which can be implemented in [R](https://cran.r-project.org) using Thomas Lumley's [survey package](https://cran.r-project.org/web/packages/survey/survey.pdf)<sup>[^4]</sup> or using a non-parametric weighted bootstrap approach such as the one described [here](https://github.com/rapidsurvys/bbw)<sup>[^5]</sup>.
+Data collected from this type of sampling frame can the be made population representative by applying a population weighted analysis during indicator/outcome estimation. This can be done parametrically using Taylor linearised deviation techniques (which can be implemented in [R](https://cran.r-project.org) using Thomas Lumley's [survey package](https://cran.r-project.org/web/packages/survey/survey.pdf)<sup>[^4]</sup>) or using a non-parametric weighted bootstrap approach such as the one described [here](https://github.com/rapidsurvys/bbw)<sup>[^5]</sup>.
 
 ## About the `spatialsampling` Shiny application
 
@@ -118,7 +121,7 @@ The figure below shows how to download this [GitHub repository](https://github.c
 <br/>
 
 ```{r download_github, echo = FALSE, fig.align = "center"}
-knitr::include_graphics("README_files/downloadGitHubRepo.png")
+knitr::include_graphics("figures/downloadGitHubRepo.png")
 ```
 
 <br/>
@@ -150,7 +153,7 @@ shiny::runApp(launch.browser = TRUE)
 You will see the following on your web browser when you access the [Shiny](https://shiny.rstudio.com) application either remotely on [EHA](https://www.ecohealthalliance.org)'s [Shiny](https://shiny.rstudio.com) server or locally through your copy of the application.
 
 ```{r shiny_app, echo = FALSE, fig.align = "center"}
-knitr::include_graphics("README_files/spatialSampling.png")
+knitr::include_graphics("figures/spatialSampling.png")
 ```
 
 The basic interface of the [Shiny](https://shiny.rstudio.com) application is a that of a map with an overlay menu on the upper right hand corner where the user inputs a few required parameters to be used for spatial sampling. When the menu is not in use, it turns transparent. Hover your cursor over the menu and it will turn opaque allowing for the menu buttons to be readable.
@@ -204,7 +207,7 @@ This [Shiny](https://shiny.rstudio.com) application was made possible by contrib
 
 ## License
 
-This [Shiny](https://shiny.rstudio.com) is made available under a [MIT license](https://github.com/ecohealthalliance/spatialsampling/blob/master/LICENSE).
+This [Shiny](https://shiny.rstudio.com) applicadtion is made available under a [MIT license](https://github.com/ecohealthalliance/spatialsampling/blob/master/LICENSE).
 
 ## Issues and feedback
 

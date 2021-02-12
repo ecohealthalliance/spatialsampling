@@ -8,6 +8,8 @@
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+![version](https://img.shields.io/badge/version-v0.1.0-blue)
+[![license](https://img.shields.io/badge/license-MIT-blue)](https://github.com/ecohealthalliance/spatialsampling/blob/master/LICENSE)
 <!-- badges: end -->
 
 Area sampling approaches such as **centric systematic area sampling** or
@@ -38,7 +40,7 @@ as possible.
 
 Below is a map of a study area somewhere in Tanzania.
 
-<img src="README_files/figure-gfm/step1-1.png" style="display: block; margin: auto;" />
+<img src="figures/step1-1.png" style="display: block; margin: auto;" />
 
 ### Step 2: Draw a grid
 
@@ -50,7 +52,7 @@ for.
 Below is an example of a grid overlaid onto the previous map to create
 200 square grids
 
-<img src="README_files/figure-gfm/step2-1.png" style="display: block; margin: auto;" />
+<img src="figures/step2-1.png" style="display: block; margin: auto;" />
 
 ### Step 3: Select the areas to sample
 
@@ -67,7 +69,7 @@ population representative by applying a population weighted analysis
 during indicator/outcome estimation. This can be done parametrically
 using Taylor linearised deviation techniques (which can be implemented
 in [R](https://cran.r-project.org) using Thomas Lumley’s [survey
-package](https://cran.r-project.org/web/packages/survey/survey.pdf)<sup>\[4\]</sup>
+package](https://cran.r-project.org/web/packages/survey/survey.pdf)<sup>\[4\]</sup>)
 or using a non-parametric weighted bootstrap approach such as the one
 described [here](https://github.com/rapidsurvys/bbw)<sup>\[5\]</sup>.
 
@@ -106,7 +108,7 @@ repository](https://github.com/ecohealthalliance/spatialsampling):
 
 <br/>
 
-<img src="README_files/downloadGitHubRepo.png" width="2880" style="display: block; margin: auto;" />
+<img src="figures/downloadGitHubRepo.png" width="2880" style="display: block; margin: auto;" />
 
 <br/>
 
@@ -148,7 +150,7 @@ You will see the following on your web browser when you access the
 [Shiny](https://shiny.rstudio.com) server or locally through your copy
 of the application.
 
-<img src="README_files/spatialSampling.png" width="1000" style="display: block; margin: auto;" />
+<img src="figures/spatialSampling.png" width="1000" style="display: block; margin: auto;" />
 
 The basic interface of the [Shiny](https://shiny.rstudio.com)
 application is a that of a map with an overlay menu on the upper right
@@ -240,7 +242,8 @@ contributions from:
 
 ## License
 
-This [Shiny](https://shiny.rstudio.com) is made available under a [MIT
+This [Shiny](https://shiny.rstudio.com) applicadtion is made available
+under a [MIT
 license](https://github.com/ecohealthalliance/spatialsampling/blob/master/LICENSE).
 
 ## Issues and feedback

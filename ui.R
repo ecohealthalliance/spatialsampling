@@ -402,6 +402,25 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
         target='_blank'>spatialsampler</a><sup>6</sup> which provides functions
         for performing <strong>CSAS</strong>.</p>
         <br>
+        <h3>Contributors</h3>
+        <p>This <a href='https://shiny.rstudio.com' target='_blank'>Shiny</a>
+        application was made possible by contributions from:
+        <ul>
+          <li><a href='mailto:guevarra@ecohealthalliance.org'>Ernest Guevarra</a>
+          <li><a href='mailto:rostal@ecohealthalliance.org'>Melinda Rostal</a>
+          <li><a href='mailto:bodenham@ecohealthalliance.org'>Rebecca Bodenham</a>
+        </ul>
+        <br>
+        <h3>License</h3>
+        <p>This <a href='https://shiny.rstudio.com target='_blank'>Shiny</a>
+        application is available under a <a href='https://github.com/ecohealthalliance/spatialsampling/blob/master/LICENSE'
+        target='_blank'>MIT license</a>.
+        <br>
+        <h3>Issues and feedback</h3>
+        <p>Feedback, bug reports and feature requests are welcome; file issues
+        or seek support <a href='https://github.com/ecohealthalliance/spatialsampling/issues'
+        target='_blank'>here</a></p>
+        <br>
         <h3>References</h3>
         <p><sup>1</sup> Milne, A. (1959). The Centric Systematic Area-Sample
         Treated as a Random Sample. Biometrics, 15(2), 270-297.
