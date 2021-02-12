@@ -41,8 +41,8 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
         selectInput(inputId = "country",
           label = "Study country",
           choices = c("Select study country" = " ",
-                      "Bangladesh", "Liberia", "Philippines",
-                      "South Africa", "Tanzania", "South Africa"),
+                      "Bangladesh", "Jordan", "Liberia",
+                      "Philippines", "South Africa", "Tanzania"),
           selected = " "
         ),
         ## Upload study area map
@@ -414,7 +414,7 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
         <h3>License</h3>
         <p>This <a href='https://shiny.rstudio.com target='_blank'>Shiny</a>
         application is available under a <a href='https://github.com/ecohealthalliance/spatialsampling/blob/master/LICENSE'
-        target='_blank'>MIT license</a>.
+        target='_blank'>MIT license</a>.</p>
         <br>
         <h3>Issues and feedback</h3>
         <p>Feedback, bug reports and feature requests are welcome; file issues

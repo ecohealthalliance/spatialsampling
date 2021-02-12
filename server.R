@@ -307,7 +307,16 @@ function(input, output, session) {
     )
 
     if (input$country == "Tanzania") {
-      pop <- raster("www/maps/TZA_popmap10adj_v2b.tif")
+      pop <- try(raster("www/maps/TZA_popmap10adj_v2b.tif"))
+
+      if (class(pop) == "try-error") {
+        ccode <- countrycode::countrycode(
+          sourcevar = input$country,
+          origin = "country.name",
+          destination = "iso3c"
+        )
+        pop <- get_wpgp_pop_data(ccode = ccode, year = 2020)
+      }
     } else {
       ccode <- countrycode::countrycode(
         sourcevar = input$country,
@@ -325,7 +334,22 @@ function(input, output, session) {
     req(survey_area())
 
     ## Read GLW3 global raster
-    cattle_global <- raster("www/maps/6_Ct_2010_Aw.tif")
+    cattle_global <- try(raster("www/maps/6_Ct_2010_Aw.tif"))
+
+    if (class(cattle_global) == "try-error") {
+      glw_files <- dataverse::get_dataset(
+        dataset = "doi:10.7910/DVN/GIVQ75",
+        server = "dataverse.harvard.edu")
+
+      cattle_global <- glw_files$files %>%
+        dplyr::filter(label == "6_Ct_2010_Aw.tif") %>%
+        dplyr::select(id) %>%
+        as.vector(mode = "integer") %>%
+        dataverse::get_dataframe_by_id(
+          .f = raster::raster,
+          server = "dataverse.harvard.edu"
+        )
+    }
 
     ## Get study are raster
     cattle_local <- raster::intersect(cattle_global, survey_area())
