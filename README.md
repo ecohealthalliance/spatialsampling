@@ -62,6 +62,8 @@ the village or settlement or farm at or near the centroid location. For
 environmental sampling, this would be specimens drawn at or near the
 centroid locations.
 
+<br>
+
 ## Data analysis considerations
 
 Data collected from this type of sampling frame can the be made
@@ -72,6 +74,8 @@ in [R](https://cran.r-project.org) using Thomas Lumley’s [survey
 package](https://cran.r-project.org/web/packages/survey/survey.pdf)<sup>\[4\]</sup>)
 or using a non-parametric weighted bootstrap approach such as the one
 described [here](https://github.com/rapidsurvys/bbw)<sup>\[5\]</sup>.
+
+<br>
 
 ## About the `spatialsampling` Shiny application
 
@@ -147,13 +151,13 @@ shiny::runApp(launch.browser = TRUE)
 ```
 
 Please note that there are [R](https://cran.r-project.org) packages
-required for running the [Shiny](https://shiny.rstudio.com) that you may
-have to install if they are not already installed on your local machine.
-This will most likley be the main issue that will arise when running
-this application locally. Please install missing packages as indicated
-in the resulting error messages (if any). Note also that installation of
-[R](https://cran.r-project.org) spatial packages can be tricky and a bit
-complicated.
+required for running the [Shiny](https://shiny.rstudio.com) application
+that you may have to install if they are not already installed on your
+local machine. This will most likley be the main issue that will arise
+when running this application locally. Please install missing packages
+as indicated in the resulting error messages (if any). Note also that
+installation of [R](https://cran.r-project.org) spatial packages can be
+tricky and a bit complicated.
 
 This approach of accessing the [Shiny](https://shiny.rstudio.com)
 application is more suitable for those who are more familiar with
@@ -181,7 +185,7 @@ of the application.
 <br>
 
 The basic interface of the [Shiny](https://shiny.rstudio.com)
-application is a that of a map with an overlay menu on the upper right
+application is that of a map with an overlay menu on the upper right
 hand corner where the user inputs a few required parameters to be used
 for spatial sampling. When the menu is not in use, it turns transparent.
 Hover your cursor over the menu and it will turn opaque allowing for the
@@ -278,6 +282,8 @@ to do a spatial sample for a different country or a different study area
 within the same country, click on the refresh button and then repeat the
 steps above.
 
+<br>
+
 ## Contributors
 
 This [Shiny](https://shiny.rstudio.com) application was made possible by
@@ -289,17 +295,23 @@ contributions from:
 
   - [Rebecca Bodenham](mailto:bodenham@ecohealthalliance.org)
 
+<br>
+
 ## License
 
-This [Shiny](https://shiny.rstudio.com) applicadtion is made available
+This [Shiny](https://shiny.rstudio.com) application is made available
 under a [MIT
 license](https://github.com/ecohealthalliance/spatialsampling/blob/master/LICENSE).
+
+<br>
 
 ## Issues and feedback
 
 Feedback, bug reports and feature requests are welcome; file issues or
 seek support
 [here](https://github.com/ecohealthalliance/spatialsampling/issues).
+
+<br>
 
 ## References
 
@@ -323,7 +335,7 @@ seek support
 5.  Mark Myatt (2018). bbw: Blocked Weighted Bootstrap. R package
     version 0.1.3. <https://CRAN.R-project.org/package=bbw>
 
-6.  Mark Myatt, Farah Ibrahim and Ernest Guevarra (2021).
+6.  Mark Myatt, Farah Ibrahim and Ernest Guevarra (2018).
     spatialsampler: An Implementation of the Centric Systematic Area
     Sampling (CSAS) and Simple Spatial Sampling Method (S3M) sampling
     approaches in R. R package version 0.1.0.
