@@ -1225,40 +1225,6 @@
         "Built": "R 4.0.3; x86_64-pc-linux-gnu; 2021-01-26 11:00:55 UTC; unix"
       }
     },
-    "foreign": {
-      "Source": "CRAN",
-      "Repository": null,
-      "GithubRepo": null,
-      "GithubUsername": null,
-      "GithubRef": null,
-      "GithubSha1": null,
-      "description": {
-        "Package": "foreign",
-        "Priority": "recommended",
-        "Version": "0.8-80",
-        "Date": "2020-05-13",
-        "Title": "Read Data Stored by 'Minitab', 'S', 'SAS', 'SPSS', 'Stata',\n'Systat', 'Weka', 'dBase', ...",
-        "Depends": "R (>= 4.0.0)",
-        "Imports": "methods, utils, stats",
-        "Authors@R": "c(\n   person(\"R Core Team\",\n      email = \"R-core@R-project.org\", role = c(\"aut\", \"cph\", \"cre\")),\n    person(\"Roger\", \"Bivand\", role = c(\"ctb\", \"cph\")),\n    person(c(\"Vincent\", \"J.\"), \"Carey\", role = c(\"ctb\", \"cph\")),\n    person(\"Saikat\", \"DebRoy\", role = c(\"ctb\", \"cph\")),\n    person(\"Stephen\", \"Eglen\", role = c(\"ctb\", \"cph\")),\n    person(\"Rajarshi\", \"Guha\", role = c(\"ctb\", \"cph\")),\n    person(\"Swetlana\", \"Herbrandt\", role = \"ctb\"),\n    person(\"Nicholas\", \"Lewin-Koh\", role = c(\"ctb\", \"cph\")),\n    person(\"Mark\", \"Myatt\", role = c(\"ctb\", \"cph\")),\n    person(\"Michael\", \"Nelson\", role = \"ctb\"),\n    person(\"Ben\", \"Pfaff\", role = \"ctb\"),\n    person(\"Brian\", \"Quistorff\", role = \"ctb\"),\n    person(\"Frank\", \"Warmerdam\", role = c(\"ctb\", \"cph\")),\n    person(\"Stephen\", \"Weigand\", role = c(\"ctb\", \"cph\")),\n    person(\"Free Software Foundation, Inc.\", role = \"cph\"))",
-        "Contact": "see 'MailingList'",
-        "Copyright": "see file COPYRIGHTS",
-        "Description": "Reading and writing data stored by some versions of\n\t'Epi Info', 'Minitab', 'S', 'SAS', 'SPSS', 'Stata', 'Systat', 'Weka',\n\tand for reading and writing some 'dBase' files.",
-        "ByteCompile": "yes",
-        "Biarch": "yes",
-        "License": "GPL (>= 2)",
-        "BugReports": "https://bugs.r-project.org",
-        "MailingList": "R-help@r-project.org",
-        "URL": "https://svn.r-project.org/R-packages/trunk/foreign",
-        "NeedsCompilation": "yes",
-        "Packaged": "2020-05-13 08:43:51 UTC; maechler",
-        "Author": "R Core Team [aut, cph, cre],\n  Roger Bivand [ctb, cph],\n  Vincent J. Carey [ctb, cph],\n  Saikat DebRoy [ctb, cph],\n  Stephen Eglen [ctb, cph],\n  Rajarshi Guha [ctb, cph],\n  Swetlana Herbrandt [ctb],\n  Nicholas Lewin-Koh [ctb, cph],\n  Mark Myatt [ctb, cph],\n  Michael Nelson [ctb],\n  Ben Pfaff [ctb],\n  Brian Quistorff [ctb],\n  Frank Warmerdam [ctb, cph],\n  Stephen Weigand [ctb, cph],\n  Free Software Foundation, Inc. [cph]",
-        "Maintainer": "R Core Team <R-core@R-project.org>",
-        "Repository": "CRAN",
-        "Date/Publication": "2020-05-24 00:40:14 UTC",
-        "Built": "R 4.0.2; x86_64-pc-linux-gnu; 2020-10-07 21:24:20 UTC; unix"
-      }
-    },
     "fs": {
       "Source": "CRAN",
       "Repository": "https://packagemanager.rstudio.com/all/__linux__/focal/latest",
@@ -2029,39 +1995,6 @@
         "Built": "R 4.0.2; x86_64-pc-linux-gnu; 2020-07-10 22:11:23 UTC; unix"
       }
     },
-    "lattice": {
-      "Source": "CRAN",
-      "Repository": null,
-      "GithubRepo": null,
-      "GithubUsername": null,
-      "GithubRef": null,
-      "GithubSha1": null,
-      "description": {
-        "Package": "lattice",
-        "Version": "0.20-41",
-        "Date": "2020-04-01",
-        "Priority": "recommended",
-        "Title": "Trellis Graphics for R",
-        "Authors@R": "c(person(\"Deepayan\", \"Sarkar\", role = c(\"aut\", \"cre\"),\n\t            email = \"deepayan.sarkar@r-project.org\",\n\t\t    comment = c(ORCID = \"0000-0003-4107-1553\")),\n              person(\"Felix\", \"Andrews\", role = \"ctb\"),\n\t      person(\"Kevin\", \"Wright\", role = \"ctb\", comment = \"documentation\"),\n\t      person(\"Neil\", \"Klepeis\", role = \"ctb\"),\n              person(\"Paul\", \"Murrell\", role = \"ctb\", email = \"paul@stat.auckland.ac.nz\"))",
-        "Description": "A powerful and elegant high-level data visualization\n  system inspired by Trellis graphics, with an emphasis on\n  multivariate data. Lattice is sufficient for typical graphics needs,\n  and is also flexible enough to handle most nonstandard requirements.\n  See ?Lattice for an introduction.",
-        "Depends": "R (>= 3.0.0)",
-        "Suggests": "KernSmooth, MASS, latticeExtra",
-        "Imports": "grid, grDevices, graphics, stats, utils",
-        "Enhances": "chron",
-        "LazyLoad": "yes",
-        "LazyData": "yes",
-        "License": "GPL (>= 2)",
-        "URL": "http://lattice.r-forge.r-project.org/",
-        "BugReports": "https://github.com/deepayan/lattice/issues",
-        "NeedsCompilation": "yes",
-        "Packaged": "2020-04-02 10:52:37 UTC; deepayan",
-        "Author": "Deepayan Sarkar [aut, cre] (<https://orcid.org/0000-0003-4107-1553>),\n  Felix Andrews [ctb],\n  Kevin Wright [ctb] (documentation),\n  Neil Klepeis [ctb],\n  Paul Murrell [ctb]",
-        "Maintainer": "Deepayan Sarkar <deepayan.sarkar@r-project.org>",
-        "Repository": "CRAN",
-        "Date/Publication": "2020-04-02 12:00:06 UTC",
-        "Built": "R 4.0.2; x86_64-pc-linux-gnu; 2020-10-07 21:22:27 UTC; unix"
-      }
-    },
     "lazyeval": {
       "Source": "CRAN",
       "Repository": "https://packagemanager.rstudio.com/all/__linux__/focal/latest",
@@ -2459,41 +2392,6 @@
         "Date/Publication": "2018-06-12 04:29:06 UTC",
         "Encoding": "UTF-8",
         "Built": "R 4.0.0; ; 2020-06-09 07:05:03 UTC; unix"
-      }
-    },
-    "nlme": {
-      "Source": "CRAN",
-      "Repository": null,
-      "GithubRepo": null,
-      "GithubUsername": null,
-      "GithubRef": null,
-      "GithubSha1": null,
-      "description": {
-        "Package": "nlme",
-        "Version": "3.1-148",
-        "Date": "2020-05-13",
-        "Priority": "recommended",
-        "Title": "Linear and Nonlinear Mixed Effects Models",
-        "Authors@R": "c(person(\"José\", \"Pinheiro\", role = \"aut\", comment = \"S version\"),\n             person(\"Douglas\", \"Bates\", role = \"aut\", comment = \"up to 2007\"),\n             person(\"Saikat\", \"DebRoy\", role = \"ctb\", comment = \"up to 2002\"),\n             person(\"Deepayan\", \"Sarkar\", role = \"ctb\", comment = \"up to 2005\"),\n             person(\"EISPACK authors\", role = \"ctb\", comment = \"src/rs.f\"),\n\t     person(\"Siem\", \"Heisterkamp\", role = \"ctb\", comment = \"Author fixed sigma\"),\n             person(\"Bert\", \"Van Willigen\",role = \"ctb\", comment = \"Programmer fixed sigma\"),\n\t     person(\"R-core\", email = \"R-core@R-project.org\",\n                    role = c(\"aut\", \"cre\")))",
-        "Contact": "see 'MailingList'",
-        "Description": "Fit and compare Gaussian linear and nonlinear mixed-effects models.",
-        "Depends": "R (>= 3.4.0)",
-        "Imports": "graphics, stats, utils, lattice",
-        "Suggests": "Hmisc, MASS",
-        "LazyData": "yes",
-        "ByteCompile": "yes",
-        "Encoding": "UTF-8",
-        "License": "GPL (>= 2) | file LICENCE",
-        "BugReports": "https://bugs.r-project.org",
-        "MailingList": "R-help@r-project.org",
-        "URL": "https://svn.r-project.org/R-packages/trunk/nlme",
-        "NeedsCompilation": "yes",
-        "Packaged": "2020-05-13 08:42:56 UTC; maechler",
-        "Author": "José Pinheiro [aut] (S version),\n  Douglas Bates [aut] (up to 2007),\n  Saikat DebRoy [ctb] (up to 2002),\n  Deepayan Sarkar [ctb] (up to 2005),\n  EISPACK authors [ctb] (src/rs.f),\n  Siem Heisterkamp [ctb] (Author fixed sigma),\n  Bert Van Willigen [ctb] (Programmer fixed sigma),\n  R-core [aut, cre]",
-        "Maintainer": "R-core <R-core@R-project.org>",
-        "Repository": "CRAN",
-        "Date/Publication": "2020-05-24 00:40:02 UTC",
-        "Built": "R 4.0.2; x86_64-pc-linux-gnu; 2020-10-07 21:23:39 UTC; unix"
       }
     },
     "openssl": {
