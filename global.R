@@ -11,7 +11,7 @@ library(rgdal)
 library(rgeos)
 library(raster)
 library(sf)
-library(mapboxapi)       ## for mapbox baselayers and functions
+#library(mapboxapi)       ## for mapbox baselayers and functions
 library(leaflet)         ## for leaflet mapping
 
 ## spatial sampling functions
@@ -42,16 +42,28 @@ library(kableExtra)
 library(openxlsx)
 
 ## Authenticate with Mapbox ----------------------------------------------------
-mapboxapi::mb_access_token(token = Sys.getenv("MAPBOX_PUBLIC_TOKEN"))
+#mapboxapi::mb_access_token(token = Sys.getenv("MAPBOX_PUBLIC_TOKEN"))
 
 ## Mapbox styles
-moonlight <- "cj3nban30001z2rpahc10c9ef"
-leShine   <- "ckk7gbtu20d9817qu6i8hbxet"
-decimal   <- "ckk7gdtbw0d3a17lf2hnuky50"
-satellite <- "ckk7geu550d8k17l1t39f1t43"
-standard  <- "ckk7geic50d9417juktz7ajet"
-northstar <- "ckk7iv17e0fnn17lt6cvi9ppz"
-terminal  <- "cj6g0tzbd30kc2sph2wyh666m"
+#moonlight <- "cj3nban30001z2rpahc10c9ef"
+#leShine   <- "ckk7gbtu20d9817qu6i8hbxet"
+#decimal   <- "ckk7gdtbw0d3a17lf2hnuky50"
+#satellite <- "ckk7geu550d8k17l1t39f1t43"
+#standard  <- "ckk7geic50d9417juktz7ajet"
+#northstar <- "ckk7iv17e0fnn17lt6cvi9ppz"
+#terminal  <- "cj6g0tzbd30kc2sph2wyh666m"
+
+## Create Mapbox base layer objects for leaflet mapping
+satellite <- "https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXJuZXN0Z3VldmFycmEiLCJhIjoiejRRLXlZdyJ9.sqS1zi0rDH5CIzvcn9SXSg"
+#mapbox.street    <- "https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXJuZXN0Z3VldmFycmEiLCJhIjoiejRRLXlZdyJ9.sqS1zi0rDH5CIzvcn9SXSg"
+#mapbox.dark      <- "https://api.mapbox.com/styles/v1/mapbox/dark-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXJuZXN0Z3VldmFycmEiLCJhIjoiejRRLXlZdyJ9.sqS1zi0rDH5CIzvcn9SXSg"
+#mapbox.light     <- "https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXJuZXN0Z3VldmFycmEiLCJhIjoiejRRLXlZdyJ9.sqS1zi0rDH5CIzvcn9SXSg"
+moonlight <- "https://api.mapbox.com/styles/v1/ernestguevarra/cj3nban30001z2rpahc10c9ef/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXJuZXN0Z3VldmFycmEiLCJhIjoiejRRLXlZdyJ9.sqS1zi0rDH5CIzvcn9SXSg"
+northstar <- "https://api.mapbox.com/styles/v1/ernestguevarra/cj4ke832y4sng2spe2ds4fs55/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXJuZXN0Z3VldmFycmEiLCJhIjoiejRRLXlZdyJ9.sqS1zi0rDH5CIzvcn9SXSg"
+standard  <- "https://api.mapbox.com/styles/v1/ernestguevarra/cj5di36jn0gxg2rphjn3yetpt/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXJuZXN0Z3VldmFycmEiLCJhIjoiejRRLXlZdyJ9.sqS1zi0rDH5CIzvcn9SXSg"
+decimal   <- "https://api.mapbox.com/styles/v1/ernestguevarra/cj5ms1akt3pbi2smtcewsex9m/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXJuZXN0Z3VldmFycmEiLCJhIjoiejRRLXlZdyJ9.sqS1zi0rDH5CIzvcn9SXSg"
+terminal  <- "https://api.mapbox.com/styles/v1/ernestguevarra/cj6g0tzbd30kc2sph2wyh666m/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXJuZXN0Z3VldmFycmEiLCJhIjoiejRRLXlZdyJ9.sqS1zi0rDH5CIzvcn9SXSg"
+leShine  <- "https://api.mapbox.com/styles/v1/ernestguevarra/cjdlr8pvl0xiv2sqvq1evk1pl/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXJuZXN0Z3VldmFycmEiLCJhIjoiejRRLXlZdyJ9.sqS1zi0rDH5CIzvcn9SXSg"
 
 ## Functions
 
