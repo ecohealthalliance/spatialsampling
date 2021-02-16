@@ -5038,38 +5038,11 @@
     "ui.R": {
       "checksum": "b3452a802c8c0c5fdf95b48e1e1162a1"
     },
-    "www/maps/5_Ct_2010_Da.tif": {
-      "checksum": "dca9086b131859a69d4dcb90a47d8e00"
-    },
     "www/maps/6_Ct_2010_Aw.tif": {
       "checksum": "93241e39a1b8e8a866c0378b1c622c6c"
     },
-    "www/maps/gadm36_BGD_3_sp.rds": {
-      "checksum": "33e7fb72a8a35b10eb37b4b3e1d51bf8"
-    },
-    "www/maps/gadm36_LBR_3_sp.rds": {
-      "checksum": "514091cd0a4fd39c90a6f4aa7c767a95"
-    },
-    "www/maps/gadm36_TZA_3_sp.rds": {
-      "checksum": "f54bcd447be96d6492b97d657a553e47"
-    },
-    "www/maps/gadm36_ZAF_3_sp.rds": {
-      "checksum": "99ca70242605265e9f590c3b06a5f660"
-    },
     "www/maps/TZA_popmap10adj_v2b.tif": {
       "checksum": "544b8b0205ff82e0af022ee1b610c969"
-    },
-    "www/report.Rmd": {
-      "checksum": "42042d13c711fe148c88dbad5650a93c"
-    },
-    "www/reports/tanzania_2021-02-04_13:25:41.xlsx": {
-      "checksum": "897c3e0ac5567ecd867a80aa31d6ea55"
-    },
-    "www/reports/tanzania_2021-02-04_13:33:10.xlsx": {
-      "checksum": "1bd262f95cd733fd326fd8bcf910f5a8"
-    },
-    "www/reports/tanzania.html": {
-      "checksum": "d5675636c311e786b5830b4d79a3c7a3"
     },
     "www/styles.css": {
       "checksum": "a54bb05220add4aae25c3b47d0c95032"
