@@ -96,10 +96,7 @@ repository](https://github.com/ecohealthalliance/spatialsampling).
 To use the [Shiny](https://shiny.rstudio.com) application via [EcoHealth
 Alliance](https://www.ecohealthalliance.org)’s
 [Shiny](https://shiny.rstudio.com) server, go to
-<https://aegypti.echohealthalliance.org/shiny/guevarra/spatialsampling>.
-When prompted for a *username* and *password*, please use your
-[EcoHealth Alliance](https://www.ecohealthalliance.org)
-[Google](https://www.google.com) account credentials.
+<https://connect.eha.io/spatialsampling>.
 
 This is the most straightforward and easiest way of accessing the
 [Shiny](https://shiny.rstudio.com) application.

@@ -33,9 +33,9 @@ library(RColorBrewer)
 library(RCurl)
 library(curl)
 library(jsonlite)
-#library(dataverse)
 
 if (!require(dataverse)) remotes::install_github("iqss/dataverse-client-r")
+library(dataverse)
 
 ## Reporting
 library(kableExtra)
