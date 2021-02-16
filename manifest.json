@@ -630,35 +630,6 @@
         "Built": "R 4.0.0; x86_64-pc-linux-gnu; 2020-06-11 13:02:47 UTC; unix"
       }
     },
-    "class": {
-      "Source": "CRAN",
-      "Repository": null,
-      "GithubRepo": null,
-      "GithubUsername": null,
-      "GithubRef": null,
-      "GithubSha1": null,
-      "description": {
-        "Package": "class",
-        "Priority": "recommended",
-        "Version": "7.3-17",
-        "Date": "2020-04-26",
-        "Depends": "R (>= 3.0.0), stats, utils",
-        "Imports": "MASS",
-        "Authors@R": "c(person(\"Brian\", \"Ripley\", role = c(\"aut\", \"cre\", \"cph\"),\n                    email = \"ripley@stats.ox.ac.uk\"),\n             person(\"William\", \"Venables\", role = \"cph\"))",
-        "Description": "Various functions for classification, including k-nearest\n  neighbour, Learning Vector Quantization and Self-Organizing Maps.",
-        "Title": "Functions for Classification",
-        "ByteCompile": "yes",
-        "License": "GPL-2 | GPL-3",
-        "URL": "http://www.stats.ox.ac.uk/pub/MASS4/",
-        "NeedsCompilation": "yes",
-        "Packaged": "2020-04-26 09:33:24 UTC; ripley",
-        "Author": "Brian Ripley [aut, cre, cph],\n  William Venables [cph]",
-        "Maintainer": "Brian Ripley <ripley@stats.ox.ac.uk>",
-        "Repository": "CRAN",
-        "Date/Publication": "2020-04-26 10:31:01 UTC",
-        "Built": "R 4.0.2; x86_64-pc-linux-gnu; 2020-10-07 21:24:30 UTC; unix"
-      }
-    },
     "classInt": {
       "Source": "CRAN",
       "Repository": "https://packagemanager.rstudio.com/all/__linux__/focal/latest",
