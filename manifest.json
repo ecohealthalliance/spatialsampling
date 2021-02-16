@@ -1290,41 +1290,6 @@
         "Built": "R 4.0.3; x86_64-pc-linux-gnu; 2021-01-26 11:00:55 UTC; unix"
       }
     },
-    "foreign": {
-      "Source": "CRAN",
-      "Repository": "https://packagemanager.rstudio.com/all/__linux__/focal/latest",
-      "GithubRepo": null,
-      "GithubUsername": null,
-      "GithubRef": null,
-      "GithubSha1": null,
-      "description": {
-        "Package": "foreign",
-        "Priority": "recommended",
-        "Version": "0.8-81",
-        "Date": "2020-12-22",
-        "Title": "Read Data Stored by 'Minitab', 'S', 'SAS', 'SPSS', 'Stata',\n'Systat', 'Weka', 'dBase', ...",
-        "Depends": "R (>= 4.0.0)",
-        "Imports": "methods, utils, stats",
-        "Authors@R": "c(\n   person(\"R Core Team\",\n      email = \"R-core@R-project.org\", role = c(\"aut\", \"cph\", \"cre\")),\n    person(\"Roger\", \"Bivand\", role = c(\"ctb\", \"cph\")),\n    person(c(\"Vincent\", \"J.\"), \"Carey\", role = c(\"ctb\", \"cph\")),\n    person(\"Saikat\", \"DebRoy\", role = c(\"ctb\", \"cph\")),\n    person(\"Stephen\", \"Eglen\", role = c(\"ctb\", \"cph\")),\n    person(\"Rajarshi\", \"Guha\", role = c(\"ctb\", \"cph\")),\n    person(\"Swetlana\", \"Herbrandt\", role = \"ctb\"),\n    person(\"Nicholas\", \"Lewin-Koh\", role = c(\"ctb\", \"cph\")),\n    person(\"Mark\", \"Myatt\", role = c(\"ctb\", \"cph\")),\n    person(\"Michael\", \"Nelson\", role = \"ctb\"),\n    person(\"Ben\", \"Pfaff\", role = \"ctb\"),\n    person(\"Brian\", \"Quistorff\", role = \"ctb\"),\n    person(\"Frank\", \"Warmerdam\", role = c(\"ctb\", \"cph\")),\n    person(\"Stephen\", \"Weigand\", role = c(\"ctb\", \"cph\")),\n    person(\"Free Software Foundation, Inc.\", role = \"cph\"))",
-        "Contact": "see 'MailingList'",
-        "Copyright": "see file COPYRIGHTS",
-        "Description": "Reading and writing data stored by some versions of\n\t'Epi Info', 'Minitab', 'S', 'SAS', 'SPSS', 'Stata', 'Systat', 'Weka',\n\tand for reading and writing some 'dBase' files.",
-        "ByteCompile": "yes",
-        "Biarch": "yes",
-        "License": "GPL (>= 2)",
-        "BugReports": "https://bugs.r-project.org",
-        "MailingList": "R-help@r-project.org",
-        "URL": "https://svn.r-project.org/R-packages/trunk/foreign/",
-        "NeedsCompilation": "yes",
-        "Packaged": "2020-12-22 13:59:32 UTC; hornik",
-        "Author": "R Core Team [aut, cph, cre],\n  Roger Bivand [ctb, cph],\n  Vincent J. Carey [ctb, cph],\n  Saikat DebRoy [ctb, cph],\n  Stephen Eglen [ctb, cph],\n  Rajarshi Guha [ctb, cph],\n  Swetlana Herbrandt [ctb],\n  Nicholas Lewin-Koh [ctb, cph],\n  Mark Myatt [ctb, cph],\n  Michael Nelson [ctb],\n  Ben Pfaff [ctb],\n  Brian Quistorff [ctb],\n  Frank Warmerdam [ctb, cph],\n  Stephen Weigand [ctb, cph],\n  Free Software Foundation, Inc. [cph]",
-        "Maintainer": "R Core Team <R-core@R-project.org>",
-        "Repository": "RSPM",
-        "Date/Publication": "2020-12-22 14:59:20 UTC",
-        "Encoding": "UTF-8",
-        "Built": "R 4.0.3; x86_64-pc-linux-gnu; 2021-02-11 21:30:15 UTC; unix"
-      }
-    },
     "fs": {
       "Source": "CRAN",
       "Repository": "https://packagemanager.rstudio.com/all/__linux__/focal/latest",
