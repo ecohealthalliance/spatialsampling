@@ -1361,8 +1361,8 @@
       "description": {
         "Package": "foreign",
         "Priority": "recommended",
-        "Version": "0.8-80",
-        "Date": "2020-05-13",
+        "Version": "0.8-81",
+        "Date": "2020-12-22",
         "Title": "Read Data Stored by 'Minitab', 'S', 'SAS', 'SPSS', 'Stata',\n'Systat', 'Weka', 'dBase', ...",
         "Depends": "R (>= 4.0.0)",
         "Imports": "methods, utils, stats",
@@ -1375,14 +1375,15 @@
         "License": "GPL (>= 2)",
         "BugReports": "https://bugs.r-project.org",
         "MailingList": "R-help@r-project.org",
-        "URL": "https://svn.r-project.org/R-packages/trunk/foreign",
+        "URL": "https://svn.r-project.org/R-packages/trunk/foreign/",
         "NeedsCompilation": "yes",
-        "Packaged": "2020-05-13 08:43:51 UTC; maechler",
+        "Packaged": "2020-12-22 13:59:32 UTC; hornik",
         "Author": "R Core Team [aut, cph, cre],\n  Roger Bivand [ctb, cph],\n  Vincent J. Carey [ctb, cph],\n  Saikat DebRoy [ctb, cph],\n  Stephen Eglen [ctb, cph],\n  Rajarshi Guha [ctb, cph],\n  Swetlana Herbrandt [ctb],\n  Nicholas Lewin-Koh [ctb, cph],\n  Mark Myatt [ctb, cph],\n  Michael Nelson [ctb],\n  Ben Pfaff [ctb],\n  Brian Quistorff [ctb],\n  Frank Warmerdam [ctb, cph],\n  Stephen Weigand [ctb, cph],\n  Free Software Foundation, Inc. [cph]",
         "Maintainer": "R Core Team <R-core@R-project.org>",
-        "Repository": "CRAN",
-        "Date/Publication": "2020-05-24 00:40:14 UTC",
-        "Built": "R 4.0.2; x86_64-pc-linux-gnu; 2020-10-07 21:24:20 UTC; unix"
+        "Repository": "RSPM",
+        "Date/Publication": "2020-12-22 14:59:20 UTC",
+        "Encoding": "UTF-8",
+        "Built": "R 4.0.3; x86_64-pc-linux-gnu; 2021-02-11 21:30:15 UTC; unix"
       }
     },
     "fs": {
@@ -4700,7 +4701,7 @@
       "checksum": "bbf6fa7e1cd053185eddf38488272dba"
     },
     "packrat/desc/foreign": {
-      "checksum": "6da2912cc5b6d7fcab764c7f06c04de0"
+      "checksum": "bc39b18f6f5bfc9c25206522dffd4b7a"
     },
     "packrat/desc/fs": {
       "checksum": "768804f4ec047486283333666dc44957"
@@ -5030,7 +5031,7 @@
       "checksum": "02499336b5f6337f0a748f7d8763f55c"
     },
     "packrat/packrat.lock": {
-      "checksum": "c5873cf0323e63889147fd6a11e3c06f"
+      "checksum": "998acacba46bfc7c9ec01221dd903649"
     },
     "server.R": {
       "checksum": "5b00d2a304203843e04ed9a01687aeda"
