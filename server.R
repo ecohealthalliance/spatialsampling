@@ -449,20 +449,16 @@ function(input, output, session) {
   ## Create sample map for settings
   output$sample_base_map <- renderLeaflet({
     leaflet(options = leafletOptions(zoomControl = FALSE)) %>%
-      addTiles(urlTemplate = get(input$base_layer),
-               attribution = "Map by <a href='http://www.mapbox.com/'>Mapbox</a>") %>%
-      #addMapboxTiles(style_id = get(input$base_layer),
-      #               username = "ernestguevarra") %>%
+      addMapboxTiles(style_id = get(input$base_layer),
+                     username = "ernestguevarra") %>%
       setView(lng = 20, lat = 20, zoom = 2)
   })
 
   ## Base map
   output$map <- renderLeaflet({
     leaflet() %>%
-      addTiles(urlTemplate = get(input$base_layer),
-               attribution = "Map by <a href='http://www.mapbox.com/'>Mapbox</a>") %>%
-      #addMapboxTiles(style_id = get(input$base_layer),
-      #  username = "ernestguevarra") %>%
+      addMapboxTiles(style_id = get(input$base_layer),
+        username = "ernestguevarra") %>%
       setView(lng = 20, lat = 20, zoom = 3) %>%
       addScaleBar(position = "bottomright") %>%
       addMeasure(position = "topleft")
