@@ -9,6 +9,8 @@ www/maps/gadm36_BGD_3_sp.rds
 www/maps/gadm36_LBR_3_sp.rds
 www/maps/gadm36_TZA_3_sp.rds
 www/maps/gadm36_ZAF_3_sp.rds
+www/maps/gadm36_JOR_2_sp.rds
+www/maps/gadm36_PHL_3_sp.rds
 maps/maps.R
 maps/survey_area
 maps/survey_area.zip
