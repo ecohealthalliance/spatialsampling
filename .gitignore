@@ -3,7 +3,12 @@
 .RData
 .Ruserdata
 .DS_Store
-www/maps
+www/maps/5_Ct_2010_Da.tif
+www/maps/TZA_popmap10adj_v2b.tif
+www/maps/gadm36_BGD_3_sp.rds
+www/maps/gadm36_LBR_3_sp.rds
+www/maps/gadm36_TZA_3_sp.rds
+www/maps/gadm36_ZAF_3_sp.rds
 maps/maps.R
 maps/survey_area
 maps/survey_area.zip
