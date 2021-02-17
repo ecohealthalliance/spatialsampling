@@ -3789,27 +3789,27 @@
       "GithubSha1": null,
       "description": {
         "Package": "spacetime",
-        "Version": "1.2-3",
+        "Version": "1.2-4",
         "Title": "Classes and Methods for Spatio-Temporal Data",
         "Authors@R": "c(person(\"Edzer\", \"Pebesma\", role = c(\"aut\", \"cre\"), email = \"edzer.pebesma@uni-muenster.de\", comment = c(ORCID = \"0000-0001-8049-7069\")),\n\tperson(\"Benedikt\", \"Graeler\", role = \"ctb\"),\n\tperson(\"Tom\", \"Gottfried\", role = \"ctb\"),\n\tperson(\"Robert J.\", \"Hijmans\", role = \"ctb\"))",
         "Depends": "R (>= 3.0.0)",
         "Imports": "graphics, utils, stats, methods, lattice, sp (>= 1.1-0), zoo\n(>= 1.7-9), xts (>= 0.8-8), intervals",
-        "Suggests": "adehabitatLT, cshapes, diveMove, foreign, gstat (>= 1.0-16),\nmaps, mapdata, maptools, plm, raster, RColorBrewer, rgdal,\nrgeos, RPostgreSQL, knitr, googleVis, ISOcodes",
+        "Suggests": "adehabitatLT, cshapes, diveMove, foreign, gstat (>= 1.0-16),\nmaps, mapdata, maptools, plm, raster, RColorBrewer, rgdal,\nrgeos, RPostgreSQL, knitr, googleVis, ISOcodes, markdown",
         "LazyData": "no",
         "Description": "Classes and methods for spatio-temporal data, including space-time regular lattices, sparse lattices, irregular data, and trajectories; utility functions for plotting data as map sequences (lattice or animation) or multiple time series; methods for spatial and temporal selection and subsetting, as well as for spatial/temporal/spatio-temporal matching or aggregation, retrieving coordinates, print, summary, etc.",
         "License": "GPL (>= 2)",
-        "URL": "http://github.com/edzer/spacetime",
+        "URL": "https://github.com/edzer/spacetime",
         "BugReports": "https://github.com/edzer/spacetime/issues",
         "VignetteBuilder": "knitr",
         "Collate": "Class-xts.R Class-ST.R Class-STFDF.R Class-STSDF.R\nClass-STIDF.R Class-STTDF.R interval.R endtime.R ST-methods.R\nSTFDF-methods.R STSDF-methods.R STIDF-methods.R STTDF-methods.R\napply.R coerce.R stconstruct.R plot.R stplot.R timematch.R\nover.R aggregate.R eof.R mnf.R bind.R na.R raster.R tgrass.R\nstinteraction.R",
         "NeedsCompilation": "no",
-        "Packaged": "2020-01-14 14:38:27 UTC; edzer",
+        "Packaged": "2021-01-25 11:39:06 UTC; edzer",
         "Author": "Edzer Pebesma [aut, cre] (<https://orcid.org/0000-0001-8049-7069>),\n  Benedikt Graeler [ctb],\n  Tom Gottfried [ctb],\n  Robert J. Hijmans [ctb]",
         "Maintainer": "Edzer Pebesma <edzer.pebesma@uni-muenster.de>",
         "Repository": "RSPM",
-        "Date/Publication": "2020-01-21 10:50:02 UTC",
+        "Date/Publication": "2021-01-25 12:20:02 UTC",
         "Encoding": "UTF-8",
-        "Built": "R 4.0.0; ; 2020-06-11 10:16:00 UTC; unix"
+        "Built": "R 4.0.3; ; 2021-02-11 22:05:35 UTC; unix"
       }
     },
     "spatialsampler": {
@@ -3818,7 +3818,7 @@
       "GithubRepo": "spatialsampler",
       "GithubUsername": "spatialworks",
       "GithubRef": "HEAD",
-      "GithubSha1": "74a4af21e6579bb5a78d64e0a84498e09be40cc8",
+      "GithubSha1": "b32c8080497792a72b09764c86289862e993183c",
       "description": {
         "Package": "spatialsampler",
         "Type": "Package",
@@ -3841,16 +3841,16 @@
         "RemoteRepo": "spatialsampler",
         "RemoteUsername": "spatialworks",
         "RemoteRef": "HEAD",
-        "RemoteSha": "74a4af21e6579bb5a78d64e0a84498e09be40cc8",
+        "RemoteSha": "b32c8080497792a72b09764c86289862e993183c",
         "GithubRepo": "spatialsampler",
         "GithubUsername": "spatialworks",
         "GithubRef": "HEAD",
-        "GithubSHA1": "74a4af21e6579bb5a78d64e0a84498e09be40cc8",
+        "GithubSHA1": "b32c8080497792a72b09764c86289862e993183c",
         "NeedsCompilation": "no",
-        "Packaged": "2021-01-12 20:43:07 UTC; guevarra",
+        "Packaged": "2021-02-17 07:25:22 UTC; guevarra",
         "Author": "Mark Myatt [aut],\n  Farah Ibrahim [aut],\n  Ernest Guevarra [aut, cre] (<https://orcid.org/0000-0002-4887-4415>)",
         "Maintainer": "Ernest Guevarra <ernest@guevarra.io>",
-        "Built": "R 4.0.2; ; 2021-01-12 20:43:08 UTC; unix"
+        "Built": "R 4.0.2; ; 2021-02-17 07:25:23 UTC; unix"
       }
     },
     "stringi": {
@@ -5020,10 +5020,10 @@
       "checksum": "eb3b5fa41d53cf1f95a2480e08526bcd"
     },
     "packrat/desc/spacetime": {
-      "checksum": "30fc54140d50ea86bfdae9396be65ebb"
+      "checksum": "c64c6e028f32e1653d6d99f5042e74b7"
     },
     "packrat/desc/spatialsampler": {
-      "checksum": "0b2df175c0c5c9becd4a1c145a133f3e"
+      "checksum": "bb98cebc6593fd726dddbabb0cb2824f"
     },
     "packrat/desc/stringi": {
       "checksum": "cd65f9bec4d598f9ae025a4b0a60bfe8"
@@ -5101,7 +5101,7 @@
       "checksum": "02499336b5f6337f0a748f7d8763f55c"
     },
     "packrat/packrat.lock": {
-      "checksum": "279d2aa707daa3eee31b3c92c9bfba3c"
+      "checksum": "b070a00b446a39c57018187d052a6bf9"
     },
     "server.R": {
       "checksum": "5b00d2a304203843e04ed9a01687aeda"
