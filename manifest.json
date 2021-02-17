@@ -394,6 +394,67 @@
         "Built": "R 4.0.0; ; 2020-06-10 05:50:51 UTC; unix"
       }
     },
+    "aws.s3": {
+      "Source": "CRAN",
+      "Repository": "https://packagemanager.rstudio.com/all/__linux__/focal/latest",
+      "GithubRepo": null,
+      "GithubUsername": null,
+      "GithubRef": null,
+      "GithubSha1": null,
+      "description": {
+        "Package": "aws.s3",
+        "Type": "Package",
+        "Title": "'AWS S3' Client Package",
+        "Version": "0.3.21",
+        "Authors@R": "c(person(\"Thomas J.\", \"Leeper\", role = \"aut\",\n                    email = \"thosjleeper@gmail.com\",\n                    comment = c(ORCID = \"0000-0003-4097-6326\")),\n             person(\"Boettiger\", \"Carl\", role = \"ctb\"),\n             person(\"Andrew\", \"Martin\", role = \"ctb\"),\n             person(\"Mark\", \"Thompson\", role = \"ctb\"),\n             person(\"Tyler\", \"Hunt\", role = \"ctb\"),\n             person(\"Steven\", \"Akins\", role = \"ctb\"),\n             person(\"Bao\", \"Nguyen\", role = \"ctb\"),\n             person(\"Thierry\", \"Onkelinx\", role = \"ctb\"),\n             person(\"Andrii\", \"Degtiarov\", role = \"ctb\"),\n             person(\"Dhruv\", \"Aggarwal\", role = \"ctb\"),\n             person(\"Alyssa\", \"Columbus\", role = \"ctb\"),\n             person(\"Simon\", \"Urbanek\", role = c(\"cre\", \"ctb\"),\n                    email = \"simon.urbanek@R-project.org\")\n\t     )",
+        "Maintainer": "Simon Urbanek <simon.urbanek@R-project.org>",
+        "Description": "A simple client package for the Amazon Web Services ('AWS') Simple\n    Storage Service ('S3') 'REST' 'API' <https://aws.amazon.com/s3/>.",
+        "License": "GPL (>= 2)",
+        "URL": "https://github.com/cloudyr/aws.s3",
+        "BugReports": "https://github.com/cloudyr/aws.s3/issues",
+        "Encoding": "UTF-8",
+        "Imports": "utils, tools, curl, httr, xml2 (> 1.0.0), base64enc, digest,\naws.signature (>= 0.3.7)",
+        "Suggests": "testthat, datasets",
+        "RoxygenNote": "7.0.2",
+        "NeedsCompilation": "no",
+        "Packaged": "2020-04-07 20:31:01 UTC; svnuser",
+        "Author": "Thomas J. Leeper [aut] (<https://orcid.org/0000-0003-4097-6326>),\n  Boettiger Carl [ctb],\n  Andrew Martin [ctb],\n  Mark Thompson [ctb],\n  Tyler Hunt [ctb],\n  Steven Akins [ctb],\n  Bao Nguyen [ctb],\n  Thierry Onkelinx [ctb],\n  Andrii Degtiarov [ctb],\n  Dhruv Aggarwal [ctb],\n  Alyssa Columbus [ctb],\n  Simon Urbanek [cre, ctb]",
+        "Repository": "RSPM",
+        "Date/Publication": "2020-04-07 21:10:02 UTC",
+        "Built": "R 4.0.0; ; 2020-06-12 03:09:43 UTC; unix"
+      }
+    },
+    "aws.signature": {
+      "Source": "CRAN",
+      "Repository": "https://packagemanager.rstudio.com/all/__linux__/focal/latest",
+      "GithubRepo": null,
+      "GithubUsername": null,
+      "GithubRef": null,
+      "GithubSha1": null,
+      "description": {
+        "Package": "aws.signature",
+        "Type": "Package",
+        "Title": "Amazon Web Services Request Signatures",
+        "Version": "0.6.0",
+        "Date": "2020-06-01",
+        "Authors@R": "c(person(\"Thomas J.\", \"Leeper\",\n                    role = c(\"aut\"),\n                    email = \"thosjleeper@gmail.com\",\n                    comment = c(ORCID = \"0000-0003-4097-6326\")),\n             person(\"Jonathan\", \"Stott\", email = \"jonathan.stott@magairports.com\", role = c(\"cre\", \"aut\")),\n             person(\"Mike\", \"Kaminsky\", email = \"kaminsky.michael@gmail.com\", role = \"ctb\")\n            )",
+        "Description": "Generates version 2 and version 4 request signatures for Amazon Web Services ('AWS') <https://aws.amazon.com/> Application Programming Interfaces ('APIs') and provides a mechanism for retrieving credentials from environment variables, 'AWS' credentials files, and 'EC2' instance metadata. For use on 'EC2' instances, users will need to install the suggested package 'aws.ec2metadata' <https://cran.r-project.org/package=aws.ec2metadata>.",
+        "License": "GPL (>= 2)",
+        "Imports": "digest, base64enc",
+        "Suggests": "testthat (>= 2.1.0), aws.ec2metadata (>= 0.1.6)",
+        "URL": "https://github.com/cloudyr/aws.signature",
+        "BugReports": "https://github.com/cloudyr/aws.signature/issues",
+        "RoxygenNote": "7.1.0",
+        "NeedsCompilation": "no",
+        "Packaged": "2020-06-01 09:51:14 UTC; jon_m",
+        "Author": "Thomas J. Leeper [aut] (<https://orcid.org/0000-0003-4097-6326>),\n  Jonathan Stott [cre, aut],\n  Mike Kaminsky [ctb]",
+        "Maintainer": "Jonathan Stott <jonathan.stott@magairports.com>",
+        "Repository": "RSPM",
+        "Date/Publication": "2020-06-01 10:10:02 UTC",
+        "Encoding": "UTF-8",
+        "Built": "R 4.0.0; ; 2020-06-12 10:03:46 UTC; unix"
+      }
+    },
     "backports": {
       "Source": "CRAN",
       "Repository": "https://packagemanager.rstudio.com/all/__linux__/focal/latest",
@@ -1290,6 +1351,41 @@
         "Built": "R 4.0.3; x86_64-pc-linux-gnu; 2021-01-26 11:00:55 UTC; unix"
       }
     },
+    "foreign": {
+      "Source": "CRAN",
+      "Repository": "https://packagemanager.rstudio.com/all/__linux__/focal/latest",
+      "GithubRepo": null,
+      "GithubUsername": null,
+      "GithubRef": null,
+      "GithubSha1": null,
+      "description": {
+        "Package": "foreign",
+        "Priority": "recommended",
+        "Version": "0.8-81",
+        "Date": "2020-12-22",
+        "Title": "Read Data Stored by 'Minitab', 'S', 'SAS', 'SPSS', 'Stata',\n'Systat', 'Weka', 'dBase', ...",
+        "Depends": "R (>= 4.0.0)",
+        "Imports": "methods, utils, stats",
+        "Authors@R": "c(\n   person(\"R Core Team\",\n      email = \"R-core@R-project.org\", role = c(\"aut\", \"cph\", \"cre\")),\n    person(\"Roger\", \"Bivand\", role = c(\"ctb\", \"cph\")),\n    person(c(\"Vincent\", \"J.\"), \"Carey\", role = c(\"ctb\", \"cph\")),\n    person(\"Saikat\", \"DebRoy\", role = c(\"ctb\", \"cph\")),\n    person(\"Stephen\", \"Eglen\", role = c(\"ctb\", \"cph\")),\n    person(\"Rajarshi\", \"Guha\", role = c(\"ctb\", \"cph\")),\n    person(\"Swetlana\", \"Herbrandt\", role = \"ctb\"),\n    person(\"Nicholas\", \"Lewin-Koh\", role = c(\"ctb\", \"cph\")),\n    person(\"Mark\", \"Myatt\", role = c(\"ctb\", \"cph\")),\n    person(\"Michael\", \"Nelson\", role = \"ctb\"),\n    person(\"Ben\", \"Pfaff\", role = \"ctb\"),\n    person(\"Brian\", \"Quistorff\", role = \"ctb\"),\n    person(\"Frank\", \"Warmerdam\", role = c(\"ctb\", \"cph\")),\n    person(\"Stephen\", \"Weigand\", role = c(\"ctb\", \"cph\")),\n    person(\"Free Software Foundation, Inc.\", role = \"cph\"))",
+        "Contact": "see 'MailingList'",
+        "Copyright": "see file COPYRIGHTS",
+        "Description": "Reading and writing data stored by some versions of\n\t'Epi Info', 'Minitab', 'S', 'SAS', 'SPSS', 'Stata', 'Systat', 'Weka',\n\tand for reading and writing some 'dBase' files.",
+        "ByteCompile": "yes",
+        "Biarch": "yes",
+        "License": "GPL (>= 2)",
+        "BugReports": "https://bugs.r-project.org",
+        "MailingList": "R-help@r-project.org",
+        "URL": "https://svn.r-project.org/R-packages/trunk/foreign/",
+        "NeedsCompilation": "yes",
+        "Packaged": "2020-12-22 13:59:32 UTC; hornik",
+        "Author": "R Core Team [aut, cph, cre],\n  Roger Bivand [ctb, cph],\n  Vincent J. Carey [ctb, cph],\n  Saikat DebRoy [ctb, cph],\n  Stephen Eglen [ctb, cph],\n  Rajarshi Guha [ctb, cph],\n  Swetlana Herbrandt [ctb],\n  Nicholas Lewin-Koh [ctb, cph],\n  Mark Myatt [ctb, cph],\n  Michael Nelson [ctb],\n  Ben Pfaff [ctb],\n  Brian Quistorff [ctb],\n  Frank Warmerdam [ctb, cph],\n  Stephen Weigand [ctb, cph],\n  Free Software Foundation, Inc. [cph]",
+        "Maintainer": "R Core Team <R-core@R-project.org>",
+        "Repository": "RSPM",
+        "Date/Publication": "2020-12-22 14:59:20 UTC",
+        "Encoding": "UTF-8",
+        "Built": "R 4.0.3; x86_64-pc-linux-gnu; 2021-02-11 21:30:15 UTC; unix"
+      }
+    },
     "fs": {
       "Source": "CRAN",
       "Repository": "https://packagemanager.rstudio.com/all/__linux__/focal/latest",
@@ -1386,6 +1482,77 @@
         "Repository": "RSPM",
         "Date/Publication": "2020-10-31 06:10:15 UTC",
         "Built": "R 4.0.3; ; 2020-11-02 11:01:12 UTC; unix"
+      }
+    },
+    "geojsonsf": {
+      "Source": "CRAN",
+      "Repository": "https://packagemanager.rstudio.com/all/__linux__/focal/latest",
+      "GithubRepo": null,
+      "GithubUsername": null,
+      "GithubRef": null,
+      "GithubSha1": null,
+      "description": {
+        "Package": "geojsonsf",
+        "Type": "Package",
+        "Title": "GeoJSON to Simple Feature Converter",
+        "Version": "2.0.1",
+        "Date": "2020-10-02",
+        "Authors@R": "c(\n    person(\"David\", \"Cooley\", ,\"dcooley@symbolix.com.au\", role = c(\"aut\", \"cre\"))\n    )",
+        "Description": "Converts Between GeoJSON and simple feature objects. ",
+        "License": "MIT + file LICENSE",
+        "URL": "https://github.com/SymbolixAU/geojsonsf",
+        "BugReports": "https://github.com/SymbolixAU/geojsonsf/issues",
+        "Encoding": "UTF-8",
+        "LazyData": "true",
+        "Depends": "R (>= 3.3.0)",
+        "SystemRequirements": "C++11",
+        "LinkingTo": "geometries, jsonify (>= 1.1.1), rapidjsonr (>= 1.2.0), Rcpp,\nsfheaders (>= 0.2.2)",
+        "Imports": "Rcpp",
+        "RoxygenNote": "7.1.0",
+        "Suggests": "covr, jsonify, knitr, rmarkdown, tinytest",
+        "VignetteBuilder": "knitr",
+        "NeedsCompilation": "yes",
+        "Packaged": "2020-10-02 04:44:57 UTC; dave",
+        "Author": "David Cooley [aut, cre]",
+        "Maintainer": "David Cooley <dcooley@symbolix.com.au>",
+        "Repository": "RSPM",
+        "Date/Publication": "2020-10-02 05:12:05 UTC",
+        "Built": "R 4.0.3; x86_64-pc-linux-gnu; 2020-12-02 11:03:37 UTC; unix"
+      }
+    },
+    "geometries": {
+      "Source": "CRAN",
+      "Repository": "https://packagemanager.rstudio.com/all/__linux__/focal/latest",
+      "GithubRepo": null,
+      "GithubUsername": null,
+      "GithubRef": null,
+      "GithubSha1": null,
+      "description": {
+        "Package": "geometries",
+        "Type": "Package",
+        "Title": "Convert Between R Objects and Geometric Structures",
+        "Date": "2020-11-26",
+        "Version": "0.2.0",
+        "Authors@R": "c(\n    person(\"David\", \"Cooley\", ,\"david.cooley.au@gmail.com\", role = c(\"aut\", \"cre\"))\n    )",
+        "Description": "Geometry shapes in 'R' are typically represented by matrices (points, lines), with more complex \n  shapes being lists of matrices (polygons). 'Geometries' will convert various 'R' objects into these shapes. \n  Conversion functions are available at both the 'R' level, and through 'Rcpp'.",
+        "License": "MIT + file LICENSE",
+        "URL": "https://dcooley.github.io/geometries/",
+        "BugReports": "https://github.com/dcooley/geometries/issues",
+        "Encoding": "UTF-8",
+        "LazyData": "true",
+        "RoxygenNote": "7.1.1",
+        "SystemRequirements": "C++11",
+        "LinkingTo": "Rcpp",
+        "Imports": "Rcpp",
+        "Suggests": "covr, knitr, rmarkdown, tinytest",
+        "VignetteBuilder": "knitr",
+        "NeedsCompilation": "yes",
+        "Packaged": "2020-11-26 09:38:29 UTC; dave",
+        "Author": "David Cooley [aut, cre]",
+        "Maintainer": "David Cooley <david.cooley.au@gmail.com>",
+        "Repository": "RSPM",
+        "Date/Publication": "2020-11-26 10:30:02 UTC",
+        "Built": "R 4.0.3; x86_64-pc-linux-gnu; 2020-11-27 11:00:16 UTC; unix"
       }
     },
     "geosphere": {
@@ -1831,6 +1998,39 @@
         "Built": "R 4.0.3; x86_64-pc-linux-gnu; 2020-12-18 12:34:04 UTC; unix"
       }
     },
+    "jsonify": {
+      "Source": "CRAN",
+      "Repository": "https://packagemanager.rstudio.com/all/__linux__/focal/latest",
+      "GithubRepo": null,
+      "GithubUsername": null,
+      "GithubRef": null,
+      "GithubSha1": null,
+      "description": {
+        "Package": "jsonify",
+        "Type": "Package",
+        "Title": "Convert Between 'R' Objects and Javascript Object Notation\n(JSON)",
+        "Version": "1.2.1",
+        "Date": "2020-06-02",
+        "Authors@R": "c(\n    person(\"David\", \"Cooley\", ,\"dcooley@symbolix.com.au\", role = c(\"aut\", \"cre\")),\n    person(\"Chris\", \"Muir\", role = \"ctb\"),\n    person(\"Brendan\", \"Knapp\", role = \"ctb\", comment = c(ORCID = \"0000-0003-3284-4972\"))\n    )",
+        "Description": "Conversions between 'R' objects and Javascript Object Notation (JSON) using \n    the 'rapidjsonr' library <https://CRAN.R-project.org/package=rapidjsonr>. ",
+        "License": "MIT + file LICENSE",
+        "Depends": "R (>= 3.3.0)",
+        "SystemRequirements": "C++11",
+        "Imports": "Rcpp (>= 0.12.18)",
+        "LinkingTo": "rapidjsonr (>= 1.2.0), Rcpp",
+        "RoxygenNote": "7.1.0",
+        "Suggests": "covr, testthat, knitr, rmarkdown",
+        "Encoding": "UTF-8",
+        "VignetteBuilder": "knitr",
+        "NeedsCompilation": "yes",
+        "Packaged": "2020-06-01 22:06:41 UTC; david",
+        "Author": "David Cooley [aut, cre],\n  Chris Muir [ctb],\n  Brendan Knapp [ctb] (<https://orcid.org/0000-0003-3284-4972>)",
+        "Maintainer": "David Cooley <dcooley@symbolix.com.au>",
+        "Repository": "RSPM",
+        "Date/Publication": "2020-06-02 08:50:21 UTC",
+        "Built": "R 4.0.2; x86_64-pc-linux-gnu; 2020-07-10 21:46:22 UTC; unix"
+      }
+    },
     "jsonlite": {
       "Source": "CRAN",
       "Repository": "https://packagemanager.rstudio.com/all/__linux__/focal/latest",
@@ -2146,6 +2346,40 @@
         "Built": "R 4.0.0; ; 2020-06-11 16:03:17 UTC; unix"
       }
     },
+    "magick": {
+      "Source": "CRAN",
+      "Repository": "https://packagemanager.rstudio.com/all/__linux__/focal/latest",
+      "GithubRepo": null,
+      "GithubUsername": null,
+      "GithubRef": null,
+      "GithubSha1": null,
+      "description": {
+        "Package": "magick",
+        "Type": "Package",
+        "Title": "Advanced Graphics and Image-Processing in R",
+        "Version": "2.6.0",
+        "Authors@R": "person(\"Jeroen\", \"Ooms\", role = c(\"aut\", \"cre\"), email = \"jeroen@berkeley.edu\",\n    comment = c(ORCID = \"0000-0002-4035-0289\"))",
+        "Description": "Bindings to 'ImageMagick': the most comprehensive open-source image\n    processing library available. Supports many common formats (png, jpeg, tiff,\n    pdf, etc) and manipulations (rotate, scale, crop, trim, flip, blur, etc).\n    All operations are vectorized via the Magick++ STL meaning they operate either\n    on a single frame or a series of frames for working with layers, collages,\n    or animation. In RStudio images are automatically previewed when printed to\n    the console, resulting in an interactive editing environment. The latest \n    version of the package includes a native graphics device for creating \n    in-memory graphics or drawing onto images using pixel coordinates.",
+        "License": "MIT + file LICENSE",
+        "URL": "https://docs.ropensci.org/magick/ (website)\nhttps://github.com/ropensci/magick (devel)",
+        "BugReports": "https://github.com/ropensci/magick/issues",
+        "SystemRequirements": "ImageMagick++: ImageMagick-c++-devel (rpm) or\nlibmagick++-dev (deb)",
+        "VignetteBuilder": "knitr",
+        "Imports": "Rcpp (>= 0.12.12), magrittr, curl",
+        "LinkingTo": "Rcpp",
+        "Suggests": "av (>= 0.3), spelling, jsonlite, methods, knitr, rmarkdown,\nrsvg, webp, pdftools, ggplot2, gapminder, IRdisplay, tesseract\n(>= 2.0), gifski",
+        "Encoding": "UTF-8",
+        "RoxygenNote": "7.1.1",
+        "Language": "en-US",
+        "NeedsCompilation": "yes",
+        "Packaged": "2021-01-13 16:42:12 UTC; jeroen",
+        "Author": "Jeroen Ooms [aut, cre] (<https://orcid.org/0000-0002-4035-0289>)",
+        "Maintainer": "Jeroen Ooms <jeroen@berkeley.edu>",
+        "Repository": "RSPM",
+        "Date/Publication": "2021-01-13 18:40:02 UTC",
+        "Built": "R 4.0.3; x86_64-pc-linux-gnu; 2021-01-20 18:33:22 UTC; unix"
+      }
+    },
     "magrittr": {
       "Source": "CRAN",
       "Repository": "https://packagemanager.rstudio.com/all/__linux__/focal/latest",
@@ -2175,6 +2409,37 @@
         "Repository": "RSPM",
         "Date/Publication": "2020-11-17 16:20:06 UTC",
         "Built": "R 4.0.2; x86_64-pc-linux-gnu; 2021-01-12 20:42:45 UTC; unix"
+      }
+    },
+    "mapboxapi": {
+      "Source": "CRAN",
+      "Repository": "https://packagemanager.rstudio.com/all/__linux__/focal/latest",
+      "GithubRepo": null,
+      "GithubUsername": null,
+      "GithubRef": null,
+      "GithubSha1": null,
+      "description": {
+        "Package": "mapboxapi",
+        "Type": "Package",
+        "Title": "R Interface to 'Mapbox' Web Services",
+        "Date": "2020-09-29",
+        "Version": "0.2",
+        "Authors@R": "\n    c(person(given = \"Kyle\", family = \"Walker\", email = \"kyle@walker-data.com\", \n    role = c(\"aut\", \"cre\")))",
+        "Maintainer": "Kyle Walker <kyle@walker-data.com>",
+        "Description": "Includes support for 'Mapbox' Navigation APIs, including directions, \n  isochrones, and route optimization; the Search API for forward and reverse geocoding; \n  the Maps API for interacting with 'Mapbox' vector tilesets and visualizing \n  'Mapbox' maps in R; and the 'tippecanoe' tile-generation utility. \n  See <https://docs.mapbox.com/api/> for more information about the 'Mapbox' APIs.",
+        "License": "MIT + file LICENSE",
+        "Encoding": "UTF-8",
+        "LazyData": "true",
+        "Depends": "R (>= 3.3.0)",
+        "Imports": "httr, sf, jsonlite, purrr, curl, dplyr (>= 1.0.0), tidyr (>=\n1.0.0), aws.s3, stringi, slippymath, protolite, rlang,\ngeojsonsf, magick, leaflet",
+        "Suggests": "mapdeck, tigris, tidycensus",
+        "RoxygenNote": "7.1.1",
+        "NeedsCompilation": "no",
+        "Packaged": "2020-09-29 10:15:09 UTC; kyle",
+        "Author": "Kyle Walker [aut, cre]",
+        "Repository": "RSPM",
+        "Date/Publication": "2020-10-05 11:20:02 UTC",
+        "Built": "R 4.0.2; ; 2020-10-06 10:48:50 UTC; unix"
       }
     },
     "maps": {
@@ -2749,6 +3014,38 @@
         "Built": "R 4.0.2; x86_64-pc-linux-gnu; 2020-07-10 22:24:37 UTC; unix"
       }
     },
+    "protolite": {
+      "Source": "CRAN",
+      "Repository": "https://packagemanager.rstudio.com/all/__linux__/focal/latest",
+      "GithubRepo": null,
+      "GithubUsername": null,
+      "GithubRef": null,
+      "GithubSha1": null,
+      "description": {
+        "Package": "protolite",
+        "Type": "Package",
+        "Title": "Highly Optimized Protocol Buffer Serializers",
+        "Author": "Jeroen Ooms",
+        "Maintainer": "Jeroen Ooms <jeroen@berkeley.edu>",
+        "Description": "Pure C++ implementations for reading and writing several common data \n    formats based on Google protocol-buffers. Currently supports 'rexp.proto' for \n    serialized R objects, 'geobuf.proto' for binary geojson, and 'mvt.proto' for \n    vector tiles. This package uses the auto-generated C++ code by protobuf-compiler, \n    hence the entire serialization is optimized at compile time. The 'RProtoBuf' \n    package on the other hand uses the protobuf runtime library to provide a general-\n    purpose toolkit for reading and writing arbitrary protocol-buffer data in R.",
+        "Version": "2.1",
+        "License": "MIT + file LICENSE",
+        "URL": "https://jeroen.cran.dev/protolite (website)\nhttps://github.com/jeroen/protolite (devel)",
+        "BugReports": "https://github.com/jeroen/protolite/issues",
+        "SystemRequirements": "libprotobuf and protobuf-compiler",
+        "LinkingTo": "Rcpp",
+        "Imports": "Rcpp (>= 0.12.12), jsonlite",
+        "Suggests": "spelling, curl, testthat, RProtoBuf, sf",
+        "RoxygenNote": "6.1.99.9001",
+        "Encoding": "UTF-8",
+        "Language": "en-US",
+        "NeedsCompilation": "yes",
+        "Packaged": "2020-01-11 16:51:57 UTC; jeroen",
+        "Repository": "RSPM",
+        "Date/Publication": "2020-01-13 10:10:02 UTC",
+        "Built": "R 4.0.2; x86_64-pc-linux-gnu; 2020-07-10 21:53:21 UTC; unix"
+      }
+    },
     "ps": {
       "Source": "CRAN",
       "Repository": "https://packagemanager.rstudio.com/all/__linux__/focal/latest",
@@ -2810,6 +3107,35 @@
         "Repository": "RSPM",
         "Date/Publication": "2020-04-17 12:10:07 UTC",
         "Built": "R 4.0.0; x86_64-pc-linux-gnu; 2020-06-12 05:35:54 UTC; unix"
+      }
+    },
+    "rapidjsonr": {
+      "Source": "CRAN",
+      "Repository": "https://packagemanager.rstudio.com/all/__linux__/focal/latest",
+      "GithubRepo": null,
+      "GithubUsername": null,
+      "GithubRef": null,
+      "GithubSha1": null,
+      "description": {
+        "Package": "rapidjsonr",
+        "Type": "Package",
+        "Title": "'Rapidjson' C++ Header Files",
+        "Version": "1.2.0",
+        "Date": "2020-03-08",
+        "Authors@R": "c(\n    person(\"David\", \"Cooley\", ,\"dcooley@symbolix.com.au\", role = c(\"aut\", \"cre\")),\n    person(\"Milo\", \"Yip\", , role = \"ctb\", comment = \"Author of c++ rapidjson library, provided through THL A29 Limited, a Tencent company\"),\n    person(\"Alexander\", \"Chemeris\", role = \"ctb\", comment = \"Author of c++ msinttypes library\")\n    )",
+        "Description": "Provides JSON parsing capability through the 'Rapidjson' 'C++' header-only library. ",
+        "License": "MIT + file LICENSE",
+        "Encoding": "UTF-8",
+        "LazyData": "true",
+        "RoxygenNote": "7.0.2",
+        "SystemRequirements": "GNU make",
+        "NeedsCompilation": "yes",
+        "Packaged": "2020-03-08 06:44:13 UTC; dave",
+        "Author": "David Cooley [aut, cre],\n  Milo Yip [ctb] (Author of c++ rapidjson library, provided through THL\n    A29 Limited, a Tencent company),\n  Alexander Chemeris [ctb] (Author of c++ msinttypes library)",
+        "Maintainer": "David Cooley <dcooley@symbolix.com.au>",
+        "Repository": "RSPM",
+        "Date/Publication": "2020-03-08 07:10:02 UTC",
+        "Built": "R 4.0.0; ; 2020-06-11 16:03:15 UTC; unix"
       }
     },
     "raster": {
@@ -3269,6 +3595,40 @@
         "Built": "R 4.0.3; x86_64-pc-linux-gnu; 2021-01-19 12:50:22 UTC; unix"
       }
     },
+    "sfheaders": {
+      "Source": "CRAN",
+      "Repository": "https://packagemanager.rstudio.com/all/__linux__/focal/latest",
+      "GithubRepo": null,
+      "GithubUsername": null,
+      "GithubRef": null,
+      "GithubSha1": null,
+      "description": {
+        "Package": "sfheaders",
+        "Type": "Package",
+        "Title": "Converts Between R Objects and Simple Feature Objects",
+        "Date": "2020-12-01",
+        "Version": "0.4.0",
+        "Authors@R": "c(\n    person(\"David\", \"Cooley\", ,\"david.cooley.au@gmail.com\", role = c(\"aut\", \"cre\")),\n    person(given = \"Michael\", family = \"Sumner\", role = \"ctb\")\n    )",
+        "Description": "Converts between R and Simple Feature 'sf' objects, without depending\n  on the Simple Feature library. Conversion functions are available at both the R level, \n  and through 'Rcpp'.",
+        "License": "MIT + file LICENSE",
+        "URL": "https://dcooley.github.io/sfheaders/",
+        "BugReports": "https://github.com/dcooley/sfheaders/issues",
+        "Encoding": "UTF-8",
+        "LazyData": "true",
+        "RoxygenNote": "7.1.1",
+        "SystemRequirements": "C++11",
+        "LinkingTo": "geometries, Rcpp",
+        "Imports": "geometries (>= 0.2.0), Rcpp",
+        "Suggests": "covr, knitr, testthat",
+        "NeedsCompilation": "yes",
+        "Packaged": "2020-11-30 21:43:15 UTC; dave",
+        "Author": "David Cooley [aut, cre],\n  Michael Sumner [ctb]",
+        "Maintainer": "David Cooley <david.cooley.au@gmail.com>",
+        "Repository": "RSPM",
+        "Date/Publication": "2020-12-01 00:50:03 UTC",
+        "Built": "R 4.0.3; x86_64-pc-linux-gnu; 2020-12-02 11:01:26 UTC; unix"
+      }
+    },
     "shiny": {
       "Source": "CRAN",
       "Repository": "https://packagemanager.rstudio.com/all/__linux__/focal/latest",
@@ -3362,6 +3722,38 @@
         "Date/Publication": "2020-09-09 07:50:03 UTC",
         "Encoding": "UTF-8",
         "Built": "R 4.0.2; ; 2020-09-10 11:00:13 UTC; unix"
+      }
+    },
+    "slippymath": {
+      "Source": "CRAN",
+      "Repository": "https://packagemanager.rstudio.com/all/__linux__/focal/latest",
+      "GithubRepo": null,
+      "GithubUsername": null,
+      "GithubRef": null,
+      "GithubSha1": null,
+      "description": {
+        "Package": "slippymath",
+        "Title": "Slippy Map Tile Tools",
+        "Version": "0.3.1",
+        "Authors@R": "c(\n    person(\"Miles\", \"McBain\", email = \"miles.mcbain@gmail.com\", role = c(\"aut\", \"cre\"), \n    comment = c(ORCID = \"0000-0003-2865-2548\")),\n    person(\"Michael\",\"Sumner\", email = \"mdsumner@gmail.com\", role = c(\"aut\")))",
+        "Description": "Provides functions for performing common tasks when working with\n  slippy map tile service APIs e.g. Google maps, Open Street Map, Mapbox, Stamen,\n  among others. Functionality includes converting from latitude and longitude to\n  tile numbers, determining tile bounding boxes, and compositing tiles to a\n  georeferenced raster image.",
+        "Depends": "R (>= 3.5.0)",
+        "License": "MIT + file LICENSE",
+        "URL": "https://www.github.com/milesmcbain/slippymath",
+        "BugReports": "https://www.github.com/milesmcbain/slippymath/issues",
+        "Encoding": "UTF-8",
+        "LazyData": "true",
+        "Imports": "raster, purrr, stats, png",
+        "Suggests": "testthat, knitr, rmarkdown",
+        "RoxygenNote": "6.1.1",
+        "VignetteBuilder": "knitr",
+        "NeedsCompilation": "no",
+        "Packaged": "2019-06-28 15:28:10 UTC; miles",
+        "Author": "Miles McBain [aut, cre] (<https://orcid.org/0000-0003-2865-2548>),\n  Michael Sumner [aut]",
+        "Maintainer": "Miles McBain <miles.mcbain@gmail.com>",
+        "Repository": "RSPM",
+        "Date/Publication": "2019-06-28 16:20:03 UTC",
+        "Built": "R 4.0.0; ; 2020-06-10 14:04:22 UTC; unix"
       }
     },
     "sourcetools": {
@@ -3723,6 +4115,40 @@
         "Repository": "RSPM",
         "Date/Publication": "2021-01-29 10:20:02 UTC",
         "Built": "R 4.0.3; x86_64-pc-linux-gnu; 2021-02-11 22:38:13 UTC; unix"
+      }
+    },
+    "tidyr": {
+      "Source": "CRAN",
+      "Repository": "https://packagemanager.rstudio.com/all/__linux__/focal/latest",
+      "GithubRepo": null,
+      "GithubUsername": null,
+      "GithubRef": null,
+      "GithubSha1": null,
+      "description": {
+        "Package": "tidyr",
+        "Title": "Tidy Messy Data",
+        "Version": "1.1.2",
+        "Authors@R": "\n    c(person(given = \"Hadley\",\n             family = \"Wickham\",\n             role = c(\"aut\", \"cre\"),\n             email = \"hadley@rstudio.com\"),\n      person(given = \"RStudio\",\n             role = \"cph\"))",
+        "Description": "Tools to help to create tidy data, where each column is a \n    variable, each row is an observation, and each cell contains a single value.  \n    'tidyr' contains tools for changing the shape (pivoting) and hierarchy\n    (nesting and 'unnesting') of a dataset, turning deeply nested lists\n    into rectangular data frames ('rectangling'), and extracting values out \n    of string columns. It also includes tools for working with missing values \n    (both implicit and explicit).",
+        "License": "MIT + file LICENSE",
+        "URL": "https://tidyr.tidyverse.org, https://github.com/tidyverse/tidyr",
+        "BugReports": "https://github.com/tidyverse/tidyr/issues",
+        "Depends": "R (>= 3.1)",
+        "Imports": "dplyr (>= 0.8.2), ellipsis (>= 0.1.0), glue, magrittr, purrr,\nrlang, tibble (>= 2.1.1), tidyselect (>= 1.1.0), utils, vctrs\n(>= 0.3.0), lifecycle",
+        "Suggests": "covr, jsonlite, knitr, repurrrsive (>= 1.0.0), rmarkdown,\nreadr, testthat (>= 2.1.0)",
+        "LinkingTo": "cpp11 (>= 0.2.1)",
+        "VignetteBuilder": "knitr",
+        "SystemRequirements": "C++11",
+        "Encoding": "UTF-8",
+        "LazyData": "true",
+        "RoxygenNote": "7.1.1",
+        "NeedsCompilation": "yes",
+        "Packaged": "2020-08-26 15:43:09 UTC; hadley",
+        "Author": "Hadley Wickham [aut, cre],\n  RStudio [cph]",
+        "Maintainer": "Hadley Wickham <hadley@rstudio.com>",
+        "Repository": "RSPM",
+        "Date/Publication": "2020-08-27 12:20:02 UTC",
+        "Built": "R 4.0.2; x86_64-pc-linux-gnu; 2020-10-02 11:04:16 UTC; unix"
       }
     },
     "tidyselect": {
@@ -4260,13 +4686,19 @@
   },
   "files": {
     "global.R": {
-      "checksum": "a423a6dfd9b4328d7185bc037860d1dc"
+      "checksum": "9d7df3d092d82f179e1a29ba93bbca05"
     },
     "packrat/desc/askpass": {
       "checksum": "23d389e9b509df526dc0fc5cd0b3dc71"
     },
     "packrat/desc/assertthat": {
       "checksum": "468aba1ccbf595a50b411a52630adb8d"
+    },
+    "packrat/desc/aws.s3": {
+      "checksum": "ab9bb1058cb409551c88bc2ef3cf10d1"
+    },
+    "packrat/desc/aws.signature": {
+      "checksum": "2be4acb538246fdf65a6039beacf5c04"
     },
     "packrat/desc/backports": {
       "checksum": "0f1a8041f82b323b256cb2bd0799303a"
@@ -4376,6 +4808,12 @@
     "packrat/desc/generics": {
       "checksum": "c8b96c99b708befa3d7e2995888a93cc"
     },
+    "packrat/desc/geojsonsf": {
+      "checksum": "a139ca739187bad33c1644d198420e24"
+    },
+    "packrat/desc/geometries": {
+      "checksum": "05630a50f35717bea92132fa5f0ff7aa"
+    },
     "packrat/desc/geosphere": {
       "checksum": "7e8b6ca8d04591b6ae510868c08cc9ae"
     },
@@ -4421,6 +4859,9 @@
     "packrat/desc/isoband": {
       "checksum": "768764bc800bc1cf89fedb2157abe0c3"
     },
+    "packrat/desc/jsonify": {
+      "checksum": "fe6ced06daa7313d6e2e25f8bc947895"
+    },
     "packrat/desc/jsonlite": {
       "checksum": "2b4f56a826cc3c9180f53e23d07d76f1"
     },
@@ -4454,8 +4895,14 @@
     "packrat/desc/lifecycle": {
       "checksum": "2b8120263cd1bfe20e88943fc0ca1bf9"
     },
+    "packrat/desc/magick": {
+      "checksum": "127882625ab17402d3e33e13ada0b196"
+    },
     "packrat/desc/magrittr": {
       "checksum": "e64083b38edee674dad1f2c091ad9e9e"
+    },
+    "packrat/desc/mapboxapi": {
+      "checksum": "5b7bd4c4df638ba6bc7a487b406679e0"
     },
     "packrat/desc/maps": {
       "checksum": "f53d4abba001dea2cbe90d8568954cf1"
@@ -4520,6 +4967,9 @@
     "packrat/desc/promises": {
       "checksum": "4cccc914843b5ed84c5517bce5936cde"
     },
+    "packrat/desc/protolite": {
+      "checksum": "1a3e34821c2124b89a21f9ca25a568e2"
+    },
     "packrat/desc/ps": {
       "checksum": "816d5f5e66d600782343e21e8a779124"
     },
@@ -4528,6 +4978,9 @@
     },
     "packrat/desc/R6": {
       "checksum": "e922e036291f1eef83c6cc3cddad960e"
+    },
+    "packrat/desc/rapidjsonr": {
+      "checksum": "9b8634e3dcdc91aee02d16249869896a"
     },
     "packrat/desc/raster": {
       "checksum": "16b0cd89b04d1ded20f74d365f5ae69d"
@@ -4580,6 +5033,9 @@
     "packrat/desc/sf": {
       "checksum": "fc692a1ce3cab090ede8b245bb0ba5aa"
     },
+    "packrat/desc/sfheaders": {
+      "checksum": "0aec43206651dc038b46c6803a7ed76c"
+    },
     "packrat/desc/shiny": {
       "checksum": "2f2a75e8d8332ced0e95cd535ff2b2bb"
     },
@@ -4588,6 +5044,9 @@
     },
     "packrat/desc/shinyjs": {
       "checksum": "1e9e2e5a994d7c4dfebc3df887a584d1"
+    },
+    "packrat/desc/slippymath": {
+      "checksum": "8a5a16d05baf5e0ce88473ed65010392"
     },
     "packrat/desc/sourcetools": {
       "checksum": "550ff62ca551873779712ed2e9de4ed0"
@@ -4621,6 +5080,9 @@
     },
     "packrat/desc/tibble": {
       "checksum": "19f3eb06a8fb59bcd91a4d47b71cf7a0"
+    },
+    "packrat/desc/tidyr": {
+      "checksum": "1cd7b6aff7f7a601ee13d41fc0f91f8b"
     },
     "packrat/desc/tidyselect": {
       "checksum": "7452b88b30cbc783050ae9f6e27cc65a"
@@ -4674,10 +5136,10 @@
       "checksum": "02499336b5f6337f0a748f7d8763f55c"
     },
     "packrat/packrat.lock": {
-      "checksum": "f6092ac984d0101f39c919384d4c318b"
+      "checksum": "279d2aa707daa3eee31b3c92c9bfba3c"
     },
     "server.R": {
-      "checksum": "68fd3da9d35d110ac418d30262ec7fb4"
+      "checksum": "5b00d2a304203843e04ed9a01687aeda"
     },
     "ui.R": {
       "checksum": "b3452a802c8c0c5fdf95b48e1e1162a1"
