@@ -3818,7 +3818,7 @@
       "GithubRepo": "spatialsampler",
       "GithubUsername": "spatialworks",
       "GithubRef": "HEAD",
-      "GithubSha1": "b32c8080497792a72b09764c86289862e993183c",
+      "GithubSha1": "fc6e2b753fb66219df4dc161882f4c3b08b67e47",
       "description": {
         "Package": "spatialsampler",
         "Type": "Package",
@@ -3841,16 +3841,16 @@
         "RemoteRepo": "spatialsampler",
         "RemoteUsername": "spatialworks",
         "RemoteRef": "HEAD",
-        "RemoteSha": "b32c8080497792a72b09764c86289862e993183c",
+        "RemoteSha": "fc6e2b753fb66219df4dc161882f4c3b08b67e47",
         "GithubRepo": "spatialsampler",
         "GithubUsername": "spatialworks",
         "GithubRef": "HEAD",
-        "GithubSHA1": "b32c8080497792a72b09764c86289862e993183c",
+        "GithubSHA1": "fc6e2b753fb66219df4dc161882f4c3b08b67e47",
         "NeedsCompilation": "no",
-        "Packaged": "2021-02-17 07:25:22 UTC; guevarra",
+        "Packaged": "2021-02-17 14:05:49 UTC; guevarra",
         "Author": "Mark Myatt [aut],\n  Farah Ibrahim [aut],\n  Ernest Guevarra [aut, cre] (<https://orcid.org/0000-0002-4887-4415>)",
         "Maintainer": "Ernest Guevarra <ernest@guevarra.io>",
-        "Built": "R 4.0.2; ; 2021-02-17 07:25:23 UTC; unix"
+        "Built": "R 4.0.2; ; 2021-02-17 14:05:51 UTC; unix"
       }
     },
     "stringi": {
@@ -5023,7 +5023,7 @@
       "checksum": "c64c6e028f32e1653d6d99f5042e74b7"
     },
     "packrat/desc/spatialsampler": {
-      "checksum": "bb98cebc6593fd726dddbabb0cb2824f"
+      "checksum": "14b9bea341d3bcea3ff4cf9c3bb378ec"
     },
     "packrat/desc/stringi": {
       "checksum": "cd65f9bec4d598f9ae025a4b0a60bfe8"
@@ -5101,7 +5101,7 @@
       "checksum": "02499336b5f6337f0a748f7d8763f55c"
     },
     "packrat/packrat.lock": {
-      "checksum": "b070a00b446a39c57018187d052a6bf9"
+      "checksum": "fa5bc699a2c8008c6b975f65be4f4152"
     },
     "server.R": {
       "checksum": "5b00d2a304203843e04ed9a01687aeda"
