@@ -168,8 +168,9 @@ function(input, output, session) {
       files <- unzip(zipfile = fn$datapath, list = TRUE)
       layer <- files$Name %>%
         stringr::str_split(pattern = "\\.|\\/", simplify = TRUE)
-      x <- readOGR(dsn = paste0(tempdir(), "/", layer[1, 1]),
-              layer = layer[2, 2])
+      #x <- readOGR(dsn = paste0(tempdir(), "/", layer[1, 1]),
+      #        layer = layer[2, 2])
+      x <- readOGR(dsn = tempdir(), layer = layer[1, 1])
     }
 
     x
@@ -247,18 +248,37 @@ function(input, output, session) {
   sampling_points <- eventReactive(input$get_sample, {
     req(input$nSamplingUnits)
 
-    create_sp_grid(x = survey_area(), country = input$country,
-                   n = input$nSamplingUnits, buffer = input$samplingBuffer,
-                   type = "csas")
+    if (class(survey_area()) == "SpatialPointsDataFrame") {
+      pt_area <- create_buffer(x = survey_area(),
+                               buffer = 20,
+                               country = input$country)
+
+      sp1 <- create_sp_grid(x = pt_area, country = input$country,
+                            n = input$nSamplingUnits,
+                            buffer = input$samplingBuffer,
+                            type = "csas")
+
+      get_nearest_point(data = data.frame(coordinates(survey_area()), survey_area()),
+                        data.x = "coords.x1", data.y = "coords.x2",
+                        query = sp1, n = 1)
+    } else {
+      create_sp_grid(x = survey_area(), country = input$country,
+                     n = input$nSamplingUnits, buffer = input$samplingBuffer,
+                     type = "csas")
+    }
   })
 
   ## Create spatial sample - grid
   sampling_grid <- reactive({
     req(sampling_points())
 
-    sampling_points() %>%
-      SpatialPixels() %>%
-      as("SpatialPolygons")
+    if (class(sampling_points()) == "SpatialPolygons") {
+      sampling_points() %>%
+        SpatialPixels() %>%
+        as("SpatialPolygons")
+    } else {
+      NULL
+    }
   })
 
   ## Get grid populations
@@ -299,7 +319,7 @@ function(input, output, session) {
 
   ## Get sampling points information
   sampling_points_info <- reactive({
-    req(sampling_pops())
+    req(sampling_pops(), class(sampling_points()) == "SpatialPoints")
     z <- raster::intersect(sampling_points(), admin_boundaries())
     #z <- cbind(z@coords, z@data)
     z <- data.frame(z, sampling_pops())
@@ -477,34 +497,67 @@ function(input, output, session) {
   ## Add survey area
   observe({
     req(survey_area(), input$country != " ")
-    leafletProxy("map") %>%
-      clearMarkers() %>%
-      #setView(
-      #  lng = coordinates(survey_area())[1],
-      #  lat = coordinates(survey_area())[2],
-      #  zoom = 9) %>%
-      fitBounds(
-        lng1 = bbox(survey_area())[1, 1],
-        lat1 = bbox(survey_area())[2, 1],
-        lng2 = bbox(survey_area())[1, 2],
-        lat2 = bbox(survey_area())[2, 2]
-      ) %>%
-      addPolygons(data = admin_boundaries(),
-        color = input$country_boundaries_colour,
-        fill = FALSE,
-        weight = input$country_boundaries_weight,
-        group = "Administrative boundaries") %>%
-      addPolygons(data = survey_area(),
-        color = input$survey_area_colour,
-        fill = FALSE,
-        weight = input$survey_area_weight,
-        group = "Study area") %>%
-      addLayersControl(
-        baseGroups = c("Administrative boundaries"),
-        overlayGroups = c("Study area"),
-        position = "bottomleft",
-        options = layersControlOptions(collapsed = FALSE, autoZIndex = TRUE)
-      )
+
+    if (class(survey_area()) == "SpatialPolygonsDataFrame") {
+      leafletProxy("map") %>%
+        clearMarkers() %>%
+        #setView(
+        #  lng = coordinates(survey_area())[1],
+        #  lat = coordinates(survey_area())[2],
+        #  zoom = 9) %>%
+        fitBounds(
+          lng1 = bbox(survey_area())[1, 1],
+          lat1 = bbox(survey_area())[2, 1],
+          lng2 = bbox(survey_area())[1, 2],
+          lat2 = bbox(survey_area())[2, 2]
+        ) %>%
+        addPolygons(data = admin_boundaries(),
+          color = input$country_boundaries_colour,
+          fill = FALSE,
+          weight = input$country_boundaries_weight,
+          group = "Administrative boundaries") %>%
+        addPolygons(data = survey_area(),
+          color = input$survey_area_colour,
+          fill = FALSE,
+          weight = input$survey_area_weight,
+          group = "Study area") %>%
+        addLayersControl(
+          baseGroups = c("Administrative boundaries"),
+          overlayGroups = c("Study area"),
+          position = "bottomleft",
+          options = layersControlOptions(collapsed = FALSE, autoZIndex = TRUE)
+        )
+    } else {
+      leafletProxy("map") %>%
+        clearMarkers() %>%
+        #setView(
+        #  lng = coordinates(survey_area())[1],
+        #  lat = coordinates(survey_area())[2],
+        #  zoom = 9) %>%
+        fitBounds(
+          lng1 = bbox(survey_area())[1, 1],
+          lat1 = bbox(survey_area())[2, 1],
+          lng2 = bbox(survey_area())[1, 2],
+          lat2 = bbox(survey_area())[2, 2]
+        ) %>%
+        addPolygons(data = admin_boundaries(),
+                    color = input$country_boundaries_colour,
+                    fill = FALSE,
+                    weight = input$country_boundaries_weight,
+                    group = "Administrative boundaries") %>%
+        addCircleMarkers(lng = survey_area()@coords[ , 1],
+                         lat = survey_area()@coords[ , 2],
+                         color = input$survey_area_colour,
+                         radius = input$centroid_size,
+                         weight = input$survey_area_weight,
+                         group = "Study area") %>%
+        addLayersControl(
+          baseGroups = c("Administrative boundaries"),
+          overlayGroups = c("Study area"),
+          position = "bottomleft",
+          options = layersControlOptions(collapsed = FALSE, autoZIndex = TRUE)
+        )
+    }
   })
 
   ## Generate population rasters
@@ -587,28 +640,48 @@ function(input, output, session) {
 
   ## Add sampling grid
   observeEvent(input$get_sample, {
-    leafletProxy("map") %>%
-      clearGroup(group = "Sampling points") %>%
-      clearGroup(group = "Sampling grid") %>%
-      addCircleMarkers(
-        lng = sampling_points()@coords[ , 1],
-        lat = sampling_points()@coords[ , 2],
-        color = input$centroid_colour,
-        radius = input$centroid_size,
-        weight = input$centroid_weight,
-        group = "Sampling points") %>%
-      addPolygons(data = sampling_grid(),
-        color = input$grid_colour,
-        fill = FALSE,
-        weight = input$grid_weight,
-        group = "Sampling grid") %>%
-      addLayersControl(
-        baseGroups = c("Administrative boundaries"),
-        overlayGroups = c("Study area", "Human population", "Cattle population",
-                          "Sampling points", "Sampling grid"),
-        position = "bottomleft",
-        options = layersControlOptions(collapsed = FALSE, autoZIndex = TRUE)
-      )
+    if (class(sampling_points()) == "SpatialPoints") {
+      leafletProxy("map") %>%
+        clearGroup(group = "Sampling points") %>%
+        clearGroup(group = "Sampling grid") %>%
+        addCircleMarkers(
+          lng = sampling_points()@coords[ , 1],
+          lat = sampling_points()@coords[ , 2],
+          color = input$centroid_colour,
+          radius = input$centroid_size,
+          weight = input$centroid_weight,
+          group = "Sampling points") %>%
+        addPolygons(data = sampling_grid(),
+          color = input$grid_colour,
+          fill = FALSE,
+          weight = input$grid_weight,
+          group = "Sampling grid") %>%
+        addLayersControl(
+          baseGroups = c("Administrative boundaries"),
+          overlayGroups = c("Study area", "Human population", "Cattle population",
+                            "Sampling points", "Sampling grid"),
+          position = "bottomleft",
+          options = layersControlOptions(collapsed = FALSE, autoZIndex = TRUE)
+        )
+    } else {
+      leafletProxy("map") %>%
+        clearGroup(group = "Sampling points") %>%
+        clearGroup(group = "Sampling grid") %>%
+        addCircleMarkers(
+          lng = sampling_points()$coords.x1,
+          lat = sampling_points()$coords.x2,
+          color = input$centroid_colour,
+          radius = input$centroid_size,
+          weight = input$centroid_weight,
+          group = "Sampling points") %>%
+        addLayersControl(
+          baseGroups = c("Administrative boundaries"),
+          overlayGroups = c("Study area", "Human population", "Cattle population",
+                            "Sampling points"),
+          position = "bottomleft",
+          options = layersControlOptions(collapsed = FALSE, autoZIndex = TRUE)
+        )
+    }
   })
 
   ## Check if sampling inputs are reset
@@ -737,10 +810,16 @@ function(input, output, session) {
             ts(), ".xlsx", sep = "")
     },
     content = function(file) {
-      openxlsx::write.xlsx(
-        x = data.frame(coordinates(sampling_points()),
-                     sampling_points_info()),
-        file = file)
+      if (class(sampling_points()) == "SpatialPoints") {
+        openxlsx::write.xlsx(
+          x = data.frame(coordinates(sampling_points()),
+                         sampling_points_info()),
+          file = file)
+      } else {
+        openxlsx::write.xlsx(
+          x = sampling_points(),
+          file = file)
+      }
     }
   )
 
