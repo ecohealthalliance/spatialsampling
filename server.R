@@ -162,6 +162,11 @@ function(input, output, session) {
     fn <- input$survey_map
 
     x <- try(readOGR(dsn = fn$datapath))
+    #x <- try(as(st_read(dsn = fn$datapath), "Spatial"))
+
+    #if (class(x) == "SpatialMultiPointsDataFrame") {
+    #  x <- as(x, "SpatialPointsDataFrame")
+    #}
 
     if (class(x) == "try-error") {
       unzip(zipfile = fn$datapath, exdir = tempdir())
@@ -258,7 +263,7 @@ function(input, output, session) {
                             buffer = input$samplingBuffer,
                             type = "csas")
 
-      get_nearest_point(data = data.frame(coordinates(survey_area()), survey_area()),
+      get_nearest_point(data = data.frame(survey_area()),
                         data.x = "coords.x1", data.y = "coords.x2",
                         query = sp1, n = 1)
     } else {
