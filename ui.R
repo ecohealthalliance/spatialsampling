@@ -56,6 +56,7 @@ navbarPage(title = "Spatial Sampling", id = "chosenTab",
         ## Input sampling parameters
         uiOutput("sample_parameters1"),
         uiOutput("sample_parameters2"),
+        uiOutput("sample_parameters4"),
         div(style="display:inline-block",
           uiOutput("sample_parameters3")
         ),

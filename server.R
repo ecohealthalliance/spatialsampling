@@ -42,6 +42,14 @@ function(input, output, session) {
                  value = 0, step = 1)
   })
 
+  output$sample_parameters4 <- renderUI({
+    req(input$survey_map)
+
+    checkboxInput(inputId = "choose_centric",
+                  label = "centric",
+                  value = TRUE)
+  })
+
   output$sample_parameters3 <- renderUI({
     req(input$survey_map)
 
