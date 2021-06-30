@@ -42,6 +42,14 @@ function(input, output, session) {
                  value = 0, step = 1)
   })
 
+  output$sample_parameters4 <- renderUI({
+    req(input$survey_map)
+
+    checkboxInput(inputId = "centric_sample",
+                  label = "Centric sample",
+                  value = TRUE)
+  })
+
   output$sample_parameters3 <- renderUI({
     req(input$survey_map)
 
@@ -244,19 +252,50 @@ function(input, output, session) {
   })
 
   ## Create spatial sample - points
-  sampling_points <- eventReactive(input$get_sample, {
+  sampling_points_base <- eventReactive(input$get_sample, {
     req(input$nSamplingUnits)
 
-    create_sp_grid(x = survey_area(), country = input$country,
-                   n = input$nSamplingUnits, buffer = input$samplingBuffer,
-                   type = "csas")
+    centric_sample <- create_sp_grid(
+      x = survey_area(), country = input$country,
+      n = input$nSamplingUnits, buffer = input$samplingBuffer,
+      type = "csas"
+    )
+
+    sample_grid <- centric_sample %>%
+      SpatialPixels() %>%
+      as("SpatialPolygons")
+
+    eccentric_sample <- NULL
+
+    for (i in seq_len(length(sample_grid))) {
+      current_grid <- sample_grid[i, ]
+      sub_grid <- sp::spsample(x = current_grid, n = 25, type = "regular")
+      eccentric_sample <- rbind(eccentric_sample, coordinates(sub_grid)[sample(x = 1:25, size = 1), ])
+    }
+
+    eccentric_sample <- eccentric_sample %>%
+      SpatialPoints(proj4string = CRS(proj4string(survey_area())))
+
+    list(centric_sample, eccentric_sample)
+  })
+
+  sampling_points <- reactive({
+    ##
+    req(sampling_points_base())
+
+    ## Get appropriate sampling_points
+    if (input$centric_sample) {
+      sampling_points_base()[[1]]
+    } else {
+      sampling_points_base()[[2]]
+    }
   })
 
   ## Create spatial sample - grid
   sampling_grid <- reactive({
-    req(sampling_points())
+    req(sampling_points_base())
 
-    sampling_points() %>%
+    sampling_points_base()[[1]] %>%
       SpatialPixels() %>%
       as("SpatialPolygons")
   })
