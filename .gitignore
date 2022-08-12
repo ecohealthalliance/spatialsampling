@@ -11,7 +11,7 @@ www/maps/gadm36_TZA_3_sp.rds
 www/maps/gadm36_ZAF_3_sp.rds
 www/maps/gadm36_JOR_2_sp.rds
 www/maps/gadm36_PHL_3_sp.rds
-#maps
+maps
 !maps/maps.R
 !maps/tanzania.R
 tanzania
