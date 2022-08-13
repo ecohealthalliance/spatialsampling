@@ -25,7 +25,7 @@ library(spatialsampler)
 
 <!-- badges: start -->
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-![version](https://img.shields.io/badge/version-v0.1.0-blue)
+![version](https://img.shields.io/badge/version-v0.3.0-blue)
 [![license](https://img.shields.io/badge/license-MIT-blue)](https://github.com/ecohealthalliance/spatialsampling/blob/master/LICENSE)
 <!-- badges: end -->
 
@@ -210,6 +210,10 @@ Input the number of sampling units required or desired. For a human population s
 
 Sometimes, it is necessary to add a buffer around the study area to be able to spread the spatial sample evenly up to the edges. This buffer can be specified here. By default, this is set to 0 for no buffer. The buffer should be specified in kilometres (kms). This parameter is optional but as a rule-of-thumb, it is recommended to add a buffer as the study area increases and/or if your number of sampling units is closer to 30.
 
+#### Select centric or eccentric sample
+
+By default, the application will perform a *centric sample* selection which is signified by the tick on the checkbox labeled "Centric sample". If desired, an *eccentric sample* can be selected (sampling point is randomly selected at any part of each of the sampling grids rather than just the centre). Untick this checkbox if an *eccentric sample* is desired.
+
 #### Sample
 
 Once the required number of sampling units has been specified, a spatial sample can now be taken. 
@@ -249,7 +253,7 @@ This [Shiny](https://shiny.rstudio.com) application is made available under a [M
 Feedback, bug reports and feature requests are welcome; file issues or seek support [here](https://github.com/ecohealthalliance/spatialsampling/issues).
     
 <br>
-    
+
 ## References
 
 [^1]: Milne, A. (1959). The Centric Systematic Area-Sample Treated as a Random Sample. Biometrics, 15(2), 270-297. doi:10.2307/2527674

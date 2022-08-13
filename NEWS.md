@@ -1,17 +1,26 @@
-`spatialsampling` v0.2.0
+# `spatialsampling` v0.3.0
+
+Third release of `spatialsampling`. In this release:
+
+* Added function to perform *eccentric sample* selection within the sampling grids.
+
+* Updated README to reflect usage of new function.
+
+
+# `spatialsampling` v0.2.0
 
 Second release of `spatialsampling`. In this release:
 
 * Published the application to EHA's new RSConnect server via GitHub using a `manifest.json`.
 
-* updated documentation to reflect new application URL.
+* Updated documentation to reflect new application URL.
 
 * Updated some package dependencies given changes in sources/repositories of some packages.
 
 * Added a NEWS.md to track application versions.
 
 
-`spatialsampling` v0.1.0
+# `spatialsampling` v0.1.0
 
 First release of `spatialsampling`. In this release:
 

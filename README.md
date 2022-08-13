@@ -8,7 +8,7 @@
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-![version](https://img.shields.io/badge/version-v0.1.0-blue)
+![version](https://img.shields.io/badge/version-v0.3.0-blue)
 [![license](https://img.shields.io/badge/license-MIT-blue)](https://github.com/ecohealthalliance/spatialsampling/blob/master/LICENSE)
 <!-- badges: end -->
 
@@ -24,11 +24,11 @@ size distribution is inversely related to human population size.
 With **CSAS**, sampling of any subject is performed systematically over
 geographic area and resulting sample is said to be spatially
 representative. This type of sample is said to approximate a simple
-random sample (SRS)<sup>\[1\]</sup>. Thus, a mixed human and animal
+random sample (SRS)<sup>[1]</sup>. Thus, a mixed human and animal
 subject study can use the same spatial sampling frame for all subjects.
 Additional advantages of a **CSAS** approach is that the resulting
 sample is implicitly spatially stratified which contributes to increased
-sampling variance<sup>\[2\]\[3\]</sup>.
+sampling variance<sup>[2][3]</sup>.
 
 ## Steps in CSAS
 
@@ -71,9 +71,9 @@ population representative by applying a population weighted analysis
 during indicator/outcome estimation. This can be done parametrically
 using Taylor linearised deviation techniques (which can be implemented
 in [R](https://cran.r-project.org) using Thomas Lumley’s [survey
-package](https://cran.r-project.org/web/packages/survey/survey.pdf)<sup>\[4\]</sup>)
+package](https://cran.r-project.org/web/packages/survey/survey.pdf)<sup>[4]</sup>)
 or using a non-parametric weighted bootstrap approach such as the one
-described [here](https://github.com/rapidsurvys/bbw)<sup>\[5\]</sup>.
+described [here](https://github.com/rapidsurvys/bbw)<sup>[5]</sup>.
 
 <br>
 
@@ -82,7 +82,7 @@ described [here](https://github.com/rapidsurvys/bbw)<sup>\[5\]</sup>.
 This [Shiny](https://shiny.rstudio.com) application assists users in the
 process of applying **CSAS** to a specified study area. This application
 utilises the [R](https://cran.r-project.org) package
-[`spatialsampler`](https://github.com/spatialworks/spatialsampler)<sup>\[6\]</sup>
+[`spatialsampler`](https://github.com/spatialworks/spatialsampler)<sup>[6]</sup>
 which provides functions for performing **CSAS**.
 
 The application can be accessed either via [EcoHealth
@@ -165,7 +165,7 @@ contribute to it via
 those who are familiar and comfortable with installing
 [R](https://cran.r-project.org) spatial packages. We recommend using
 this second approach if you fall within the categories described above
-or if you are up for a challenge\!
+or if you are up for a challenge!
 
 ### Using the Shiny application
 
@@ -210,22 +210,22 @@ containing the multiple files required.
 To trial the application, the following sample study area maps for
 specific countries can be downloaded and used for this step:
 
-  - Bangladesh -
+-   Bangladesh -
     [survey\_area\_bgd.gpkg](https://github.com/ecohealthalliance/spatialsampling/blob/main/maps/survey_area_bgd.gpkg?raw=true)
 
-  - Jordan -
+-   Jordan -
     [survey\_area\_jor.gpkg](https://github.com/ecohealthalliance/spatialsampling/blob/main/maps/survey_area_jor.gpkg?raw=true)
 
-  - Liberia -
+-   Liberia -
     [survey\_area\_lbr.gpkg](https://github.com/ecohealthalliance/spatialsampling/blob/main/maps/survey_area_lbr.gpkg?raw=true)
 
-  - Philippines -
+-   Philippines -
     [survey\_area\_phl.gpkg](https://github.com/ecohealthalliance/spatialsampling/blob/main/maps/survey_area_phl.gpkg?raw=true)
 
-  - South Africa -
+-   South Africa -
     [survey\_area\_zaf.gpkg](https://github.com/ecohealthalliance/spatialsampling/blob/main/maps/survey_area_zaf.gpkg?raw=true)
 
-  - Tanzania -
+-   Tanzania -
     [survey\_area\_tza.gpkg](https://github.com/ecohealthalliance/spatialsampling/blob/main/maps/survey_area_tza.gpkg?raw=true)
 
 Once a map file has been uploaded, this will be read and processed. Part
@@ -257,6 +257,15 @@ optional but as a rule-of-thumb, it is recommended to add a buffer as
 the study area increases and/or if your number of sampling units is
 closer to 30.
 
+#### Select centric or eccentric sample
+
+By default, the application will perform a *centric sample* selection
+which is signified by the tick on the checkbox labeled “Centric sample”.
+If desired, an *eccentric sample* can be selected (sampling point is
+randomly selected at any part of each of the sampling grids rather than
+just the centre). Untick this checkbox if an *eccentric sample* is
+desired.
+
 #### Sample
 
 Once the required number of sampling units has been specified, a spatial
@@ -286,11 +295,11 @@ steps above.
 This [Shiny](https://shiny.rstudio.com) application was made possible by
 contributions from:
 
-  - [Ernest Guevarra](mailto:guevarra@ecohealthalliance.org)
+-   [Ernest Guevarra](mailto:guevarra@ecohealthalliance.org)
 
-  - [Melinda Rostal](mailto:rostal@ecohealthalliance.org)
+-   [Melinda Rostal](mailto:rostal@ecohealthalliance.org)
 
-  - [Rebecca Bodenham](mailto:bodenham@ecohealthalliance.org)
+-   [Rebecca Bodenham](mailto:bodenham@ecohealthalliance.org)
 
 <br>
 
@@ -312,28 +321,28 @@ seek support
 
 ## References
 
-1.  Milne, A. (1959). The Centric Systematic Area-Sample Treated as a
-    Random Sample. Biometrics, 15(2), 270-297. <doi:10.2307/2527674>
+[1] Milne, A. (1959). The Centric Systematic Area-Sample Treated as a
+Random Sample. Biometrics, 15(2), 270-297. <doi:10.2307/2527674>
 
-2.  Aaron GJ, Strutt N, Boateng NA, Guevarra E, Siling K, et al. (2016)
-    Assessing Program Coverage of Two Approaches to Distributing a
-    Complementary Feeding Supplement to Infants and Young Children in
-    Ghana. PLOS ONE 11(10): e0162462.
-    <https://doi.org/10.1371/journal.pone.0162462>
+[2] Aaron GJ, Strutt N, Boateng NA, Guevarra E, Siling K, et al. (2016)
+Assessing Program Coverage of Two Approaches to Distributing a
+Complementary Feeding Supplement to Infants and Young Children in Ghana.
+PLOS ONE 11(10): e0162462.
+<https://doi.org/10.1371/journal.pone.0162462>
 
-3.  Aaron, G. J. et al. (2016) ‘Household coverage of fortified staple
-    food commodities in Rajasthan, India’, PLoS ONE, 11(10).
-    <https://doi.org/10.1371/journal.pone.0163176>
+[3] Aaron, G. J. et al. (2016) ‘Household coverage of fortified staple
+food commodities in Rajasthan, India’, PLoS ONE, 11(10).
+<https://doi.org/10.1371/journal.pone.0163176>
 
-4.  Lumley T. Analysis of complex survey samples. Journal of Statistical
-    Software. 2004;9: 1–19. Available:
-    <http://www.jstatsoft.org/v09/a08/paper>
+[4] Lumley T. Analysis of complex survey samples. Journal of Statistical
+Software. 2004;9: 1–19. Available:
+<http://www.jstatsoft.org/v09/a08/paper>
 
-5.  Mark Myatt (2018). bbw: Blocked Weighted Bootstrap. R package
-    version 0.1.3. <https://CRAN.R-project.org/package=bbw>
+[5] Mark Myatt (2018). bbw: Blocked Weighted Bootstrap. R package
+version 0.1.3. <https://CRAN.R-project.org/package=bbw>
 
-6.  Mark Myatt, Farah Ibrahim and Ernest Guevarra (2018).
-    spatialsampler: An Implementation of the Centric Systematic Area
-    Sampling (CSAS) and Simple Spatial Sampling Method (S3M) sampling
-    approaches in R. R package version 0.1.0.
-    <https://github.com/spatialworks/spatialsampler>
+[6] Mark Myatt, Farah Ibrahim and Ernest Guevarra (2018).
+spatialsampler: An Implementation of the Centric Systematic Area
+Sampling (CSAS) and Simple Spatial Sampling Method (S3M) sampling
+approaches in R. R package version 0.1.0.
+<https://github.com/spatialworks/spatialsampler>

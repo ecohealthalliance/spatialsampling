@@ -45,8 +45,8 @@ function(input, output, session) {
   output$sample_parameters4 <- renderUI({
     req(input$survey_map)
 
-    checkboxInput(inputId = "choose_centric",
-                  label = "centric",
+    checkboxInput(inputId = "centric_sample",
+                  label = "Centric sample",
                   value = TRUE)
   })
 
@@ -258,40 +258,52 @@ function(input, output, session) {
   })
 
   ## Create spatial sample - points
-  sampling_points <- eventReactive(input$get_sample, {
+  sampling_points_base <- eventReactive(input$get_sample, {
     req(input$nSamplingUnits)
 
-    if (class(survey_area()) == "SpatialPointsDataFrame") {
-      pt_area <- create_buffer(x = survey_area(),
-                               buffer = 20,
-                               country = input$country)
+    centric_sample <- create_sp_grid(
+      x = survey_area(), country = input$country,
+      n = input$nSamplingUnits, buffer = input$samplingBuffer,
+      type = "csas"
+    )
 
-      sp1 <- create_sp_grid(x = pt_area, country = input$country,
-                            n = input$nSamplingUnits,
-                            buffer = input$samplingBuffer,
-                            type = "csas")
+    sample_grid <- centric_sample %>%
+      SpatialPixels() %>%
+      as("SpatialPolygons")
 
-      get_nearest_point(data = data.frame(survey_area()),
-                        data.x = "coords.x1", data.y = "coords.x2",
-                        query = sp1, n = 1)
+    eccentric_sample <- NULL
+
+    for (i in seq_len(length(sample_grid))) {
+      current_grid <- sample_grid[i, ]
+      sub_grid <- sp::spsample(x = current_grid, n = 25, type = "regular")
+      eccentric_sample <- rbind(eccentric_sample, coordinates(sub_grid)[sample(x = 1:25, size = 1), ])
+    }
+
+    eccentric_sample <- eccentric_sample %>%
+      SpatialPoints(proj4string = CRS(proj4string(survey_area())))
+
+    list(centric_sample, eccentric_sample)
+  })
+
+  sampling_points <- reactive({
+    ##
+    req(sampling_points_base())
+
+    ## Get appropriate sampling_points
+    if (input$centric_sample) {
+      sampling_points_base()[[1]]
     } else {
-      create_sp_grid(x = survey_area(), country = input$country,
-                     n = input$nSamplingUnits, buffer = input$samplingBuffer,
-                     type = "csas")
+      sampling_points_base()[[2]]
     }
   })
 
   ## Create spatial sample - grid
   sampling_grid <- reactive({
-    req(sampling_points())
+    req(sampling_points_base())
 
-    if (class(sampling_points()) == "SpatialPolygons") {
-      sampling_points() %>%
-        SpatialPixels() %>%
-        as("SpatialPolygons")
-    } else {
-      NULL
-    }
+    sampling_points_base()[[1]] %>%
+      SpatialPixels() %>%
+      as("SpatialPolygons")
   })
 
   ## Get grid populations
